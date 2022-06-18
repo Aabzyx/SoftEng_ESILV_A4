@@ -6,7 +6,9 @@ const cors = require('cors')
 // Import DB Connection
 const db = require("./config/db");
 // Import API route
-const routes = require('./app/routes/routes.js'); //importing route
+const routeElection = require('./app/routes/election.routes'); //importing route
+const routeUser= require('./app/routes/user.routes'); //importing route
+const routeVote = require('./app/routes/vote.routes'); //importing route
 
 // create express app
 const  app = express();
@@ -28,8 +30,10 @@ app.use(cors(corsOptions))
 app.get("/", (req, res) => {
   res.json({ message: "Server lives!!!" });
 });
-// altywacja routingu 
-routes(app);
+// connect routes
+routeElection(app);
+routeUser(app);
+routeVote(app);
 
 // Listen to server
 app.listen(port, () => {

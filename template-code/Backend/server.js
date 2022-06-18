@@ -7,6 +7,7 @@ const cors = require('cors')
 const db = require("./config/db");
 // Import API route
 const routes = require('./app/routes/routes.js'); //importing route
+const routes2 = require('./app/routes/routes2.js'); //importing route
 
 // create express app
 const  app = express();
@@ -30,6 +31,7 @@ app.get("/", (req, res) => {
 });
 // altywacja routingu 
 routes(app);
+routes2(app);
 
 // Listen to server
 app.listen(port, () => {

@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 //Assign MongoDB connection string to Uri and declare options settings
 // Important!!! set your real login and passwd in connection string
-const uri ="mongodb+srv://client:c0ll05u5@clusterefrei.t5fyv.mongodb.net/shop?retryWrites=true&w=majority";
+const uri ="mongodb+srv://all:mastercamp@cluster0.1muq8.mongodb.net/?retryWrites=true&w=majority";
 // Declare a variable named option and assign optional settings
 const options = {
 useNewUrlParser: true,

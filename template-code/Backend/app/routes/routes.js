@@ -1,4 +1,3 @@
-const products = require("../controllers/product.controller.js");
 module.exports = function(app) {
     const products = require('../controllers/product.controller.js');
     // Create a new product
@@ -18,21 +17,4 @@ module.exports = function(app) {
 
     // Delete a productcommand with Id
     app.delete('/api/product/:id', products.delete);
-
-    const userHandlers = require('../controllers/user.controller.js');
-
-    // post request for user registration
-    app.post('/api/user', userHandlers.register);
-
-    // get all users
-    app.get('/api/users', userHandlers.findAll);
-
-    // post request for user log in
-    app.post('/api/users', userHandlers.signIn);
-
-    // Update a productcommand with IdCloient
-    app.put('/api/user', userHandlers.update);
-
-    // Update banned with Id
-    app.put('/api/users', userHandlers.block);
 }
