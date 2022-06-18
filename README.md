@@ -21,6 +21,11 @@ You can create private votes, share them and participate in government private a
 From the Frontend and Backend direcory do :
 
 ---
+    `npm install cli`
+    
+To install all the libraries you will need
+
+---
     `npm run start`
 
 To start the front and the back
