@@ -35,7 +35,7 @@
       </div>
       <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
         <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-          <h1>Shop AGH</h1>
+          <h1>Ekip vote</h1>
         </div>
         <div class="formbg-outer">
           <div class="formbg">
@@ -44,11 +44,11 @@
               <form id="stripe-login">
                 <div class="field padding-bottom--24">
                   <label><b>Email</b></label>
-                  <input type="email" name="email" placeholder="Email" v-model="$store.state.emailLog">
+                  <input type="email" name="email" placeholder="Email" v-model="mail">
                 </div>
                 <div class="field padding-bottom--24">
                     <label><b>Password</b></label>
-                    <input type="password" name="password" placeholder="Password" v-model="$store.state.passwordLog" @keyup.enter="logIn">
+                    <input type="password" name="password" placeholder="Password" v-model="password" @keyup.enter="logIn">
                 </div>
                 <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
                   <label>
@@ -56,7 +56,7 @@
                   </label>
                 </div>
                 <div class="field padding-bottom--24">
-                  <input type="button" name="submit" value="Continue" v-on:click="logIn">
+                  <input type="button" name="submit" value="Continue" v-on:click="login">
                 </div>
 
               </form>
@@ -65,7 +65,7 @@
           <div class="footer-link padding-top--24">
             <span>Don't have an account? <router-link to="/RegisterForm">Sign up</router-link></span>
             <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
-              <span><a href="#">Â© Shop AGH</a></span>
+              <span><a href="#">Vote online</a></span>
               <span><a href="https://www.agh.edu.pl/">Contact</a></span>
               <span><a href="#">Privacy & terms</a></span>
             </div>
@@ -78,18 +78,43 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import http from "../http-common";
 
 export default {
   name: "LoginForm",
   data() {
     return {
+      mail: "",
+      password: "",
     };
   },
   computed: {
-    ...mapState([]),
+    ...mapState(["actualClient"]),
   },
   methods:{
-    ...mapActions(['logIn'])
+    ...mapActions([]),
+    login() {
+      const User = {
+        email: this.mail,
+        hash_password: this.password,
+      };
+      http
+      .post("/user/login", User)
+          .then(response => {
+            this.$store.state.actualClient = response.data;
+            alert("You are now logIn")
+          })
+          .catch(e => {
+            if (e.response.status === 401){
+              console.log(e);
+              alert("Wrong password or email")
+            }
+            else {
+              console.log(e);
+              alert("No access to this web app")
+            }
+          });
+    },
   },
 }
 </script>

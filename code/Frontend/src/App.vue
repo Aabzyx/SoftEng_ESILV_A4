@@ -3,7 +3,8 @@
 </template>
 
 <script>
-import Header from "./components/Header";
+import Header from "@/components/Header";
+
 export default {
   name: "app",
   components: {Header},
@@ -15,8 +16,4 @@ export default {
 </script>
 
 <style>
-Header
-{
-  z-index: 10;
-}
 </style>

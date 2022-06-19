@@ -35,7 +35,7 @@
       </div>
       <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
         <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-          <h1>Shop AGH</h1>
+          <h1>Ekip vote</h1>
         </div>
         <div class="formbg-outer">
           <div class="formbg">
@@ -43,23 +43,41 @@
               <span class="padding-bottom--15"><b>Register</b></span>
               <form id="stripe-login">
                 <div class="field padding-bottom--24">
-                  <label><b>Name</b></label>
-                  <input type="text" name="name" placeholder="Name" v-model="$store.state.name">
+                  <label><b>First Name</b></label>
+                  <input type="text" name="name" placeholder="First Name" v-model="nom">
+                </div>
+
+                <div class="field padding-bottom--24">
+                  <label><b>Second Name</b></label>
+                  <input type="text" name="prenom" placeholder="Second Name" v-model="prenom">
                 </div>
 
                 <div class="field padding-bottom--24">
                   <label><b>Email</b></label>
-                  <input type="email" name="email" placeholder="Email" v-model="$store.state.mail">
+                  <input type="email" name="email" placeholder="Email" v-model="mail">
                 </div>
+
+                <div class="field padding-bottom--24">
+                  <label><b>Date of birth</b></label>
+                  <input type="date" name="date" v-model="dateDeNaissance">
+                </div>
+
+                <label><b>Localisation</b></label>
+                <div class="field padding-bottom--24 test">
+                  <input type="text" name="country" placeholder="Country" v-model="country">
+                  <input type="text" name="city" placeholder="City" v-model="city">
+                  <input type="text" name="departement" placeholder="Dpt" v-model="departement">
+                </div>
+
                 <div class="field padding-bottom--24">
                   <div class="grid--50-50">
                     <label><b>Password</b></label>
                   </div>
-                  <input type="password" name="password" placeholder="Password" v-model="$store.state.password" @keyup.enter="registerUser">
+                  <input type="password" name="password" placeholder="Password" v-model="password" @keyup.enter="registerUser">
                 </div>
 
                 <div class="field padding-bottom--24">
-                  <input type="submit" name="submit" value="Continue" v-on:click="registerUser">
+                  <input type="button" name="submit" value="Continue" v-on:click="register">
                 </div>
 
               </form>
@@ -68,7 +86,7 @@
           <div class="footer-link padding-top--24">
 
             <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
-              <span><a href="#">Â© Shop AGH</a></span>
+              <span><a href="#">Vote online</a></span>
               <span><a href="https://www.agh.edu.pl/">Contact</a></span>
               <span><a href="#">Privacy & terms</a></span>
             </div>
@@ -81,23 +99,70 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import http from "../http-common";
 
 export default {
   name: "RegisterForm",
   data() {
     return {
+      nom: "",
+      prenom: "",
+      mail: "",
+      password: "",
+      dateDeNaissance: Date,
+      country: "",
+      city: "",
+      departement: "",
+      local: [],
+      urlImage: "",
+      subscription: 'free',
+      numElecteur: "",
+      autorisedElections: []
     };
   },
   computed: {
-    ...mapState([]),
+    ...mapState(["actualClient"]),
   },
   methods:{
-    ...mapActions(['registerUser'])
+    ...mapActions([]),
+    register(){
+      this.local.push(this.country, this.city, this.departement)
+      const newUser = {
+        nom: this.nom,
+        prenom: this.prenom,
+        mail: this.mail,
+        password: this.password,
+        dateDeNaissance: this.dateDeNaissance,
+        local: this.local,
+        urlImage: this.urlImage,
+        subscription: this.subscription,
+        numElecteur: this.numElecteur,
+        autorisedElections: this.autorisedElections
+      };
+      console.log(newUser);
+      http
+          .post("/user/register", newUser)
+          .then(response => {
+            console.log(response.data);
+          })
+          .catch(e => {
+            if (e.response.status === 500){
+              alert("One or many values are already used")
+            }
+            console.log(e);
+          });
+    }
   },
 }
 </script>
 
 <style scoped>
+.test{
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
 * {
   color: #1a1f36;
   box-sizing: border-box;

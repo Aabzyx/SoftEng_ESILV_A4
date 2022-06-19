@@ -1,37 +1,19 @@
 import { createWebHistory, createRouter } from "vue-router";
-import ProductsList from "./components/ProductsList";
-import BasketList from "./components/BasketList";
+import Header from "./components/Header";
 import LoginForm from "./components/LoginForm";
-import UserAll from "./components/UserAll";
-import FormProduct from "./components/FormProduct";
 import RegisterForm from "./components/RegisterForm";
 
 
 const routes =  [
     {
-        path: "/ProductList",
-        name: "ProductList",
-        component: ProductsList
-    },
-    {
-        path: "/BasketList",
-        name: "BasketList",
-        component: BasketList
+        path: "/",
+        name: "Header",
+        component: Header
     },
     {
         path: "/LoginForm",
         name: "LoginForm",
         component: LoginForm
-    },
-    {
-        path: "/UserAll",
-        name: "UserAll",
-        component: UserAll
-    },
-    {
-        path: "/FormProduct",
-        name: "FormProduct",
-        component: FormProduct
     },
     {
         path: "/RegisterForm",
