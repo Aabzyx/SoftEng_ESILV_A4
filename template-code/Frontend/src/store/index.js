@@ -212,8 +212,14 @@ export default createStore({
                         alert("You are now logIn")
                 })
                 .catch(e => {
-                    console.log(e);
-                    alert("Wrong password or email")
+                    if (e.response.status === 401){
+                        console.log(e);
+                        alert("Wrong password or email")
+                    }
+                    else {
+                        console.log(e);
+                        alert("No access to this web app")
+                    }
                 });
         },
         //Logout as user
