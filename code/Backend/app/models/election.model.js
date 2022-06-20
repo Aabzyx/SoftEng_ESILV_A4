@@ -1,13 +1,6 @@
 const mongoose = require("mongoose");
 
 const ElectionSchema = mongoose.Schema({
-    idElection: {
-        type: Number,
-        index: true,
-        unique: true,
-        required: true
-    },
-
     nom: {
         type: String,
         trim: true,
