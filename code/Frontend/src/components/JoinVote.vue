@@ -1,10 +1,8 @@
 <template>
-
+  <p>JoinVote</p>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-
 export default {
   name: "JoinVote",
   data() {

@@ -1,10 +1,8 @@
 <template>
-
+  <p>interfaceVote</p>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-
 export default {
   name: "InterfaceVote",
   data() {
