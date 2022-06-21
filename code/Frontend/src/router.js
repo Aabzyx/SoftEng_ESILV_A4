@@ -1,5 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Header from "./components/Header";
+//import Header from "./components/Header";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import HomePageVue from "./components/HomePage.vue";
@@ -15,8 +15,8 @@ import ShowResultatsVue from "./components/ShowResultats.vue";
 const routes =  [
     {
         path: "/",
-        name: "Header",
-        component: Header
+        name: "HomePageVue",
+        component: HomePageVue
     },
     {
         path: "/LoginForm",
@@ -27,11 +27,6 @@ const routes =  [
         path: "/RegisterForm",
         name: "RegisterForm",
         component: RegisterForm
-    },
-    {
-        path: "/HomePageVue",
-        name: "HomePageVue",
-        component: HomePageVue
     },
     {
         path: "/CreateVoteVue",
