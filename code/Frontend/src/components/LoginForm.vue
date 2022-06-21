@@ -48,7 +48,7 @@
                 </div>
                 <div class="field padding-bottom--24">
                     <label><b>Password</b></label>
-                    <input type="password" name="password" placeholder="Password" v-model="password" @keyup.enter="logIn">
+                    <input type="password" name="password" placeholder="Password" v-model="password" @keyup.enter="login">
                 </div>
                 <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
                   <label>
@@ -95,8 +95,8 @@ export default {
     ...mapActions([]),
     login() {
       const User = {
-        email: this.mail,
-        hash_password: this.password,
+        mail: this.mail,
+        password: this.password,
       };
       http
       .post("/user/login", User)
@@ -107,11 +107,15 @@ export default {
           .catch(e => {
             if (e.response.status === 401){
               console.log(e);
-              alert("Wrong password or email")
+              alert("Wrong email")
+            }
+            else if (e.response.status === 402){
+              console.log(e);
+              alert("No access to this web app")
             }
             else {
               console.log(e);
-              alert("No access to this web app")
+              alert("Wrong password")
             }
           });
     },

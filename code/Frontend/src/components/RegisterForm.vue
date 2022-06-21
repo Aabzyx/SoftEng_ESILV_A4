@@ -73,11 +73,11 @@
                   <div class="grid--50-50">
                     <label><b>Password</b></label>
                   </div>
-                  <input type="password" name="password" placeholder="Password" v-model="password" @keyup.enter="registerUser">
+                  <input type="password" name="password" placeholder="Password" v-model="password" @keyup.enter="register">
                 </div>
 
                 <div class="field padding-bottom--24">
-                  <input type="submit" name="submit" value="Continue" v-on:click="register">
+                  <input type="button" name="submit" value="Continue" v-on:click="register">
                 </div>
 
               </form>
@@ -139,7 +139,6 @@ export default {
         numElecteur: this.numElecteur,
         autorisedElections: this.autorisedElections
       };
-      console.log(newUser);
       http
           .post("/user/register", newUser)
           .then(response => {
