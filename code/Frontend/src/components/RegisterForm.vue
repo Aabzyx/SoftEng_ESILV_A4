@@ -77,7 +77,7 @@
                 </div>
 
                 <div class="field padding-bottom--24">
-                  <input type="button" name="submit" value="Continue" v-on:click="register">
+                  <input type="submit" name="submit" value="Continue" v-on:click="register">
                 </div>
 
               </form>
@@ -144,6 +144,7 @@ export default {
           .post("/user/register", newUser)
           .then(response => {
             console.log(response.data);
+            alert("User add")
           })
           .catch(e => {
             if (e.response.status === 500){
