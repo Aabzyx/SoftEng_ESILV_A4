@@ -1,5 +1,10 @@
 <template>
+  <div>
+    <nav>
+            <router-link class="btn btn-primary" to="/Home" >Home</router-link>
 
+    </nav>
+  </div>
   <router-view/>
 </template>
 
