@@ -13,7 +13,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "axios": "^0.21.1",
-    "bootstrap": "^4.6.0",
+    "bootstrap": "^4.6.1",
     "cli": "^1.0.1",
     "core-js": "^3.6.5",
     "jquery": "^3.6.0",
