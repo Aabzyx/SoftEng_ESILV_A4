@@ -14,7 +14,7 @@ const VoteSchema = mongoose.Schema({
     choix: {
         type: String,
         required: true
-    }
+    },
 })
 
 module.exports = mongoose.model("Vote",VoteSchema);
