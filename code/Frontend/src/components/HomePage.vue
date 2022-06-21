@@ -7,7 +7,7 @@
       <div v-if="election.type === 'informerlle' ">
         <p>{{election.name}}</p>
         <img :src=election.image>
-        <div v-on:click="deleteElection(vote)">
+        <div v-on:click="deleteVote(vote)">
           <a>❌</a>
         </div>
         <div v-on:click="test()"><!--reflechir a comment rediriger!-->
@@ -45,7 +45,7 @@ export default {
     ...mapActions(['votes']),
   },
   methods:{
-
+    ...mapActions(['deleteVote']),
   },
   mounted: function(){
 

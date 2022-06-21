@@ -10,8 +10,6 @@
       <router-link class="mr-1 btn btn-primary" to="/InterfaceVoteVue" >InterfaceVoteVue</router-link>
       <router-link class="mr-1 btn btn-primary" to="/ShowResultatsVue" >ShowResultatsVue</router-link>
       <router-link class="mr-1 btn btn-primary" to="/JoinVoteVue" >JoinVoteVue</router-link>
-      <router-link class="mr-1 btn btn-primary" to="/LoginFormVue" >LoginFormVue</router-link>
-      <router-link class="mr-1 btn btn-primary" to="/RegisterFormVue" >RegisterFormVue</router-link>
     </nav>
   </div>
   <router-view/>
