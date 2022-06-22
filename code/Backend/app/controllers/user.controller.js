@@ -77,9 +77,8 @@ exports.updateTypeAcount = (req, res) => {
         });
 };
 
-
+//Upadte elections
 exports.updateAutorisedElections = (req, res) => {
-    //Find product and update it
     User.findOneAndUpdate({ _id: req.body._id},
         {$set : {autorisedElections: req.body.autorisedElections}},{new: true})
         .then(user => {
@@ -105,3 +104,31 @@ exports.updateAutorisedElections = (req, res) => {
             });
         });
 }
+
+// UPDATE INE of an user
+exports.updateINE = (req, res) => {
+    //Find product and update it
+    User.findOneAndUpdate({ _id: req.body._id},
+        {$set : {numElecteur: req.body.numElecteur}},{new: true})
+        .then(user => {
+            if(!user) {
+                return res.status(404).send({
+                    message: "User not found with id " +
+                        req.body._id
+                });
+            }
+            res.send(user);
+        })
+        .catch(err => {
+            if(err.kind === 'ObjectId') {
+                return res.status(404).send({
+                    message: "User not found with id " +
+                        req.body._id
+                });
+            }
+            return res.status(500).send({
+                message: "Error updating user with id " +
+                    req.body._id
+            });
+        });
+};

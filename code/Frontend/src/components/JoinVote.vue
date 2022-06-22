@@ -42,6 +42,7 @@
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
               <span class="padding-bottom--15"><b>Connect your account to a vote</b></span>
+              <br>
               <form id="stripe-login">
                 <div class="field padding-bottom--24">
                   <label><b>Code</b></label>
@@ -55,7 +56,6 @@
             </div>
           </div>
           <div class="footer-link padding-top--24">
-            <span>Don't have an account? <router-link to="/RegisterForm">Sign up</router-link></span>
             <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
               <span><a href="#">Vote online</a></span>
               <span><a href="https://www.agh.edu.pl/">Contact</a></span>
@@ -94,6 +94,7 @@ export default {
                 http.put('user/joinVote',this.$store.state.actualClient)
                     .then(response => {
                       console.log("response :" , response);
+                      alert("User join vote")
                     });
           }
               )

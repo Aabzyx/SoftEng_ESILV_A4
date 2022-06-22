@@ -11,5 +11,9 @@ module.exports = function(app) {
     // put request for set type acount user
     app.put('/api/user/chooseTypeAccount', user.updateTypeAcount);
 
+    //
     app.put('/api/user/joinVote', user.updateAutorisedElections)
+
+    // put request to set INE user
+    app.put('/api/user/enterINE', user.updateINE);
 }
