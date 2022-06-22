@@ -3,6 +3,7 @@
     <nav>
       <router-link class="mr-1 btn btn-primary" to="/LoginForm" >LoginForm</router-link>
       <router-link class="mr-1 btn btn-primary" to="/RegisterForm" >RegisterForm</router-link>
+      <router-link class="mr-1 btn btn-primary" to="/DifferentAcount" >DifferentAcount</router-link>
       <router-link class="mr-1 btn btn-primary" to="/" >HomePageVue</router-link>
       <router-link class="mr-1 btn btn-primary" to="/CreateVoteVue" >CreateVoteVue</router-link>
       <router-link class="mr-1 btn btn-primary" to="/ChoixVoteVue" >ChoixVoteVue</router-link>

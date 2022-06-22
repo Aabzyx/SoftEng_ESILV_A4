@@ -206,10 +206,12 @@ export default createStore({
             http
                 .post("/users", User)
                 .then(response => {
+                    console.log(response.data)
                         state.connected = true;
                         state.client = response.data;
                         state.commands = state.client.commands
                         alert("You are now logIn")
+                    console.log(this.state.client);
                 })
                 .catch(e => {
                     if (e.response.status === 401){

@@ -39,10 +39,7 @@ exports.register = (req, res) => {
 // User Sign function
 exports.signIn = (req, res) => {
     User.findOne({email: req.body.email}, function (err, user) {
-        if (!user.authorization()){
-            res.status(402).json({ message: 'Authorization failed. No access'});
-        }
-        else if (!user.comparePassword(req.body.hash_password)) {
+        if (!user.comparePassword(req.body.hash_password)) {
             res.status(401).json({ message: 'Authentication failed. Wrong password.' });
         }
         else

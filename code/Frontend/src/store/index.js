@@ -8,9 +8,14 @@ export default createStore({
     },
     getters: {},
     mutations: {
-
+        //Logout as user
+        LOG_OUT(state){
+            state.actualClient = {};
+        },
         },
     actions: {
-
+        async logOut({commit}, payload){
+            commit("LOG_OUT", payload)
+        },
     }
 })

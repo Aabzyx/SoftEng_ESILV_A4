@@ -9,6 +9,7 @@ import IfMajeurVue from "./components/IfMajeur.vue";
 import InterfaceVoteVue from "./components/InterfaceVote.vue";
 import JoinVoteVue from "./components/JoinVote.vue";
 import ShowResultatsVue from "./components/ShowResultats.vue";
+import DifferentAcount from "@/components/DifferentAcount";
 
 const routes =  [
     {
@@ -25,6 +26,11 @@ const routes =  [
         path: "/RegisterForm",
         name: "RegisterForm",
         component: RegisterForm
+    },
+    {
+        path: "/DifferentAcount",
+        name: "DifferentAcount",
+        component: DifferentAcount
     },
     {
         path: "/CreateVoteVue",

@@ -77,7 +77,6 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
 import http from "../http-common";
 
 export default {
@@ -88,11 +87,7 @@ export default {
       password: "",
     };
   },
-  computed: {
-    ...mapState(["actualClient"]),
-  },
   methods:{
-    ...mapActions([]),
     login() {
       const User = {
         mail: this.mail,
@@ -101,7 +96,7 @@ export default {
       http
       .post("/user/login", User)
           .then(response => {
-            this.$store.state.actualClient = response.data;
+            this.$store.state.actualClient = response.data
             alert("You are now logIn")
           })
           .catch(e => {
