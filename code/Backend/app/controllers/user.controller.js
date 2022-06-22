@@ -51,7 +51,6 @@ exports.signIn = (req, res) => {
 
 // UPDATE a type of account user
 exports.updateTypeAcount = (req, res) => {
-    console.log('test = ', req.body)
     //Find product and update it
     User.findOneAndUpdate({ _id: req.body._id},
         {$set : {subscription: req.body.subscription}},{new: true})
@@ -77,3 +76,32 @@ exports.updateTypeAcount = (req, res) => {
             });
         });
 };
+
+
+exports.updateAutorisedElections = (req, res) => {
+    //Find product and update it
+    User.findOneAndUpdate({ _id: req.body._id},
+        {$set : {autorisedElections: req.body.autorisedElections}},{new: true})
+        .then(user => {
+            if(!user) {
+                return res.status(404).send({
+                    message: "User not found with id " +
+                        req.body._id
+                });
+            }
+            res.send(user);
+        })
+        .catch(err => {
+            if(err.kind === 'ObjectId') {
+                return res.status(404).send({
+                    message: "User not found with id " +
+                        req.body._id
+                });
+            }
+            return res.status(500).send({
+
+                message: "Error updating user with id " +
+                    req.body._id
+            });
+        });
+}
