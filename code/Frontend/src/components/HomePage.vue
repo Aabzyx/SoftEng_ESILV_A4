@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: "HomePage",
@@ -42,7 +42,7 @@ export default {
     };
   },
   computed: {
-    ...mapActions(['votes']),
+    ...mapState(['elections']),
   },
   methods:{
     ...mapActions(['deleteVote']),

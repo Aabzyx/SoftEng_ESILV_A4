@@ -24,7 +24,9 @@ export default {
 
   },
   methods:{
+    continueVote() {
 
+    }
   },
   mounted: function(){
 

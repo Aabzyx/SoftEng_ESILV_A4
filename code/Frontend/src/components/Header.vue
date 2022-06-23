@@ -11,6 +11,7 @@
       <router-link class="mr-1 btn btn-primary" to="/InterfaceVoteVue" >InterfaceVoteVue</router-link>
       <router-link class="mr-1 btn btn-primary" to="/ShowResultatsVue" >ShowResultatsVue</router-link>
       <router-link class="mr-1 btn btn-primary" to="/JoinVoteVue" >JoinVoteVue</router-link>
+      <router-link class="mr-1 btn btn-primary" to="/ConfigureChoicesVue" >ConfigureChoicesVue</router-link>
     </nav>
   </div>
   <router-view/>

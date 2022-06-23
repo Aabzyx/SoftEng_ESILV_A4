@@ -10,6 +10,7 @@ import InterfaceVoteVue from "./components/InterfaceVote.vue";
 import JoinVoteVue from "./components/JoinVote.vue";
 import ShowResultatsVue from "./components/ShowResultats.vue";
 import DifferentAcount from "@/components/DifferentAcount";
+import ConfigureChoicesVue from "./components/ConfigureChoices.vue";
 
 const routes =  [
     {
@@ -61,6 +62,11 @@ const routes =  [
         path: "/JoinVoteVue",
         name: "JoinVoteVue",
         component: JoinVoteVue
+    },
+    {
+        path: "/ConfigureChoicesVue",
+        name: "ConfigureChoicesVue",
+        component: ConfigureChoicesVue
     },
     
 ];
