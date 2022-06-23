@@ -114,14 +114,15 @@ The question of the security of the data is really important on this project, we
 ## Tools and targets
 
 ### Development tools
-- Figma
-- Looping
+- [Figma](https://www.figma.com/file/m4iI9m4WpGAMhajSSfLHea/Romain's-team-library?node-id=0%3A1)
+- [Looping](https://github.com/GithRomain/MasterCamp/blob/main/Reponse-appel-offre/MCDProjet.loo)
+- [Star UML](https://github.com/GithRomain/MasterCamp/blob/main/Reponse-appel-offre/UML_Diagrams.mdj)
 - MongoDB
 - Github
 - Gitlab
 - Discord
-- Excel
-- Word
+- [Excel](https://github.com/GithRomain/MasterCamp/blob/main/Reponse-appel-offre/Macro-planning.xlsx)
+- [Word](https://github.com/GithRomain/MasterCamp/blob/main/Reponse-appel-offre/Cahier%20de%20charges.docx)
 
 All the development was done on Windows 10 machines, linux machine (Ubuntu) and Mac OS machines.
 
