@@ -4,7 +4,7 @@ import { createStore } from 'vuex'
 export default createStore({
     state: {
         actualClient: {},
-        votes : [],
+        elections : [],
     },
     getters: {},
     mutations: {
