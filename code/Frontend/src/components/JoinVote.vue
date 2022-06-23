@@ -45,8 +45,12 @@
               <br>
               <form id="stripe-login">
                 <div class="field padding-bottom--24">
+                  <label><b>Name</b></label>
+                  <input type="text" name="name" placeholder="Name" v-model ="nom">
+                </div>
+                <div class="field padding-bottom--24">
                   <label><b>Code</b></label>
-                  <input type="password" name="password" placeholder="Password" v-model ="code" @keyup.enter="joinVote">
+                  <input type="password" name="password" placeholder="Secret code" v-model ="code" @keyup.enter="joinVote">
                 </div>
                 <div class="field padding-bottom--24">
                   <input type="button" name="submit" value="Join" v-on:click="joinVote">
@@ -75,7 +79,8 @@ export default {
   name: "JoinVote",
   data() {
     return {
-      code: "",
+      nom: "",
+      code: ""
     };
   },
   computed: {
@@ -85,19 +90,36 @@ export default {
     joinVote(){
       const leTout = {
         user : this.$store.state.actualClient,
-        code : this.code,
+        nom: this.nom,
+        code : this.code
       }
       http
        .post('election/chercherCode', leTout)
           .then(r =>{
+            if (!this.$store.state.actualClient.autorisedElections.includes(r.data)){
                 this.$store.state.actualClient.autorisedElections.push(r.data);
                 http.put('user/joinVote',this.$store.state.actualClient)
                     .then(response => {
                       console.log("response :" , response);
                       alert("User join vote")
-                    });
+                    })
           }
-              )
+            else {
+              alert("You are already participating to this election")
+            }
+          })
+          .catch(e => {
+                if (e.response.status === 401){
+                  console.log(e);
+                  alert("Not find this vote")
+                }
+                else if (e.response.status === 402){
+                  console.log(e);
+                  alert("Not the right combination")
+                }
+
+              }
+          );
     }
   },
 
