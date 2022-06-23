@@ -54,7 +54,7 @@ Open this to view your frontend app
 
 Backend is running on the 5000 port
 
-You will need to disable airdrop if you are on MacOs
+⚠️ You will need to disable airdrop if you are on MacOs
 
 ## Ecosystem vue
 
@@ -86,25 +86,25 @@ The question of the security of the data is really important on this project, we
 
 ### Robots
 
-To prevent robots from logging in and creating fake accounts to rig official elections. We used a captcha via the google [recaptcha](https://www.google.com/recaptcha/about/) api
+🤖 To prevent robots from logging in and creating fake accounts to rig official elections. We used a captcha via the google [recaptcha](https://www.google.com/recaptcha/about/) api
 
 ### Safe Login and actions
 
-We wanted to verify the authorization of users to access our website, which is why we use [JWTS](https://jwt.io/introduction) tokens to login and update any information in our database.
+🔑 We wanted to verify the authorization of users to access our website, which is why we use [JWTS](https://jwt.io/introduction) tokens to login and update any information in our database.
 
-And finally to prevent anyone from identifying themselves with an account that is not theirs, we have hashed user passwords using [bcrypt](https://www.npmjs.com/package/bcrypt) to enhance authentication.
+🔐 And finally to prevent anyone from identifying themselves with an account that is not theirs, we have hashed user passwords using [bcrypt](https://www.npmjs.com/package/bcrypt) to enhance authentication.
 
 ### Security of the database
 
-Even though mongoDB is already very secure, we have obviously encrypted all our data belonging to our users.
+🔒 Even though mongoDB is already very secure, we have obviously encrypted all our data belonging to our users.
 
-So as not to infringe on privacy and let customers vote anonymously and no one can see each other's votes even if we pass in simple reading our BDD
+🥷 So as not to infringe on privacy and let customers vote anonymously and no one can see each other's votes even if we pass in simple reading our BDD
 
 ### Check informations
 
-Finally to reassure users our allow them to see, as long as any votes are open, their choice of vote. 
+👓 Finally to reassure users our allow them to see, as long as any votes are open, their choice of vote. 
 
-So if there is any doubt about the integrity of our system, they can verify that their data does not change over time.
+🤓 So if there is any doubt about the integrity of our system, they can verify that their data does not change over time.
 
 ## Tools and targets
 
