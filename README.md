@@ -46,7 +46,7 @@ To start the front and the back
 ### Visualization
 
 ---
-    'http://localhost:8081/'
+    http://localhost:8081/
 
 Open this to view your frontend app 
 
