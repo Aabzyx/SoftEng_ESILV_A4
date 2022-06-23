@@ -9,6 +9,7 @@
             <label><b>choix logo :</b></label>
             <input name="logoVote" placeholder="Entrez l'URL" v-model="text">
         </div>
+        <input type="submit" value="Créer">
     </div>
   </div>
 </template>
