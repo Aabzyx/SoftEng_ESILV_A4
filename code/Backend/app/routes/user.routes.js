@@ -1,4 +1,3 @@
-const user = require("../controllers/user.controller");
 module.exports = function(app) {
     const user = require('../controllers/user.controller');
 
@@ -16,4 +15,7 @@ module.exports = function(app) {
 
     // put request to set INE user
     app.put('/api/user/enterINE', user.updateINE);
+
+    // verify captcah
+    app.post('/api/user/verifyCaptcha', user.verifyCaptcha);
 }

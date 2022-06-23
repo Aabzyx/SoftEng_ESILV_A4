@@ -3,6 +3,10 @@ const User = require("../models/user.model");
 
 // import bcryptjs - hashing function
 const bcrypt = require('bcryptjs');
+const {verify} = require("jsonwebtoken");
+const {stringify} = require("querystring");
+const fetch = (...args) =>
+    import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 // User Register function
 exports.register = (req, res) => {
@@ -131,4 +135,32 @@ exports.updateINE = (req, res) => {
                     req.body._id
             });
         });
+};
+
+//verifier le captcha
+exports.verifyCaptcha = (req, res) => {
+    if (!req.body.captcha)
+        return res.send({ success: false, msg: 'Please select captcha' });
+
+    // Secret key
+    const secretKey = '6LdcmpEgAAAAAORoX23v4C2tsScKKj2Vv1YBsEbO';
+
+    // Verify URL
+    const query = stringify({
+        secret: secretKey,
+        response: req.body.captcha,
+        /*remoteip: req.connection.remoteAddress*/
+    });
+
+    const verifyURL = `https://google.com/recaptcha/api/siteverify?${query}`;
+
+    // Make a request to verifyURL
+    const body = fetch(verifyURL).then(res => res.json());
+
+    // If not successful
+    if (body.success !== undefined && !body.success)
+        return res.send({ success: false, msg: 'Failed captcha verification' });
+
+    // If successful
+    return res.send({ success: true, msg: 'Captcha passed' });
 };

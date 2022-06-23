@@ -73,10 +73,15 @@
                   <div class="grid--50-50">
                     <label><b>Password</b></label>
                   </div>
+
                   <input type="password" name="password" placeholder="Password" v-model="password" @keyup.enter="register">
                 </div>
 
                 <div class="field padding-bottom--24">
+                  <form action="?" method="POST" class="captcha">
+                    <div class="g-recaptcha" data-sitekey="6LdcmpEgAAAAAJgpm3nX0IFGDJMligS90qSsLv_Q"></div>
+                  </form>
+                  <br>
                   <input type="button" name="submit" value="Continue" v-on:click="register">
                 </div>
 
@@ -95,13 +100,9 @@
       </div>
     </div>
   </div>
-
-iuazfoazhfoif
-
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
 import http from "../http-common";
 
 export default {
@@ -123,37 +124,49 @@ export default {
       autorisedElections: []
     };
   },
-  computed: {
-    ...mapState(["actualClient"]),
+  mounted() {
+    let recaptchaScript = document.createElement('script')
+    recaptchaScript.setAttribute('src', 'https://www.google.com/recaptcha/api.js')
+    document.head.appendChild(recaptchaScript)
   },
   methods:{
-    ...mapActions([]),
     register(){
-      this.local.push(this.country, this.city, this.departement)
-      const newUser = {
-        nom: this.nom,
-        prenom: this.prenom,
-        mail: this.mail,
-        password: this.password,
-        dateDeNaissance: this.dateDeNaissance,
-        local: this.local,
-        urlImage: this.urlImage,
-        subscription: this.subscription,
-        numElecteur: this.numElecteur,
-        autorisedElections: this.autorisedElections
-      };
+      const captcha = document.querySelector('#g-recaptcha-response').value;
       http
-          .post("/user/register", newUser)
-          .then(response => {
-            console.log(response.data);
-            alert("User add")
-          })
-          .catch(e => {
-            if (e.response.status === 500){
-              alert("One or many values are already used")
+          .post("/user/verifyCaptcha", JSON.stringify({captcha}))
+          .then(res => {
+            if (res.data.success){
+              this.local.push(this.country, this.city, this.departement)
+              const newUser = {
+                nom: this.nom,
+                prenom: this.prenom,
+                mail: this.mail,
+                password: this.password,
+                dateDeNaissance: this.dateDeNaissance,
+                local: this.local,
+                urlImage: this.urlImage,
+                subscription: this.subscription,
+                numElecteur: this.numElecteur,
+                autorisedElections: this.autorisedElections
+              };
+              http
+                  .post("/user/register", newUser)
+                  .then(response => {
+                    console.log(response.data);
+                    alert("User add")
+                  })
+                  .catch(e => {
+                    if (e.response.status === 500){
+                      alert("One or many values are already used")
+                    }
+                    console.log(e);
+                  });
             }
-            console.log(e);
-          });
+            else {
+              alert("Captcha not verify")
+            }
+          })
+      //.catch() pas d'erreur, on ne renvoit que des fichiers Json
     }
   },
 }

@@ -50,12 +50,12 @@
                     <label><b>Password</b></label>
                     <input type="password" name="password" placeholder="Password" v-model="password" @keyup.enter="login">
                 </div>
-                <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
-                  <label>
-                    <input type="checkbox" name="checkbox" placeholder="name"> Remember me !
-                  </label>
-                </div>
                 <div class="field padding-bottom--24">
+                  <form action="?" method="POST" class="captcha">
+                    <div class="g-recaptcha" data-sitekey="6LdcmpEgAAAAAJgpm3nX0IFGDJMligS90qSsLv_Q"></div>
+                    <br/>
+                  </form>
+
                   <input type="button" name="submit" value="Continue" v-on:click="login">
                 </div>
 
@@ -87,32 +87,49 @@ export default {
       password: "",
     };
   },
+  mounted() {
+    let recaptchaScript = document.createElement('script')
+    recaptchaScript.setAttribute('src', 'https://www.google.com/recaptcha/api.js')
+    document.head.appendChild(recaptchaScript)
+  },
   methods:{
+    //login avec verification : captcha, jwt, mdp
     login() {
-      const User = {
-        mail: this.mail,
-        password: this.password,
-      };
+      const captcha = document.querySelector('#g-recaptcha-response').value;
       http
-      .post("/user/login", User)
-          .then(response => {
-            this.$store.state.actualClient = response.data
-            alert("You are now logIn")
+          .post("/user/verifyCaptcha", JSON.stringify({captcha}))
+          .then(res => {
+            if (res.data.success){
+              const User = {
+                mail: this.mail,
+                password: this.password,
+              };
+              http
+                  .post("/user/login", User)
+                  .then(response => {
+                    this.$store.state.actualClient = response.data
+                    alert("You are now logIn")
+                  })
+                  .catch(e => {
+                    if (e.response.status === 401){
+                      console.log(e);
+                      alert("Wrong email")
+                    }
+                    else if (e.response.status === 402){
+                      console.log(e);
+                      alert("No access to this web app")
+                    }
+                    else {
+                      console.log(e);
+                      alert("Wrong password")
+                    }
+                  });
+            }
+            else{
+              alert("Captcha not verify")
+            }
           })
-          .catch(e => {
-            if (e.response.status === 401){
-              console.log(e);
-              alert("Wrong email")
-            }
-            else if (e.response.status === 402){
-              console.log(e);
-              alert("No access to this web app")
-            }
-            else {
-              console.log(e);
-              alert("Wrong password")
-            }
-          });
+      //.catch() pas d'erreur, on ne renvoit que des fichiers Json
     },
   },
 }
@@ -340,4 +357,5 @@ input[name="submit"] {
     transform: translateX(0px);
   }
 }
+
 </style>
