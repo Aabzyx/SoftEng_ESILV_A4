@@ -45,7 +45,6 @@ const ElectionSchema = mongoose.Schema({
 
     code: {  //code généré pour rejoindre l'élection
         type: String,
-        index: true
     },
 
     limite: {  //limite maximale de personne
