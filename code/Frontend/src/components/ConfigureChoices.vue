@@ -9,7 +9,7 @@
             <label><b>choix logo :</b></label>
             <input name="logoVote" placeholder="Entrez l'URL" v-model="text">
         </div>
-        <input type="submit" value="Créer">
+        <input type="submit" value="Créer" v-on:click="createVote()">
     </div>
   </div>
 </template>

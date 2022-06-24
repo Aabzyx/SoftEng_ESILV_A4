@@ -7,6 +7,7 @@ export default createStore({
         elections : [],
         nbrChoices : 5, // verif que cette veleur est pas modifiée par l'user
         choices : {},
+        actualElection : {}
     },
     getters: {},
     mutations: {

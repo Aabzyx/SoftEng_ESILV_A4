@@ -4,7 +4,7 @@ import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import HomePageVue from "./components/HomePage.vue";
 import CreateVoteVue from "./components/CreateVote.vue";
-import ChoixVoteVue from "./components/ChoixVote.vue";
+//import ChoixVoteVue from "./components/ChoixVote.vue";
 import IfMajeurVue from "./components/IfMajeur.vue";
 import InterfaceVoteVue from "./components/InterfaceVote.vue";
 import JoinVoteVue from "./components/JoinVote.vue";
@@ -38,11 +38,11 @@ const routes =  [
         name: "CreateVoteVue",
         component: CreateVoteVue
     },
-    {
-        path: "/ChoixVoteVue",
-        name: "ChoixVoteVue",
-        component: ChoixVoteVue
-    },
+    // {
+    //     path: "/ChoixVoteVue",
+    //     name: "ChoixVoteVue",
+    //     component: ChoixVoteVue
+    // },
     {
         path: "/IfMajeurVue",
         name: "IfMajeurVue",
