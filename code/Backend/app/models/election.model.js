@@ -44,7 +44,7 @@ const ElectionSchema = mongoose.Schema({
     },
 
     code: {  //code généré pour rejoindre l'élection
-        type: Number,
+        type: String,
         index: true
     },
 
