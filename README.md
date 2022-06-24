@@ -139,7 +139,7 @@ The application has been tested on the following browsers :
 
 - Benjamin Bernard
 - Antoine Rincheval
-- François Chevaleret
+- François Charvet
 - Romain Pasquier
 - Herman Huang
 - Luka Kupatadze
