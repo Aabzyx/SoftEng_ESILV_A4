@@ -26,7 +26,7 @@ exports.createElection = (req, res) => {
   } else {
 
     //Crée code ?
-    for(let i = 0; i<=(newElection.choix.length); i++) {
+    for(let i = 0; i<(newElection.choix.length); i++) {
       newElection.resultats.push(0);
     }
 
