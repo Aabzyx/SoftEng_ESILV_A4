@@ -4,9 +4,9 @@ import { createStore } from 'vuex'
 export default createStore({
     state: {
         actualClient: {},
-        elections : [],
-        nbrChoices : 5, // verif que cette veleur est pas modifiée par l'user
-        choices : {},
+        actualVote: {},
+        actualElection: {},
+        votes : [],
         actualElection : {}
     },
     getters: {},
