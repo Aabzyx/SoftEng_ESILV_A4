@@ -64,6 +64,7 @@ Backend is running on the 5000 port
 | [vue-router]          | [![vue-router-status]][vue-router-package]                   | Single-page application routing                         |
 | [vuex]                | [![vuex-status]][vuex-package]                               | Large-scale state management                            |
 | [vue-cli]             | [![vue-cli-status]][vue-cli-package]                         | Project scaffolding                                     |
+| [vue-page-transition] | [![vue-page-transition-status]][vue-page-transition-package] | Transition between page                                 |
 | [vue-devtools]        | [![vue-devtools-status]][vue-devtools-package]               | Browser DevTools extension                              |
 
 [vue-router]: https://github.com/vuejs/vue-router
@@ -74,11 +75,13 @@ Backend is running on the 5000 port
 [vue-router-status]: https://img.shields.io/npm/v/vue-router.svg
 [vuex-status]: https://img.shields.io/npm/v/vuex.svg
 [vue-cli-status]: https://img.shields.io/npm/v/@vue/cli.svg
+[vue-page-transition-status]: https://img.shields.io/npm/v/vue-transition.svg
 [vue-devtools-status]: https://img.shields.io/chrome-web-store/v/nhdogjmejiglipccpnnnanhbledajbpd.svg
 
 [vue-router-package]: https://npmjs.com/package/vue-router
 [vuex-package]: https://npmjs.com/package/vuex
 [vue-cli-package]: https://npmjs.com/package/@vue/cli
+[vue-page-transition-package]: https://www.npmjs.com/package/vue-page-transition
 [vue-devtools-package]: https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd
 
 ## Security
