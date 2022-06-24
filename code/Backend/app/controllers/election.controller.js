@@ -14,3 +14,42 @@ exports.chercher = (req, res) => {
             }
     })
 };
+
+
+exports.createElection = (req, res) => {
+  let newElection = new Election(req.body);
+  const err = newElection.validateSync();
+  if (err) {
+    res.status(500).send({
+      message: err.message
+    });
+  } else {
+
+    //Crée code ?
+    for(let i = 0; i<(newElection.choix.length); i++) {
+      newElection.resultats.push(0);
+    }
+
+    const min = Math.ceil(0);
+    const max = Math.floor(9999);
+
+    const intCode = Math.floor(Math.random() * (max - min + 1)) + min;
+
+    let strCode = intCode.toString();
+    while(strCode.length < 4) {
+      strCode = "0"+strCode;
+    }
+
+    newElection.code = strCode;
+
+    newElection.save()
+      .then(data => {
+        res.send(data)
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: err.message
+        });
+      });
+  }
+};
