@@ -6,7 +6,7 @@ const VoteSchema = mongoose.Schema({
         required: true
     },
 
-    idElection: {  //idELection de l'élection pour lequel l'user a voté
+    idElection: {  //idELection de l'élection pour lequel le user a voté
         type: Number,
         required: true
     },
