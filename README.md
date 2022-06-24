@@ -70,12 +70,13 @@ Backend is running on the 5000 port
 [vue-router]: https://github.com/vuejs/vue-router
 [vuex]: https://github.com/vuejs/vuex
 [vue-cli]: https://github.com/vuejs/vue-cli
+[vue-page-transition]: https://github.com/vuejs/vue-page-transition
 [vue-devtools]: https://github.com/vuejs/vue-devtools
 
 [vue-router-status]: https://img.shields.io/npm/v/vue-router.svg
 [vuex-status]: https://img.shields.io/npm/v/vuex.svg
 [vue-cli-status]: https://img.shields.io/npm/v/@vue/cli.svg
-[vue-page-transition-status]: https://img.shields.io/npm/v/vue-transition.svg
+[vue-page-transition-status]: https://img.shields.io/npm/v/vue-page-transition.svg
 [vue-devtools-status]: https://img.shields.io/chrome-web-store/v/nhdogjmejiglipccpnnnanhbledajbpd.svg
 
 [vue-router-package]: https://npmjs.com/package/vue-router
