@@ -1,6 +1,6 @@
 <template>
   <br>
-  <h1>Choose your type of acount :</h1>
+  <h1 class="h1">Choose your type of acount :</h1>
     <br><h4>You could change it in the futur</h4>
   <div class="flex">
   <section class="page-contain" v-for="type in typeAccounts" v-bind:key="type.id">
@@ -67,7 +67,10 @@ export default {
             }
             console.log(e);
           });
-    }
+    },
+  },
+  mounted: function() {
+    this.$nextTick()
   }
 }
 </script>

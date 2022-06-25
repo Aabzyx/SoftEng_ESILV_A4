@@ -7,7 +7,6 @@ export default createStore({
         actualVote: {},
         actualElection: {},
         votes : [],
-        actualElection : {}
     },
     getters: {},
     mutations: {

@@ -21,12 +21,20 @@ const routes =  [
     {
         path: "/LoginForm",
         name: "LoginForm",
-        component: LoginForm
+        component: LoginForm,
+        meta: {
+            enterClass: "animate__animated animate__backInLeft",
+            leaveClass: "animate__animated animate__backOutRight"
+        }
     },
     {
         path: "/RegisterForm",
         name: "RegisterForm",
-        component: RegisterForm
+        component: RegisterForm,
+        meta: {
+            enterClass: "animate__animated animate__backInLeft",
+            leaveClass: "animate__animated animate__backOutRight"
+        }
     },
     {
         path: "/DifferentAcount",

@@ -120,9 +120,9 @@ export default {
 
               }
           );
-    }
-  },
+    },
 
+  },
   mounted: function(){
 
   }
