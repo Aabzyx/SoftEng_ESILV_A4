@@ -47,7 +47,7 @@ exports.createElection = (req, res) => {
         res.send(data)
       })
       .catch(err => {
-        res.status(500).send({
+        res.status(501).send({
           message: err.message
         });
       });
