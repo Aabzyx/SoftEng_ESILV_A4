@@ -15,7 +15,6 @@ exports.chercher = (req, res) => {
     })
 };
 
-
 exports.createElection = (req, res) => {
   let newElection = new Election(req.body);
   console.log(newElection);
@@ -53,5 +52,17 @@ exports.createElection = (req, res) => {
         });
       });
   //}
+};
+
+exports.findAll = (req, res) => {
+    Election.find()
+        .then(elections => {
+            res.send(elections);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message
+            });
+        });
 };
 

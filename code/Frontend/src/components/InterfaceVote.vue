@@ -2,10 +2,10 @@
   <div>
     <h1>Vote now</h1>
 
-    <p>Nom du vote : {{$store.state.actualElection.name}}</p>
+    <p>Nom du vote : {{$store.state.actualElection.nom}}</p>
   <div v-for="choix in $store.state.actualElection.choix" :key="choix.id">
-    <label>{{choix.nom}}</label>
-    <input type="radio" id={{choix.nom}} name="choix">         
+    <label>{{choix}}</label>
+    <input type="radio" id={{choix}} name="choix">
   </div>
   <div>
     <input type="submit" value="Créer" v-on:click="vote()">

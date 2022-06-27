@@ -1,52 +1,48 @@
 <template>
   <p>HomePage</p>
-  <div>
-    {{$store.state.actualClient}}
-    <div v-for="(election, index) in (elections)" :key="index">
-      <p> public votes :</p>
-      <div v-if="election.type === 'informerlle' ">
-        <p>{{election.name}}</p>
-        <img :src=election.image>
-        <div v-on:click="deleteVote(vote)">
-          <a>❌</a>
-        </div>
-        <div v-on:click="test()"><!--reflechir a comment rediriger!-->
-          <a>Vote</a>
-        </div>
-      </div>
-    </div>
-    
-    <div v-for="(election, index) in (elections)" :key="index">
-      <p> official votes :</p>
-      <div v-if="election.type === 'officiel' ">
-        <p>{{election.name}}</p>
-        <img :src=election.image>
-        <div class="btn btn-primary" v-on:click="test()"><!--reflechir a comment rediriger!-->
-          <a>Vote</a>
-        </div>
-      </div>
-    </div>
-    <div>
-      <router-link class="btn btn-primary" to="/createVote">create vote</router-link>
-    </div>
+  <div v-for="(election, index) in elections" v-bind:key="index">
+    {{election.nom}}
+    <button v-on:click="goVote(election)">Vote</button>
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import http from "@/http-common";
 
 export default {
   name: "HomePage",
   data() {
     return {
+      elections: [],
     };
   },
   computed: {
-    ...mapState(['elections']),
+
   },
   methods:{
-    ...mapActions(['deleteVote']),
+  //show election
+    showElection(){
+      console.log("ok")
+      http
+          .get("/election/getElection")
+          .then(response => {
+            response.data.forEach(p => {
+              if (this.$store.state.actualClient.autorisedElections.includes(p._id)){
+                this.elections.push(p)
+              }
+            })
 
+            console.log(response)
+            console.log(this.elections)
+          })
+          .catch(e => {
+            console.log(e);
+          });
+    },
+    goVote(election){
+      this.$store.state.actualElection = election;
+      this.$router.push('/InterfaceVoteVue')
+    },
     redirection(){
       if (this.$store.state.actualClient === null){
         this.$router.push('/')
@@ -55,6 +51,7 @@ export default {
   },
   mounted: function(){
       this.$nextTick(this.redirection)
+      this.$nextTick(this.showElection)
    }
 }
 </script>

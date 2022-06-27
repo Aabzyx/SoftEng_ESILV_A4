@@ -164,3 +164,4 @@ exports.verifyCaptcha = (req, res) => {
     // If successful
     return res.send({ success: true, msg: 'Captcha passed' });
 };
+
