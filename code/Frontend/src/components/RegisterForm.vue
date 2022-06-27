@@ -153,7 +153,7 @@ export default {
                   .post("/user/register", newUser)
                   .then(response => {
                     console.log(response.data);
-                    alert("User add")
+                    this.$router.push('/')
                   })
                   .catch(e => {
                     if (e.response.status === 500){

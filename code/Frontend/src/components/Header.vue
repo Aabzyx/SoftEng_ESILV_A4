@@ -1,7 +1,5 @@
 <template>
     <nav class="container-fluid">
-      <router-link class="mr-1 btn btn-primary" to="/" >LoginForm</router-link>
-      <router-link class="mr-1 btn btn-primary" to="/RegisterForm" >RegisterForm</router-link>
       <router-link class="mr-1 btn btn-primary" to="/DifferentAcount" >DifferentAcount</router-link>
       <router-link class="mr-1 btn btn-primary" to="/HomePageVue" >HomePageVue</router-link>
       <router-link class="mr-1 btn btn-primary" to="/CreateElectionVue" >CreateElectioneVue</router-link>

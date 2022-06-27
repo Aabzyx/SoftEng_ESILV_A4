@@ -18,6 +18,7 @@ exports.chercher = (req, res) => {
 
 exports.createElection = (req, res) => {
   let newElection = new Election(req.body);
+  console.log(newElection);
   /*const err = newElection.validateSync();
   if (err) {
     res.status(500).send({

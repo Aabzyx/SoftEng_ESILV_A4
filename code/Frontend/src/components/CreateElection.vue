@@ -20,27 +20,27 @@
     <label><b>Nombre de votants :</b></label>
     <input name="nombreVotants" type="number" v-model="limite" />
 
-    <div>
-      <input
-        type="radio"
-        id="informel"
-        name="typeElection"
-        value="informel"
-        v-model="typeElection"
-        checked
-      />
-      <label for="informel">Informel</label>
-    </div>
-    <div>
-      <input
-        type="radio"
-        id="officiel"
-        name="typeElection"
-        value="officiel"
-        v-model="typeElection"
-      />
-      <label for="officiel">Officiel</label>
-    </div>
+<!--    <div>-->
+<!--      <input-->
+<!--        type="radio"-->
+<!--        id="informel"-->
+<!--        name="typeElection"-->
+<!--        v-bind:value="informel"-->
+<!--        v-model="typeElection"-->
+<!--        checked-->
+<!--      />-->
+<!--      <label for="informel">Informel</label>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      <input-->
+<!--        type="radio"-->
+<!--        id="officiel"-->
+<!--        name="typeElection"-->
+<!--        v-bind:value="officiel"-->
+<!--        v-model="typeElection"-->
+<!--      />-->
+<!--      <label for="officiel">Officiel</label>-->
+<!--    </div>-->
 
     <div>
       <input type="checkbox" id="preview" v-model="preview" />
@@ -72,7 +72,7 @@ export default {
       description: "",
       urlImage: "",
       limite: Number,
-      typeElection: "",
+      typeElection: "informel",
       preview: Boolean,
       choixA: "",
       choixB: "",
