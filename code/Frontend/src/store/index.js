@@ -12,7 +12,7 @@ export default createStore({
     mutations: {
         //Logout as user
         LOG_OUT(state){
-            state.actualClient = {};
+            state.actualClient = null;
         },
         },
     actions: {
