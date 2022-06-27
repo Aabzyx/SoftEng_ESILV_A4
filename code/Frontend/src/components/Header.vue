@@ -11,14 +11,14 @@
       <router-link class="mr-1 btn btn-primary" to="/JoinVoteVue" >JoinVoteVue</router-link>
       <router-link class="mr-1 btn btn-primary" to="/ConfigureChoicesVue" >ConfigureChoicesVue</router-link>
     </nav>
-
-  <router-view v-slot="{ Component, route }">
-    <transition class="transition"
-                :enter-active-class="route.meta.enterClass"
-                :leave-active-class="route.meta.leaveClass"
-                mode="out-in">
-      <component :is="Component" />
-    </transition>
+  <router-view>
+    <!--  <router-view v-slot="{ Component, route }">-->
+    <!--    <transition class="transition"-->
+    <!--                :enter-active-class="route.meta.enterClass"-->
+    <!--                :leave-active-class="route.meta.leaveClass"-->
+    <!--                mode="out-in">-->
+    <!--      <component :is="Component" />-->
+    <!--    </transition>-->
   </router-view>
 </template>
 

@@ -52,7 +52,11 @@ const routes =  [
     {
         path: "/CreateVoteVue",
         name: "CreateVoteVue",
-        component: CreateVoteVue
+        component: CreateVoteVue,
+        meta: {
+            enterClass: "animate__animated animate__backInLeft",
+            leaveClass: "animate__animated animate__backOutRight"
+        }
     },
     // {
     //     path: "/ChoixVoteVue",
@@ -62,27 +66,47 @@ const routes =  [
     {
         path: "/IfMajeurVue",
         name: "IfMajeurVue",
-        component: IfMajeurVue
+        component: IfMajeurVue,
+        meta: {
+            enterClass: "animate__animated animate__backInLeft",
+            leaveClass: "animate__animated animate__backOutRight"
+        }
     },
     {
         path: "/InterfaceVoteVue",
         name: "InterfaceVoteVue",
-        component: InterfaceVoteVue
+        component: InterfaceVoteVue,
+        meta: {
+            enterClass: "animate__animated animate__backInLeft",
+            leaveClass: "animate__animated animate__backOutRight"
+        }
     },
     {
         path: "/ShowResultatsVue",
         name: "ShowResultatsVue",
-        component: ShowResultatsVue
+        component: ShowResultatsVue,
+        meta: {
+            enterClass: "animate__animated animate__backInLeft",
+            leaveClass: "animate__animated animate__backOutRight"
+        }
     },
     {
         path: "/JoinVoteVue",
         name: "JoinVoteVue",
-        component: JoinVoteVue
+        component: JoinVoteVue,
+        meta: {
+            enterClass: "animate__animated animate__backInLeft",
+            leaveClass: "animate__animated animate__backOutRight"
+        }
     },
     {
         path: "/ConfigureChoicesVue",
         name: "ConfigureChoicesVue",
-        component: ConfigureChoicesVue
+        component: ConfigureChoicesVue,
+        meta: {
+            enterClass: "animate__animated animate__backInLeft",
+            leaveClass: "animate__animated animate__backOutRight"
+        }
     },
     
 ];
