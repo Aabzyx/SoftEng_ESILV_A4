@@ -5,39 +5,39 @@
     <input name="nom" placeholder="nom du vote" type="text" v-model="nom" />
     <label><b>Description :</b></label>
     <input
-        name="description"
-        placeholder="description"
-        type="text"
-        v-model="description"
+      name="description"
+      placeholder="description"
+      type="text"
+      v-model="description"
     />
     <label><b>URL logo :</b></label>
     <input
-        name="urlImage"
-        placeholder="Entrez l'URL"
-        type="url"
-        v-model="urlImage"
+      name="urlImage"
+      placeholder="Entrez l'URL"
+      type="url"
+      v-model="urlImage"
     />
     <label><b>Nombre de votants :</b></label>
     <input name="nombreVotants" type="number" v-model="limite" />
 
     <div>
       <input
-          type="radio"
-          id="informel"
-          name="typeElection"
-          value="informel"
-          v-model="typeElection"
-          checked
+        type="radio"
+        id="informel"
+        name="typeElection"
+        value="informel"
+        v-model="typeElection"
+        checked
       />
       <label for="informel">Informel</label>
     </div>
     <div>
       <input
-          type="radio"
-          id="officiel"
-          name="typeElection"
-          value="officiel"
-          v-model="typeElection"
+        type="radio"
+        id="officiel"
+        name="typeElection"
+        value="officiel"
+        v-model="typeElection"
       />
       <label for="officiel">Officiel</label>
     </div>
@@ -86,26 +86,26 @@ export default {
       const newElection = {
         nom: this.nom,
         description: this.description,
-        urlImamge: this.urlImage,
+        urlImage: this.urlImage,
         type: this.typeElection,
         choix: this.choix,
         preview: this.preview,
         limite: this.limite,
       };
       http
-          .post("/election/createElection", newElection)
-          .then((response) => {
-            console.log(response.data);
-            alert("Election added");
-          })
-          .catch((e) => {
-            if (e.response.status === 500) {
-              alert("Invalid data");
-            } else {
-              alert("DB error");
-            }
-            console.log(e);
-          });
+        .post("/election/createElection", newElection)
+        .then((response) => {
+          console.log(response.data);
+          alert("Election added");
+        })
+        .catch((e) => {
+          if (e.response.status === 500) {
+            alert("Invalid data");
+          } else {
+            alert("DB error");
+          }
+          console.log(e);
+        });
     },
   },
   mounted: function () {},
