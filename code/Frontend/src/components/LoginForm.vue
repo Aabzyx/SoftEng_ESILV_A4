@@ -74,6 +74,7 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -108,7 +109,7 @@ export default {
                   .post("/user/login", User)
                   .then(response => {
                     this.$store.state.actualClient = response.data
-                    alert("You are now logIn")
+                    this.$router.push('HomePageVue')
                   })
                   .catch(e => {
                     if (e.response.status === 401){

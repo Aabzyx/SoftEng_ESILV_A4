@@ -49,7 +49,7 @@ export default {
 
     redirection(){
       if (this.$store.state.actualClient === null){
-        this.$router.push('LoginForm')
+        this.$router.push('/')
       }
       }
   },

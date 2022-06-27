@@ -14,12 +14,16 @@ import ConfigureChoicesVue from "./components/ConfigureChoices.vue";
 
 const routes =  [
     {
-        path: "/",
+        path: "/HomePageVue",
         name: "HomePageVue",
-        component: HomePageVue
+        component: HomePageVue,
+        meta: {
+            enterClass: "animate__animated animate__backInLeft",
+            leaveClass: "animate__animated animate__backOutRight"
+        }
     },
     {
-        path: "/LoginForm",
+        path: "/",
         name: "LoginForm",
         component: LoginForm,
         meta: {
@@ -39,7 +43,11 @@ const routes =  [
     {
         path: "/DifferentAcount",
         name: "DifferentAcount",
-        component: DifferentAcount
+        component: DifferentAcount,
+        meta: {
+            enterClass: "animate__animated animate__backInLeft",
+            leaveClass: "animate__animated animate__backOutRight"
+        }
     },
     {
         path: "/CreateVoteVue",
