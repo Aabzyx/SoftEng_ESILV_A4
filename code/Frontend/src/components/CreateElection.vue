@@ -77,20 +77,27 @@ export default {
       choixA: "",
       choixB: "",
       choix: [],
+      resultats: [],
+      dates: [],
+      code: "",
     };
   },
   computed: {},
   methods: {
     createElection() {
       this.choix.push(this.choixA, this.choixB);
+      this.dates.push(Date.now());
       const newElection = {
         nom: this.nom,
         description: this.description,
         urlImage: this.urlImage,
         type: this.typeElection,
         choix: this.choix,
+        resultats: this.resultats,
+        dates: this.dates,
         preview: this.preview,
         limite: this.limite,
+        code: this.code,
       };
       http
         .post("/election/createElection", newElection)
