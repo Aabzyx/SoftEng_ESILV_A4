@@ -1,4 +1,4 @@
-<p align="center"><img width="100" src="https://www.wevote.eu/wp-content/uploads/2019/07/logo-wevote-a-colores.png" alt="logo"></p>
+<p align="center">ouiVote</p>
 
 <p align="center">
   <a href="https://www.npmjs.com/package/npm/v/8.11.0"><img src="https://img.shields.io/npm/v/vue.svg?sanitize=true" alt="Version"></a>
@@ -140,6 +140,8 @@ The application has been tested on the following browsers :
 ### Deployement
 
 ## Contributors
+
+Ekip :
 
 - Benjamin Bernard
 - Antoine Rincheval
