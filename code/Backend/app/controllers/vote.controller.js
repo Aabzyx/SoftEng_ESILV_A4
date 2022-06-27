@@ -71,7 +71,7 @@ exports.getVote = (req, res) => {
 
 //Get allVotes of a specific election
 exports.getAllVotesOfElection = (req,res) => {
-    Vote.find(req.body.actualElection.idElection == req.body.idElection)
+    Vote.find(req.body.actualElection.idElection === req.body.idElection)
         .then(votes => {
             res.send(votes);
         })

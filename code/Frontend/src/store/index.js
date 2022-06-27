@@ -3,7 +3,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
     state: {
-        actualClient: {},
+        actualClient: null,
         actualVote: {},
         actualElection: {},
         votes : [],

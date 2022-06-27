@@ -2,8 +2,8 @@
   <div>
     <h1>Vote now</h1>
 
-    <p>Nom du vote : {{actualElection.name}}</p>
-  <div v-for="choix in actualElection.choix" :key="choix.id">
+    <p>Nom du vote : {{$store.state.actualElection.name}}</p>
+  <div v-for="choix in $store.state.actualElection.choix" :key="choix.id">
     <label>{{choix.nom}}</label>
     <input type="radio" id={{choix.nom}} name="choix">         
   </div>
@@ -15,7 +15,6 @@
 
 <script>
 import http from "../http-common";
-import { mapState } from 'vuex';
 
 export default {
   name: "InterfaceVote",
@@ -27,7 +26,6 @@ export default {
     };
   },
   computed: {
-    ...mapState(['actualElection'])
   },
   methods:{
     vote(){

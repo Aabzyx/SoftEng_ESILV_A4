@@ -1,7 +1,7 @@
 <template>
   <p>HomePage</p>
   <div>
-    
+    {{$store.state.actualClient}}
     <div v-for="(election, index) in (elections)" :key="index">
       <p> public votes :</p>
       <div v-if="election.type === 'informerlle' ">
@@ -46,10 +46,16 @@ export default {
   },
   methods:{
     ...mapActions(['deleteVote']),
+
+    redirection(){
+      if (this.$store.state.actualClient === null){
+        this.$router.push('LoginForm')
+      }
+      }
   },
   mounted: function(){
-
-  }
+      this.$nextTick(this.redirection)
+   }
 }
 </script>
 
