@@ -18,12 +18,12 @@ exports.chercher = (req, res) => {
 
 exports.createElection = (req, res) => {
   let newElection = new Election(req.body);
-  const err = newElection.validateSync();
+  /*const err = newElection.validateSync();
   if (err) {
     res.status(500).send({
       message: err.message
     });
-  } else {
+  } else {*/
 
     //Crée code ?
     for(let i = 0; i<(newElection.choix.length); i++) {
@@ -51,6 +51,6 @@ exports.createElection = (req, res) => {
           message: err.message
         });
       });
-  }
+  //}
 };
 
