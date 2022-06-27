@@ -3,7 +3,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import HomePageVue from "./components/HomePage.vue";
-import CreateVoteVue from "./components/CreateVote.vue";
+import CreateElectionVue from "./components/CreateElection.vue";
 //import ChoixVoteVue from "./components/ChoixVote.vue";
 import IfMajeurVue from "./components/IfMajeur.vue";
 import InterfaceVoteVue from "./components/InterfaceVote.vue";
@@ -50,9 +50,9 @@ const routes =  [
         }
     },
     {
-        path: "/CreateVoteVue",
-        name: "CreateVoteVue",
-        component: CreateVoteVue,
+        path: "/CreateElectionVue",
+        name: "CreateElectionVue",
+        component: CreateElectionVue,
         meta: {
             enterClass: "animate__animated animate__backInLeft",
             leaveClass: "animate__animated animate__backOutRight"
