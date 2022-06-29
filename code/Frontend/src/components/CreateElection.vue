@@ -42,14 +42,27 @@
       <label for="officiel">Officiel</label>
     </div>
 
-    <div>
+    <div class="box-choix">
       <div>
-        <label><b>nom du choix A :</b></label>
-        <input name="nomChoixA" placeholder="nom du choix" v-model="choixA" />
+        <label><b>Nom du choix:</b></label>
+        <input
+          name="nomChoixA"
+          type="text"
+          placeholder="nom du choix"
+          v-model="choixA"
+        />
       </div>
       <div>
-        <label><b>nom du choix B :</b></label>
-        <input name="nomChoixB" placeholder="nom du choix" v-model="choixB" />
+        <label><b>Nom du choix:</b></label>
+        <input
+          name="nomChoixB"
+          type="text"
+          placeholder="nom du choix"
+          v-model="choixB"
+        />
+      </div>
+      <div>
+        <input type="button" value="Ajouter" v-on:click="addChoix" />
       </div>
     </div>
     <input type="submit" value="Créer" v-on:click="createElection" />
@@ -70,6 +83,7 @@ export default {
       typeElection: "informel",
       choixA: "",
       choixB: "",
+      choice: "",
       choix: [],
       resultats: [],
       dates: [],
@@ -106,6 +120,23 @@ export default {
           }
           console.log(e);
         });
+    },
+
+    addChoix() {
+      let boxChoix = document.getElementsByClassName("box-choix");
+
+      let div = document.createElement("div");
+      let label = document
+        .createElement("label")
+        .appendChild(document.createElement("b"));
+      label.textContent = "Nom du choix:";
+      div.appendChild(label);
+      let input = document.createElement("input");
+      input.setAttribute("type", "text");
+      input.setAttribute("placeholder", "nom du choix");
+      input.setAttribute("v-model", "choice");
+      div.appendChild(input);
+      boxChoix.appendChild(div);
     },
   },
   mounted: function() {},
