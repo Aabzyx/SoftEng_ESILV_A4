@@ -52,11 +52,13 @@
           <label><b>Nom du choix:</b></label>
           <input type="text" placeholder="nom du choix" v-model="choixB" />
         </div>
-        <div>
-          <input type="button" value="Ajouter" v-on:click="addChoix" />
-        </div>
       </div>
-      <input type="submit" value="Créer" v-on:click="createElection" />
+      <div>
+        <input type="button" value="Ajouter" v-on:click="addChoix" />
+      </div>
+      <div>
+        <input type="submit" value="Créer" v-on:click="createElection" />
+      </div>
     </div>
   </form>
 </template>
