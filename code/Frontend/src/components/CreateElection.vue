@@ -46,11 +46,11 @@
       <div id="box-choix">
         <div>
           <label><b>Nom du choix:</b></label>
-          <input type="text" placeholder="nom du choix" v-model="choixA" />
+          <input type="text" placeholder="nom du choix" v-model="choix" />
         </div>
         <div>
           <label><b>Nom du choix:</b></label>
-          <input type="text" placeholder="nom du choix" v-model="choixB" />
+          <input type="text" placeholder="nom du choix" v-model="choix" />
         </div>
       </div>
       <div>
@@ -75,9 +75,9 @@ export default {
       urlImage: "",
       limite: Number,
       typeElection: "informel",
-      choixA: "",
+      /*choixA: "",
       choixB: "",
-      choice: "",
+      choice: "",*/
       choix: [],
       resultats: [],
       dates: [],
@@ -129,7 +129,7 @@ export default {
       let input = document.createElement("input");
       input.setAttribute("type", "text");
       input.setAttribute("placeholder", "nom du choix");
-      input.setAttribute("v-model", "choice");
+      input.setAttribute("v-model", "choix");
       div.appendChild(input);
 
       let button = document.createElement("input");
