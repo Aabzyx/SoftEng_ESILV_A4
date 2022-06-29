@@ -288,6 +288,43 @@
     z-index: 99;
     transition: all 0.5s ease;
   }
+    @media (max-width: 426px) {
+        .sidebar {
+            width: 0px;
+            /* display: none; */
+        }
+        .sidebar .logo-details{
+            width: 50px;
+        }
+        .sidebar.open .logo-details {
+            width: 222px;
+            transition: 0.5s;
+            transition-delay: 0.1s;
+        }
+        .sidebar .profile-details img {
+            /* display: none; */
+            opacity: 0;
+        }
+        .sidebar.open .profile-details img {
+            display: flex;
+            opacity: 1;
+            transition-delay: 0.5s;
+            transition: 0.5s;
+        }
+        .sidebar .profile{
+            /* display: none; */
+            opacity: 0;
+
+        }
+        .sidebar.open .profile{
+            /* display: flex */
+            opacity: 1;
+            transition: 0.5s;
+            transition-delay: 0.1s;
+        }
+
+    }
+
   .sidebar.open {
     width: 250px;
   }
@@ -296,7 +333,11 @@
     display: flex;
     align-items: center;
     position: relative;
+    
+    background-color: var(--bg-color);
+    border-radius: 10px;
   }
+
   .sidebar .logo-details .icon {
     opacity: 0;
     transition: all 0.5s ease;
@@ -473,6 +514,7 @@
     display: block;
     margin: auto;
     transition: 0.5s;
+    /* overflow: hidden; */
   }
   .sidebar.open div img {
     height: 100px;
