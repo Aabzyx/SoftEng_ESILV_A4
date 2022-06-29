@@ -43,7 +43,7 @@
         <label for="officiel">Officiel</label>
       </div>
 
-      <div class="box-choix">
+      <div id="box-choix">
         <div>
           <label><b>Nom du choix:</b></label>
           <input type="text" placeholder="nom du choix" v-model="choixA" />
@@ -115,7 +115,7 @@ export default {
     },
 
     addChoix() {
-      let boxChoix = document.querySelector("box-choix");
+      let boxChoix = document.getElementById("box-choix");
 
       let div = document.createElement("div");
       let label = document
