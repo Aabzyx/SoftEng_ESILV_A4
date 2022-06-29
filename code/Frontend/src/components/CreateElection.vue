@@ -1,72 +1,64 @@
 <template>
   <p>CreateElection</p>
-  <div>
-    <label><b>Nom de l'election :</b></label>
-    <input name="nom" placeholder="nom du vote" type="text" v-model="nom" />
-    <label><b>Description :</b></label>
-    <input
-      name="description"
-      placeholder="description"
-      type="text"
-      v-model="description"
-    />
-    <label><b>URL logo :</b></label>
-    <input
-      name="urlImage"
-      placeholder="Entrez l'URL"
-      type="url"
-      v-model="urlImage"
-    />
-    <label><b>Nombre de votants :</b></label>
-    <input name="nombreVotants" type="number" v-model="limite" />
-
+  <form>
     <div>
+      <label><b>Nom de l'election :</b></label>
+      <input name="nom" placeholder="nom du vote" type="text" v-model="nom" />
+      <label><b>Description :</b></label>
       <input
-        type="radio"
-        id="informel"
-        name="typeElection"
-        value="informel"
-        v-model="typeElection"
-        checked
+        name="description"
+        placeholder="description"
+        type="text"
+        v-model="description"
       />
-      <label for="informel">Informel</label>
-    </div>
-    <div>
+      <label><b>URL logo :</b></label>
       <input
-        type="radio"
-        id="officiel"
-        name="typeElection"
-        value="officiel"
-        v-model="typeElection"
+        name="urlImage"
+        placeholder="Entrez l'URL"
+        type="url"
+        v-model="urlImage"
       />
-      <label for="officiel">Officiel</label>
-    </div>
+      <label><b>Nombre de votants :</b></label>
+      <input name="nombreVotants" type="number" v-model="limite" />
 
-    <div class="box-choix">
       <div>
-        <label><b>Nom du choix:</b></label>
         <input
-          name="nomChoixA"
-          type="text"
-          placeholder="nom du choix"
-          v-model="choixA"
+          type="radio"
+          id="informel"
+          name="typeElection"
+          value="informel"
+          v-model="typeElection"
+          checked
         />
+        <label for="informel">Informel</label>
       </div>
       <div>
-        <label><b>Nom du choix:</b></label>
         <input
-          name="nomChoixB"
-          type="text"
-          placeholder="nom du choix"
-          v-model="choixB"
+          type="radio"
+          id="officiel"
+          name="typeElection"
+          value="officiel"
+          v-model="typeElection"
         />
+        <label for="officiel">Officiel</label>
       </div>
-      <div>
-        <input type="button" value="Ajouter" v-on:click="addChoix" />
+
+      <div class="box-choix">
+        <div>
+          <label><b>Nom du choix:</b></label>
+          <input type="text" placeholder="nom du choix" v-model="choixA" />
+        </div>
+        <div>
+          <label><b>Nom du choix:</b></label>
+          <input type="text" placeholder="nom du choix" v-model="choixB" />
+        </div>
+        <div>
+          <input type="button" value="Ajouter" v-on:click="addChoix" />
+        </div>
       </div>
+      <input type="submit" value="Créer" v-on:click="createElection" />
     </div>
-    <input type="submit" value="Créer" v-on:click="createElection" />
-  </div>
+  </form>
 </template>
 
 <script>
@@ -123,7 +115,7 @@ export default {
     },
 
     addChoix() {
-      let boxChoix = document.getElementsByClassName("box-choix");
+      let boxChoix = document.querySelector("box-choix");
 
       let div = document.createElement("div");
       let label = document
@@ -131,11 +123,16 @@ export default {
         .appendChild(document.createElement("b"));
       label.textContent = "Nom du choix:";
       div.appendChild(label);
+
       let input = document.createElement("input");
       input.setAttribute("type", "text");
       input.setAttribute("placeholder", "nom du choix");
       input.setAttribute("v-model", "choice");
       div.appendChild(input);
+
+      let button = document.createElement("input");
+      button.setAttribute("type");
+
       boxChoix.appendChild(div);
     },
   },
