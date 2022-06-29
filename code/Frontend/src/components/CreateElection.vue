@@ -87,7 +87,7 @@ export default {
   computed: {},
   methods: {
     createElection() {
-      this.choix.push(this.choixA, this.choixB);
+      //this.choix.push(this.choixA, this.choixB);
       this.dates.push(Date.now());
       const newElection = {
         nom: this.nom,
