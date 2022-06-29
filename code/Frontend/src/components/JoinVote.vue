@@ -101,6 +101,7 @@ export default {
                 http.put('user/joinVote',this.$store.state.actualClient)
                     .then(response => {
                       console.log("response :" , response);
+                      sessionStorage.setItem("userData", JSON.stringify(response.data));
                       alert("User join vote")
                     })
           }
@@ -122,8 +123,13 @@ export default {
           );
     },
 
+    connectStore(){
+      this.$store.state.actualClient = JSON.parse(sessionStorage.getItem("userData"));
+    }
+
   },
   mounted: function(){
+    this.$nextTick(this.connectStore);
 
   }
 }

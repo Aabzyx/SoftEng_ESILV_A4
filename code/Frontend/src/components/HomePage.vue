@@ -44,7 +44,11 @@ export default {
       this.$router.push('/InterfaceVoteVue')
     },
     redirection(){
-      if (this.$store.state.actualClient === null){
+     /* if (this.$store.state.actualClient === null){
+        this.$router.push('/')
+      }*/
+      console.log(sessionStorage.nom)
+      if (sessionStorage.getItem("userData") === null){
         this.$router.push('/')
       }
       }

@@ -86,6 +86,7 @@ exports.updateAutorisedElections = (req, res) => {
     User.findOneAndUpdate({ _id: req.body._id},
         {$set : {autorisedElections: req.body.autorisedElections}},{new: true})
         .then(user => {
+            console.log(user);
             if(!user) {
                 return res.status(404).send({
                     message: "User not found with id " +

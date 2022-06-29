@@ -85,7 +85,7 @@ export default {
   data() {
     return {
       mail: "",
-      password: "",
+      password: ""
     };
   },
   mounted() {
@@ -110,6 +110,9 @@ export default {
                   .then(response => {
                     this.$store.state.actualClient = response.data
                     this.$router.push('HomePageVue')
+                    sessionStorage.setItem("userData", JSON.stringify(response.data));
+                    console.log(sessionStorage.getItem("userData"));
+                    console.log(JSON.parse(sessionStorage.getItem("userData")).nom);
                   })
                   .catch(e => {
                     if (e.response.status === 401){

@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 
 const VoteSchema = mongoose.Schema({
     idUser: {  //idUser de celui qui a voté
-        type: Number,
+        type: Object,
         required: true
     },
 
     idElection: {  //idELection de l'élection pour lequel le user a voté
-        type: Number,
+        type: Object,
         required: true
     },
 

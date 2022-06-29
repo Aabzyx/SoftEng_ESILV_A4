@@ -9,12 +9,12 @@
             <i class="bx" :class="isOpened ? 'bx-menu-alt-right' : 'bx-menu'" id="btn" @click="isOpened = !isOpened" />
         </div>
         <div class="profile-details">
-            <img v-if="profileImg" :src="profileImg" alt="profileImg">
+            <img v-if="profileImg"  alt="profileImg">
             <i v-else class="bx bxs-user-rectangle" />
              <div class="name_job">
             <div class="name">
               {{ profileName }}
-            </div>
+            </div>-->
             <!-- <div class="job">
               {{ profileRole }}
             </div> -->
@@ -164,7 +164,7 @@
     //! Profile detailes
        profileImg: {
          type: String,
-         default: require('C:/Users/antoi/OneDrive/Images/romain.png'),
+         default: require(''),
      },
       profileName: {
         type: String,

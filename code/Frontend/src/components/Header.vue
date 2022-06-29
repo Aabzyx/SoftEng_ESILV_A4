@@ -8,6 +8,7 @@
       <router-link class="mr-1 btn btn-primary" to="/ShowResultatsVue" >ShowResultatsVue</router-link>
       <router-link class="mr-1 btn btn-primary" to="/JoinVoteVue" >JoinVoteVue</router-link>
       <router-link class="mr-1 btn btn-primary" to="/ConfigureChoicesVue" >ConfigureChoicesVue</router-link>
+      <button v-on:click="logout">Log out</button>
     </nav>
   <router-view>
   </router-view>
@@ -24,7 +25,9 @@ export default {
 
   },
   methods:{
-
+    logout(){
+      this.$store.dispatch("logOut");
+    }
   },
   mounted: function(){
 

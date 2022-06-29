@@ -3,7 +3,8 @@ const Vote = require("../models/vote.model");
 
 //CREATE a vote
 exports.create = (req, res) => {
-    const vote = new Vote(req.body);
+    let vote = new Vote(req.body);
+    console.log(vote);
     vote.save()
         .then(data => {
             res.send(data);

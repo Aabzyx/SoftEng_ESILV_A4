@@ -13,6 +13,7 @@ export default createStore({
         //Logout as user
         LOG_OUT(state){
             state.actualClient = null;
+            sessionStorage.clear();
         },
         },
     actions: {
