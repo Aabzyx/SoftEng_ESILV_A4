@@ -131,7 +131,7 @@ export default {
       div.appendChild(input);
 
       let button = document.createElement("input");
-      button.setAttribute("type");
+      button.setAttribute("type", "submit");
 
       boxChoix.appendChild(div);
     },
