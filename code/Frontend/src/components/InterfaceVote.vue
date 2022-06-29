@@ -26,7 +26,7 @@ export default {
     return {
       idUser: Number,
       idElection: Number,
-      choix: []
+      choix: ""
     };
   },
   computed: {},
@@ -35,7 +35,7 @@ export default {
       const newVote = {
         idUser: this.$store.state.actualClient._id,
         idElection: this.$store.state.actualElection._id,
-        choix: c[0]
+        choix: c
       };
       console.log(newVote)
       http
