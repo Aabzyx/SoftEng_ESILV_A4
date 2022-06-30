@@ -15,7 +15,7 @@
             <img v-else src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Breezeicons-actions-22-im-user.svg/1200px-Breezeicons-actions-22-im-user.svg.png" />
              <div class="name_job">
             <div class="name">
-              {{ profileName }}
+              {{ this.$store.state.actualClient.nom +" "+this.$store.state.actualClient.prenom}}
             </div>
             <!-- <div class="job">
               {{ profileRole }}
@@ -278,7 +278,7 @@
   body {
     transition: all 0.5s ease;
     /* padding-left: var(--menu-closed-padding-left-body); */
-    padding-left: 75px;
+    padding-left: 78px;
   }
   .menu-logo {
     width: 30px;
