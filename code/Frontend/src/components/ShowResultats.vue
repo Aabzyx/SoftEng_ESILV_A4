@@ -1,4 +1,5 @@
 <template>
+  <Header2></Header2>
   <p>ShowResultats</p>
 
   <div v-for="(resultat,index) in resultas" v-bind:key=index>
@@ -10,53 +11,50 @@
 
 <script>
 import http from "../http-common";
+import Header2 from "./Header2.vue";
 export default {
-  name: "ShowResultats",
-  data() {
-    return {
-      idVote : Object,
-      resultats : [],
-
-    };
-  },
-  computed: {
-
-  },
-  methods:{
-    getAllVotesElection(){
-      const objet = {
-        actualVote: this.$store.state.actualVote,
-        actualElection: this.$store.state.actualElection
-      }
-      http
-          .get("/api/votes", objet)
-          .then(response => {
-            console.log(response.data);
-            alert(objet);
-          })
-
+    name: "ShowResultats",
+    data() {
+        return {
+            idVote: Object,
+            resultats: [],
+        };
     },
-    getVoteCurrentUser(){
-      const objet = {
-        actualVote: this.$store.state.actualVote,
-      }
-      http
-          .get('/api/vote/', objet)
-          .then(response => {
-            console.log(response.data)
-            alert("get vote " + response.data);
-          })
-          .catch(e => {
-            if (e.response.status === 500){
-            alert("One or many values are already used")
-          }
-          console.log(e);
-      });
-    }
-  },
-  mounted: function(){
-
-  }
+    computed: {},
+    methods: {
+        getAllVotesElection() {
+            const objet = {
+                actualVote: this.$store.state.actualVote,
+                actualElection: this.$store.state.actualElection
+            };
+            http
+                .get("/api/votes", objet)
+                .then(response => {
+                console.log(response.data);
+                alert(objet);
+            });
+        },
+        getVoteCurrentUser() {
+            const objet = {
+                actualVote: this.$store.state.actualVote,
+            };
+            http
+                .get("/api/vote/", objet)
+                .then(response => {
+                console.log(response.data);
+                alert("get vote " + response.data);
+            })
+                .catch(e => {
+                if (e.response.status === 500) {
+                    alert("One or many values are already used");
+                }
+                console.log(e);
+            });
+        }
+    },
+    mounted: function () {
+    },
+    components: { Header2 }
 }
 </script>
 

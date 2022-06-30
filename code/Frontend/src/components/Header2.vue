@@ -9,12 +9,14 @@
             <i class="bx" :class="isOpened ? 'bx-menu-alt-right' : 'bx-menu'" id="btn" @click="isOpened = !isOpened" />
         </div>
         <div class="profile-details">
-            <img v-if="profileImg"  alt="profileImg">
-            <i v-else class="bx bxs-user-rectangle" />
+            <!-- <img v-if="profileImg" :src="profileImg"  alt="profileImg"> -->
+            <img v-if="this.$store.state.actualClient.urlImage != ''" :src="this.$store.state.actualClient.urlImage"  alt="profileImg">
+
+            <img v-else src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Breezeicons-actions-22-im-user.svg/1200px-Breezeicons-actions-22-im-user.svg.png" />
              <div class="name_job">
             <div class="name">
               {{ profileName }}
-            </div>-->
+            </div>
             <!-- <div class="job">
               {{ profileRole }}
             </div> -->
@@ -87,10 +89,10 @@
         type: String,
         default: '250px'
       },
-      menuClosedPaddingLeftBody: {
-        type: String,
-        default: '78px'
-      },
+       menuClosedPaddingLeftBody: {
+         type: String,
+         default: '78px'
+       },
 
       //! Menu items
       menuItems: {
@@ -162,10 +164,10 @@
       },
 
     //! Profile detailes
-       profileImg: {
-         type: String,
-         default: require(''),
-     },
+    //    profileImg: {
+    //      type: String,
+    //      default: this.$store.state.actualClient.urlImage,
+    //  },
       profileName: {
         type: String,
         default: 'Fayzullo Saidakbarov',
@@ -242,12 +244,22 @@
           '--menu-items-hover-color': this.menuItemsHoverColor,
           '--menu-items-text-color': this.menuItemsTextColor,
           '--menu-footer-text-color': this.menuFooterTextColor,
+          '--menu-closed-padding-left-body' : this.menuClosedPaddingLeftBody,
         }
       },
     },
     watch: {
       isOpened() {
-        window.document.body.style.paddingLeft = this.isOpened && this.isPaddingLeft ? this.menuOpenedPaddingLeftBody : this.menuClosedPaddingLeftBody
+        if ( this.isOpened && this.isPaddingLeft && window.innerWidth > 600){
+            window.document.body.style.paddingLeft = this.menuOpenedPaddingLeftBody;
+        }
+        else if (window.innerWidth < 600) {
+            window.document.body.style.paddingLeft = 0;
+        }
+        else {
+            window.document.body.style.paddingLeft = this.menuClosedPaddingLeftBody;
+        }
+        // window.document.body.style.paddingLeft = this.isOpened && this.isPaddingLeft ? this.menuOpenedPaddingLeftBody : this.menuClosedPaddingLeftBody
       }
     }
   }
@@ -265,6 +277,8 @@
   }
   body {
     transition: all 0.5s ease;
+    /* padding-left: var(--menu-closed-padding-left-body); */
+    padding-left: 75px;
   }
   .menu-logo {
     width: 30px;
@@ -288,7 +302,10 @@
     z-index: 99;
     transition: all 0.5s ease;
   }
-    @media (max-width: 426px) {
+    @media (max-width: 600px) {
+        body {
+            padding-left: 0px;
+        }
         .sidebar {
             width: 0px;
             /* display: none; */
@@ -302,7 +319,7 @@
             transition-delay: 0.1s;
         }
         .sidebar .profile-details img {
-            /* display: none; */
+            display: none;
             opacity: 0;
         }
         .sidebar.open .profile-details img {

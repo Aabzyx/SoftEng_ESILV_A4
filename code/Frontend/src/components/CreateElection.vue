@@ -1,5 +1,5 @@
 <template>
-  <p>CreateElection</p>
+  <Header2></Header2>
   <form>
     <div>
       <label><b>Nom de l'election :</b></label>
@@ -65,80 +65,78 @@
 
 <script>
 import http from "../http-common";
+import Header2 from "./Header2.vue";
 
 export default {
-  name: "CreateElection",
-  data() {
-    return {
-      nom: "",
-      description: "",
-      urlImage: "",
-      limite: Number,
-      typeElection: "informel",
-      /*choixA: "",
-      choixB: "",
-      choice: "",*/
-      choix: [],
-      resultats: [],
-      dates: [],
-      code: "",
-    };
-  },
-  computed: {},
-  methods: {
-    createElection() {
-      //this.choix.push(this.choixA, this.choixB);
-      this.dates.push(Date.now());
-      const newElection = {
-        nom: this.nom,
-        description: this.description,
-        urlImage: this.urlImage,
-        type: this.typeElection,
-        choix: this.choix,
-        resultats: this.resultats,
-        dates: this.dates,
-        limite: this.limite,
-        code: this.code,
-      };
-      http
-        .post("/election/createElection", newElection)
-        .then((response) => {
-          console.log(response.data);
-          alert("Election added");
-        })
-        .catch((e) => {
-          if (e.response.status === 500) {
-            alert("Invalid data");
-          } else {
-            alert("DB error");
-          }
-          console.log(e);
-        });
+    name: "CreateElection",
+    data() {
+        return {
+            nom: "",
+            description: "",
+            urlImage: "",
+            limite: Number,
+            typeElection: "informel",
+            /*choixA: "",
+            choixB: "",
+            choice: "",*/
+            choix: [],
+            resultats: [],
+            dates: [],
+            code: "",
+        };
     },
-
-    addChoix() {
-      let boxChoix = document.getElementById("box-choix");
-
-      let div = document.createElement("div");
-      let label = document
-        .createElement("label")
-        .appendChild(document.createElement("b"));
-      label.textContent = "Nom du choix:";
-      div.appendChild(label);
-
-      let input = document.createElement("input");
-      input.setAttribute("type", "text");
-      input.setAttribute("placeholder", "nom du choix");
-      input.setAttribute("v-model", "choix");
-      div.appendChild(input);
-
-      let button = document.createElement("input");
-      button.setAttribute("type", "submit");
-
-      boxChoix.appendChild(div);
+    computed: {},
+    methods: {
+        createElection() {
+            //this.choix.push(this.choixA, this.choixB);
+            this.dates.push(Date.now());
+            const newElection = {
+                nom: this.nom,
+                description: this.description,
+                urlImage: this.urlImage,
+                type: this.typeElection,
+                choix: this.choix,
+                resultats: this.resultats,
+                dates: this.dates,
+                limite: this.limite,
+                code: this.code,
+            };
+            http
+                .post("/election/createElection", newElection)
+                .then((response) => {
+                console.log(response.data);
+                alert("Election added");
+            })
+                .catch((e) => {
+                if (e.response.status === 500) {
+                    alert("Invalid data");
+                }
+                else {
+                    alert("DB error");
+                }
+                console.log(e);
+            });
+        },
+        addChoix() {
+            let boxChoix = document.getElementById("box-choix");
+            let div = document.createElement("div");
+            let label = document
+                .createElement("label")
+                .appendChild(document.createElement("b"));
+            label.textContent = "Nom du choix:";
+            div.appendChild(label);
+            let input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.setAttribute("placeholder", "nom du choix");
+            input.setAttribute("v-model", "choix");
+            div.appendChild(input);
+            let button = document.createElement("input");
+            button.setAttribute("type", "submit");
+            boxChoix.appendChild(div);
+        },
     },
-  },
-  mounted: function() {},
+    mounted: function () { },
+    components: { Header2 }
 };
 </script>
 

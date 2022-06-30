@@ -1,4 +1,5 @@
 <template>
+  <Header2></Header2>
   <br><br>
   <div class="login-root">
     <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
@@ -74,64 +75,59 @@
 
 <script>
 import http from "../http-common";
+import Header2 from "./Header2.vue";
 
 export default {
-  name: "JoinVote",
-  data() {
-    return {
-      nom: "",
-      code: ""
-    };
-  },
-  computed: {
-
-  },
-  methods:{
-    joinVote(){
-      const leTout = {
-        user : this.$store.state.actualClient,
-        nom: this.nom,
-        code : this.code
-      }
-      http
-       .post('election/chercherCode', leTout)
-          .then(r =>{
-            if (!this.$store.state.actualClient.autorisedElections.includes(r.data)){
-                this.$store.state.actualClient.autorisedElections.push(r.data);
-                http.put('user/joinVote',this.$store.state.actualClient)
-                    .then(response => {
-                      console.log("response :" , response);
-                      sessionStorage.setItem("userData", JSON.stringify(response.data));
-                      alert("User join vote")
-                    })
-          }
-            else {
-              alert("You are already participating to this election")
-            }
-          })
-          .catch(e => {
-                if (e.response.status === 401){
-                  console.log(e);
-                  alert("Not find this vote")
-                }
-                else if (e.response.status === 402){
-                  console.log(e);
-                  alert("Not the right combination")
-                }
-
-              }
-          );
+    name: "JoinVote",
+    data() {
+        return {
+            nom: "",
+            code: ""
+        };
     },
-
-    connectStore(){
-      this.$store.state.actualClient = JSON.parse(sessionStorage.getItem("userData"));
-    }
-
-  },
-  mounted: function(){
-    this.$nextTick(this.connectStore);
-
-  }
+    computed: {},
+    methods: {
+        joinVote() {
+            const leTout = {
+                user: this.$store.state.actualClient,
+                nom: this.nom,
+                code: this.code
+            };
+            http
+                .post("election/chercherCode", leTout)
+                .then(r => {
+                if (!this.$store.state.actualClient.autorisedElections.includes(r.data)) {
+                    this.$store.state.actualClient.autorisedElections.push(r.data);
+                    http.put("user/joinVote", this.$store.state.actualClient)
+                        .then(response => {
+                        console.log("response :", response);
+                        sessionStorage.setItem("userData", JSON.stringify(response.data));
+                        alert("User join vote");
+                    });
+                }
+                else {
+                    alert("You are already participating to this election");
+                }
+            })
+                .catch(e => {
+                if (e.response.status === 401) {
+                    console.log(e);
+                    alert("Not find this vote");
+                }
+                else if (e.response.status === 402) {
+                    console.log(e);
+                    alert("Not the right combination");
+                }
+            });
+        },
+        connectStore() {
+            this.$store.state.actualClient = JSON.parse(sessionStorage.getItem("userData"));
+        }
+    },
+    mounted: function () {
+        this.$nextTick(this.connectStore);
+    },
+    components: { Header2 }
 }
 </script>
 

@@ -1,4 +1,5 @@
 <template>
+  <Header2></Header2>
   <br>
   <h1 class="h1">Choose your type of acount :</h1>
     <br><h4>You could change it in the futur</h4>
@@ -25,53 +26,69 @@
 
 <script>
 import http from "@/http-common";
+import Header2 from "./Header2.vue";
 
 export default {
-  name: "DifferentAcount",
-  data(){
-    return{
-      typeAccounts: [
-        {
-          id: 1, titre: 'Free', avantage1: 'Classic account', avantage2: 'Can create vote of only 10 participants maximum', avantage3: 'Can create only 2 votes at the same time', prix: '0.0 $ by months'
-        },
-        {
-          id: 2, titre: 'Premium', avantage1: 'Best offer', avantage2: 'Can create vote of 100 participants maximum', avantage3: 'Can create 10 votes at the same time', prix: '5.0 $ by months'
-        },
-        {
-          id: 3, titre: 'Premium+', avantage1: 'Beast offer', avantage2: 'Can create vote of 500 participants maximum', avantage3: 'Can create 50 votes at the same time', prix: '10.0 $ by months'
-        }
-      ]
-    }
-  },
-  methods:{
-    chooseOffer(type){
-      if (type.id === 1){
-        this.$store.state.actualClient.subscription = 'free'
-      }
-      if (type.id === 2){
-        this.$store.state.actualClient.subscription = 'premium'
-      }
-      if (type.id === 3){
-        this.$store.state.actualClient.subscription = 'super-premium'
-      }
-
-      http
-          .put("/user/chooseTypeAccount", this.$store.state.actualClient)
-          .then(response => {
-            console.log(response.data);
-            alert("User update subscription")
-          })
-          .catch(e => {
-            if (e.response.status === 404){
-              alert("Can't update your account")
-            }
-            console.log(e);
-          });
+    name: "DifferentAcount",
+    data() {
+        return {
+            typeAccounts: [
+                {
+                    id: 1,
+                    titre: "Free",
+                    avantage1: "Classic account",
+                    avantage2: "Can create vote of only 10 participants maximum",
+                    avantage3: "Can create only 2 votes at the same time",
+                    prix: "0.0 $ by months"
+                },
+                {
+                    id: 2,
+                    titre: "Premium",
+                    avantage1: "Best offer",
+                    avantage2: "Can create vote of 100 participants maximum",
+                    avantage3: "Can create 10 votes at the same time",
+                    prix: "5.0 $ by months"
+                },
+                {
+                    id: 3,
+                    titre: "Premium+",
+                    avantage1: "Beast offer",
+                    avantage2: "Can create vote of 500 participants maximum",
+                    avantage3: "Can create 50 votes at the same time",
+                    prix: "10.0 $ by months"
+                }
+            ]
+        };
     },
-  },
-  mounted: function() {
-    this.$nextTick()
-  }
+    methods: {
+        chooseOffer(type) {
+            if (type.id === 1) {
+                this.$store.state.actualClient.subscription = "free";
+            }
+            if (type.id === 2) {
+                this.$store.state.actualClient.subscription = "premium";
+            }
+            if (type.id === 3) {
+                this.$store.state.actualClient.subscription = "super-premium";
+            }
+            http
+                .put("/user/chooseTypeAccount", this.$store.state.actualClient)
+                .then(response => {
+                console.log(response.data);
+                alert("User update subscription");
+            })
+                .catch(e => {
+                if (e.response.status === 404) {
+                    alert("Can't update your account");
+                }
+                console.log(e);
+            });
+        },
+    },
+    mounted: function () {
+        this.$nextTick();
+    },
+    components: { Header2 }
 }
 </script>
 

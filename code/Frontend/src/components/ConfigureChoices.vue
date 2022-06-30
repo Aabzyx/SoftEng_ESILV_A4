@@ -1,4 +1,5 @@
 <template>
+  <Header2></Header2>
   <div v-for="n in nbrChoices" v-bind:key="n.id">
     <div>choix {{n}}
         <div>
@@ -16,23 +17,21 @@
 
 <script>
 import {  mapState } from 'vuex'
+import Header2 from './Header2.vue';
 export default {
-  name: "configureChoices",
-  data() {
-    return {
-    };
-  },
-  computed: {
-    ...mapState([
-        'nbrChoices'
-    ])
-  },
-  methods:{
-
-  },
-  mounted: function(){
-
-  }
+    name: "configureChoices",
+    data() {
+        return {};
+    },
+    computed: {
+        ...mapState([
+            "nbrChoices"
+        ])
+    },
+    methods: {},
+    mounted: function () {
+    },
+    components: { Header2 }
 }
 </script>
 
