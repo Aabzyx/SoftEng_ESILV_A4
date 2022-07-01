@@ -316,15 +316,6 @@ export default {
                         v-model="choice.value"
                       />
                     </div>
-                    <!--<div class="choix">
-                      <label>Nom du choix : {{ index + 1 }}</label
-                      ><br />
-                      <input
-                        type="text"
-                        placeholder="nom du choix"
-                        v-model="choice.value"
-                      />
-                    </div>-->
                   </div>
                   <input type="button" value="Ajouter" v-on:click="addChoix" />
                 </div>
@@ -360,7 +351,7 @@ export default {
       /*choixA: "",
       choixB: "",
       choice: "",*/
-      choix: [{ value: ""}, {value: "" }],
+      choix: [{ value: "" }, { value: "" }],
       resultats: [],
       dates: [],
       code: "",
@@ -673,8 +664,9 @@ input[name="urlImage"] {
   width: 175px;
 }
 
-.les_choix {
+.flex_deux {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
 }
 
