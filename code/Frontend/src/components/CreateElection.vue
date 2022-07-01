@@ -142,7 +142,7 @@ export default {
 </script>
 
 <style scoped></style> -->
-
+  <Header2></Header2>
   <div class="login-root">
     <div
       class="box-root flex-flex flex-direction--column"
@@ -316,6 +316,15 @@ export default {
                         v-model="choice.value"
                       />
                     </div>
+                    <div class="choix">
+                      <label>Nom du choix : {{ index + 1 }}</label
+                      ><br />
+                      <input
+                        type="text"
+                        placeholder="nom du choix"
+                        v-model="choice.value"
+                      />
+                    </div>
                   </div>
                   <input type="button" value="Ajouter" v-on:click="addChoix" />
                 </div>
@@ -338,88 +347,83 @@ export default {
 
 <script>
 import http from "../http-common";
+import Header2 from "./Header2.vue";
 
 export default {
-  name: "CreateElection",
-  data() {
-    return {
-      nom: "",
-      description: "",
-      urlImage: "",
-      limite: Number,
-      typeElection: "informel",
-      /*choixA: "",
-      choixB: "",
-      choice: "",*/
-      choix: [{ value: "" }, { value: "" }],
-      resultats: [],
-      dates: [],
-      code: "",
-    };
-  },
-  computed: {},
-  methods: {
-    createElection() {
-      // this.choix.push(this.choixA, this.choixB);
-      this.dates.push(Date.now());
-      const newElection = {
-        nom: this.nom,
-        description: this.description,
-        urlImage: this.urlImage,
-        type: this.typeElection,
-        choix: this.choix,
-        resultats: this.resultats,
-        dates: this.dates,
-        limite: this.limite,
-        code: this.code,
-      };
-      http
-        .post("/election/createElection", newElection)
-        .then((response) => {
-          console.log(response.data);
-          alert("Election added");
-        })
-        .catch((e) => {
-          if (e.response.status === 500) {
-            alert("Invalid data");
-          } else {
-            alert("DB error");
-          }
-          console.log(e);
-        });
+    name: "CreateElection",
+    data() {
+        return {
+            nom: "",
+            description: "",
+            urlImage: "",
+            limite: Number,
+            typeElection: "informel",
+            /*choixA: "",
+            choixB: "",
+            choice: "",*/
+            choix: [{ value: "" }],
+            resultats: [],
+            dates: [],
+            code: "",
+        };
     },
-
-    addChoix() {
-      this.choix.push({ value: "" });
-      // let boxChoix = document.getElementById("les_choix");
-      //
-      // let div = document.createElement("div");
-      //
-      // div.className = "choix";
-      //
-      // let label = document.createElement("label");
-      // label.textContent = "Nom du choix:";
-      // div.appendChild(label);
-      // let br = document.createElement("br");
-      // div.appendChild(br);
-      //
-      // let input = document.createElement("input");
-      // input.setAttribute("type", "text");
-      // input.setAttribute("placeholder", "nom du choix");
-      // input.setAttribute("v-model", "choice.value");
-      // div.appendChild(input);
-      //
-      // let button = document.createElement("input");
-      // button.setAttribute("type", "submit");
-      //
-      // div.style.background = "#1c57b5";
-      // div.style.margin = "10px";
-      // div.style.height = "100px";
-      //
-      // boxChoix.appendChild(div);
+    computed: {},
+    methods: {
+        createElection() {
+            this.choix.push(this.choixA, this.choixB);
+            this.dates.push(Date.now());
+            const newElection = {
+                nom: this.nom,
+                description: this.description,
+                urlImage: this.urlImage,
+                type: this.typeElection,
+                choix: this.choix,
+                resultats: this.resultats,
+                dates: this.dates,
+                limite: this.limite,
+                code: this.code,
+            };
+            http
+                .post("/election/createElection", newElection)
+                .then((response) => {
+                console.log(response.data);
+                alert("Election added");
+            })
+                .catch((e) => {
+                if (e.response.status === 500) {
+                    alert("Invalid data");
+                }
+                else {
+                    alert("DB error");
+                }
+                console.log(e);
+            });
+        },
+        addChoix() {
+            this.choix.push({ value: "" });
+            let boxChoix = document.getElementById("les_choix");
+            let div = document.createElement("div");
+            div.className = "choix";
+            let label = document.createElement("label");
+            label.textContent = "Nom du choix:";
+            div.appendChild(label);
+            let br = document.createElement("br");
+            div.appendChild(br);
+            let input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.setAttribute("placeholder", "nom du choix");
+            input.setAttribute("v-model", "choice.value");
+            div.appendChild(input);
+            let button = document.createElement("input");
+            button.setAttribute("type", "submit");
+            div.style.background = "#1c57b5";
+            div.style.margin = "10px";
+            div.style.height = "100px";
+            boxChoix.appendChild(div);
+        },
     },
-  },
-  mounted: function() {},
+    mounted: function () { },
+    components: { Header2 }
 };
 </script>
 
@@ -664,15 +668,13 @@ input[name="urlImage"] {
   width: 175px;
 }
 
-.flex_deux {
+.les_choix {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
 }
 
 .choix {
   background: #1c57b5;
-  flex-direction: row;
   margin: 10px;
   height: 100px;
 }
