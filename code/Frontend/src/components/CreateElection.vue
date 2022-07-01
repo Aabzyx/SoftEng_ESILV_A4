@@ -1,102 +1,239 @@
 <template>
-<!--  <p>CreateElection</p>-->
-<!--  <div>-->
-<!--    <label><b>Nom de l'election :</b></label>-->
-<!--    <input name="nom" placeholder="nom du vote" type="text" v-model="nom" />-->
-<!--    <label><b>Description :</b></label>-->
-<!--    <input-->
-<!--      name="description"-->
-<!--      placeholder="description"-->
-<!--      type="text"-->
-<!--      v-model="description"-->
-<!--    />-->
-<!--    <label><b>URL logo :</b></label>-->
-<!--    <input-->
-<!--      name="urlImage"-->
-<!--      placeholder="Entrez l'URL"-->
-<!--      type="url"-->
-<!--      v-model="urlImage"-->
-<!--    />-->
-<!--    <label><b>Nombre de votants :</b></label>-->
-<!--    <input name="nombreVotants" type="number" v-model="limite" />-->
-
-<!--    <div>-->
-<!--      <input-->
-<!--        type="radio"-->
-<!--        id="informel"-->
-<!--        name="typeElection"-->
-<!--        v-bind:value="informel"-->
-<!--        v-model="typeElection"-->
-<!--        checked-->
-<!--      />-->
-<!--      <label for="informel">Informel</label>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <input-->
-<!--        type="radio"-->
-<!--        id="officiel"-->
-<!--        name="typeElection"-->
-<!--        v-bind:value="officiel"-->
-<!--        v-model="typeElection"-->
-<!--      />-->
-<!--      <label for="officiel">Officiel</label>
-    </div>
-
+  <!-- <template>
+  <Header2></Header2>
+  <form>
     <div>
-      <input type="checkbox" id="preview" v-model="preview" />
-      <label for="preview">Previsualisation des résultats ?</label>
-    </div>
+      <label><b>Nom de l'election :</b></label>
+      <input name="nom" placeholder="nom du vote" type="text" v-model="nom" />
+      <label><b>Description :</b></label>
+      <input
+        name="description"
+        placeholder="description"
+        type="text"
+        v-model="description"
+      />
+      <label><b>URL logo :</b></label>
+      <input
+        name="urlImage"
+        placeholder="Entrez l'URL"
+        type="url"
+        v-model="urlImage"
+      />
+      <label><b>Nombre de votants :</b></label>
+      <input name="nombreVotants" type="number" v-model="limite" />
 
-    <div>
       <div>
-        <label><b>nom du choix A :</b></label>
-        <input name="nomChoixA" placeholder="nom du choix" v-model="choixA" />
+        <input
+          type="radio"
+          id="informel"
+          name="typeElection"
+          value="informel"
+          v-model="typeElection"
+          checked
+        />
+        <label for="informel">Informel</label>
       </div>
       <div>
-        <label><b>nom du choix B :</b></label>
-        <input name="nomChoixB" placeholder="nom du choix" v-model="choixB" />
+        <input
+          type="radio"
+          id="officiel"
+          name="typeElection"
+          value="officiel"
+          v-model="typeElection"
+        />
+        <label for="officiel">Officiel</label>
+      </div>
+
+      <div id="box-choix">
+        <div>
+          <label><b>Nom du choix:</b></label>
+          <input type="text" placeholder="nom du choix" v-model="choix" />
+        </div>
+        <div>
+          <label><b>Nom du choix:</b></label>
+          <input type="text" placeholder="nom du choix" v-model="choix" />
+        </div>
+      </div>
+      <div>
+        <input type="button" value="Ajouter" v-on:click="addChoix" />
+      </div>
+      <div>
+        <input type="submit" value="Créer" v-on:click="createElection" />
       </div>
     </div>
-    <input type="submit" value="Créer" v-on:click="createElection" />-->
+  </form>
+</template>
 
+<script>
+import http from "../http-common";
+import Header2 from "./Header2.vue";
 
+export default {
+    name: "CreateElection",
+    data() {
+        return {
+            nom: "",
+            description: "",
+            urlImage: "",
+            limite: Number,
+            typeElection: "informel",
+            /*choixA: "",
+            choixB: "",
+            choice: "",*/
+            choix: [],
+            resultats: [],
+            dates: [],
+            code: "",
+        };
+    },
+    computed: {},
+    methods: {
+        createElection() {
+            //this.choix.push(this.choixA, this.choixB);
+            this.dates.push(Date.now());
+            const newElection = {
+                nom: this.nom,
+                description: this.description,
+                urlImage: this.urlImage,
+                type: this.typeElection,
+                choix: this.choix,
+                resultats: this.resultats,
+                dates: this.dates,
+                limite: this.limite,
+                code: this.code,
+            };
+            http
+                .post("/election/createElection", newElection)
+                .then((response) => {
+                console.log(response.data);
+                alert("Election added");
+            })
+                .catch((e) => {
+                if (e.response.status === 500) {
+                    alert("Invalid data");
+                }
+                else {
+                    alert("DB error");
+                }
+                console.log(e);
+            });
+        },
+        addChoix() {
+            let boxChoix = document.getElementById("box-choix");
+            let div = document.createElement("div");
+            let label = document
+                .createElement("label")
+                .appendChild(document.createElement("b"));
+            label.textContent = "Nom du choix:";
+            div.appendChild(label);
+            let input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.setAttribute("placeholder", "nom du choix");
+            input.setAttribute("v-model", "choix");
+            div.appendChild(input);
+            let button = document.createElement("input");
+            button.setAttribute("type", "submit");
+            boxChoix.appendChild(div);
+        },
+    },
+    mounted: function () { },
+    components: { Header2 }
+};
+</script>
+
+<style scoped></style> -->
 
   <div class="login-root">
-    <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
+    <div
+      class="box-root flex-flex flex-direction--column"
+      style="min-height: 100vh;flex-grow: 1;"
+    >
       <div class="loginbackground box-background--white padding-top--64">
         <div class="loginbackground-gridContainer">
-          <div class="box-root flex-flex" style="grid-area: top / start / 8 / end;">
-            <div class="box-root" style="background-image: linear-gradient(white 0%, rgb(247, 250, 252) 33%); flex-grow: 1;">
-            </div>
+          <div
+            class="box-root flex-flex"
+            style="grid-area: top / start / 8 / end;"
+          >
+            <div
+              class="box-root"
+              style="background-image: linear-gradient(white 0%, rgb(247, 250, 252) 33%); flex-grow: 1;"
+            ></div>
           </div>
           <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5;">
-            <div class="box-root box-divider--light-all-2 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+            <div
+              class="box-root box-divider--light-all-2 animationLeftRight tans3s"
+              style="flex-grow: 1;"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 6 / start / auto / 2;">
-            <div class="box-root box-background--blue800" style="flex-grow: 1;"></div>
+          <div
+            class="box-root flex-flex"
+            style="grid-area: 6 / start / auto / 2;"
+          >
+            <div
+              class="box-root box-background--blue800"
+              style="flex-grow: 1;"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 7 / start / auto / 4;">
-            <div class="box-root box-background--blue animationLeftRight" style="flex-grow: 1;"></div>
+          <div
+            class="box-root flex-flex"
+            style="grid-area: 7 / start / auto / 4;"
+          >
+            <div
+              class="box-root box-background--blue animationLeftRight"
+              style="flex-grow: 1;"
+            ></div>
           </div>
           <div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6;">
-            <div class="box-root box-background--gray100 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+            <div
+              class="box-root box-background--gray100 animationLeftRight tans3s"
+              style="flex-grow: 1;"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 2 / 15 / auto / end;">
-            <div class="box-root box-background--cyan200 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+          <div
+            class="box-root flex-flex"
+            style="grid-area: 2 / 15 / auto / end;"
+          >
+            <div
+              class="box-root box-background--cyan200 animationRightLeft tans4s"
+              style="flex-grow: 1;"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 3 / 14 / auto / end;">
-            <div class="box-root box-background--blue animationRightLeft" style="flex-grow: 1;"></div>
+          <div
+            class="box-root flex-flex"
+            style="grid-area: 3 / 14 / auto / end;"
+          >
+            <div
+              class="box-root box-background--blue animationRightLeft"
+              style="flex-grow: 1;"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 4 / 17 / auto / 20;">
-            <div class="box-root box-background--gray100 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+          <div
+            class="box-root flex-flex"
+            style="grid-area: 4 / 17 / auto / 20;"
+          >
+            <div
+              class="box-root box-background--gray100 animationRightLeft tans4s"
+              style="flex-grow: 1;"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 5 / 14 / auto / 17;">
-            <div class="box-root box-divider--light-all-2 animationRightLeft tans3s" style="flex-grow: 1;"></div>
+          <div
+            class="box-root flex-flex"
+            style="grid-area: 5 / 14 / auto / 17;"
+          >
+            <div
+              class="box-root box-divider--light-all-2 animationRightLeft tans3s"
+              style="flex-grow: 1;"
+            ></div>
           </div>
         </div>
       </div>
-      <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
-        <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
+      <div
+        class="box-root padding-top--24 flex-flex flex-direction--column"
+        style="flex-grow: 1; z-index: 9;"
+      >
+        <div
+          class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center"
+        >
           <h1>EKIP VOTE</h1>
         </div>
         <div class="formbg-outer">
@@ -106,37 +243,55 @@
               <form id="stripe-login">
                 <div class="flex">
                   <div class="field padding-bottom--24">
-                    <label><b>Nom de l'election :</b></label><br>
-                    <input type="text" name="nom" placeholder="Nom de l'election" v-model="nom" >
+                    <label><b>Nom de l'election :</b></label
+                    ><br />
+                    <input
+                      type="text"
+                      name="nom"
+                      placeholder="Nom de l'election"
+                      v-model="nom"
+                    />
                   </div>
 
-                    <div class="field padding-bottom--24">
-                      <div>
-                        <label><b>URL logo :</b></label><br>
-                        <input
-                            name="urlImage"
-                            placeholder="Entrez l'URL"
-                            type="url"
-                            v-model="urlImage"
-                        />
+                  <div class="field padding-bottom--24">
+                    <div>
+                      <label><b>URL logo :</b></label
+                      ><br />
+                      <input
+                        name="urlImage"
+                        placeholder="Entrez l'URL"
+                        type="url"
+                        v-model="urlImage"
+                      />
                     </div>
                   </div>
                   <div class="nombreVotant">
                     <div class="field padding-bottom--24">
                       <div>
                         <label><b>Nombre de votants :</b></label>
-                        <input name="nombreVotants" type="number" v-model="limite" />
+                        <input
+                          name="nombreVotants"
+                          type="number"
+                          v-model="limite"
+                        />
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="field padding-bottom--24">
-                  <label><b>Description :</b></label><br>
-                  <textarea type="text" name="description" class="description" placeholder="Description" v-model="description"></textarea>
+                  <label><b>Description :</b></label
+                  ><br />
+                  <textarea
+                    type="text"
+                    name="description"
+                    class="description"
+                    placeholder="Description"
+                    v-model="description"
+                  ></textarea>
                 </div>
 
                 <div class="flex_deux">
-                  <div class="les_choix" id="les_choix">
+                  <!-- <div class="les_choix" id="les_choix">
                     <div class="choix">
                       <label>Nom du choix :</label><br>
                       <input name="nom_du_choix" placeholder="nom du choix"  />
@@ -144,24 +299,50 @@
                     <div class="choix">
                       <label>Nom du choix :</label><br>
                       <input name="nom_du_choix" placeholder="nom du choix"  />
+                    </div>
+                  </div> -->
+                  <div
+                    class="les_choix"
+                    id="les_choix"
+                    v-for="(choice, index) in choix"
+                    :key="choice"
+                  >
+                    <div class="choix">
+                      <label>Nom du choix : {{ index + 1 }}</label
+                      ><br />
+                      <input
+                        type="text"
+                        placeholder="nom du choix"
+                        v-model="choice.value"
+                      />
+                    </div>
+                    <div class="choix">
+                      <label>Nom du choix : {{ index + 1 }}</label
+                      ><br />
+                      <input
+                        type="text"
+                        placeholder="nom du choix"
+                        v-model="choice.value"
+                      />
                     </div>
                   </div>
-                  <input type="button" value="Créer" v-on:click="addChoix" />
-
+                  <input type="button" value="Ajouter" v-on:click="addChoix" />
                 </div>
                 <div class="field padding-bottom--24">
-                  <input type="submit" name="submit" value="Continue" v-on:click="createElection">
+                  <input
+                    type="submit"
+                    name="submit"
+                    value="Continue"
+                    v-on:click="createElection"
+                  />
                 </div>
-
-
               </form>
             </div>
-          </div>
           </div>
         </div>
       </div>
     </div>
-
+  </div>
 </template>
 
 <script>
@@ -179,7 +360,7 @@ export default {
       /*choixA: "",
       choixB: "",
       choice: "",*/
-      choix: [],
+      choix: [{ value: "", value: "" }],
       resultats: [],
       dates: [],
       code: "",
@@ -218,24 +399,23 @@ export default {
     },
 
     addChoix() {
+      this.choix.push({ value: "" });
       let boxChoix = document.getElementById("les_choix");
 
       let div = document.createElement("div");
 
-      div.className="choix";
+      div.className = "choix";
 
-      let label = document
-        .createElement("label");
+      let label = document.createElement("label");
       label.textContent = "Nom du choix:";
       div.appendChild(label);
-      let br = document
-          .createElement("br");
+      let br = document.createElement("br");
       div.appendChild(br);
 
       let input = document.createElement("input");
       input.setAttribute("type", "text");
       input.setAttribute("placeholder", "nom du choix");
-      input.setAttribute("v-model", "choix");
+      input.setAttribute("v-model", "choice.value");
       div.appendChild(input);
 
       let button = document.createElement("input");
@@ -248,21 +428,20 @@ export default {
       boxChoix.appendChild(div);
     },
   },
-  mounted: function () {},
+  mounted: function() {},
 };
 </script>
 
 <style scoped>
-
 * {
   color: #1a1f36;
   box-sizing: border-box;
   word-wrap: break-word;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Ubuntu,sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Ubuntu, sans-serif;
 }
 
-template
-{
+template {
   overflow: hidden;
 }
 
@@ -314,10 +493,11 @@ a {
 .loginbackground-gridContainer {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: [start] 1fr [left-gutter] (86.6px)[16] [left-gutter] 1fr [end];
-  grid-template-columns: [start] 1fr [left-gutter] repeat(16,86.6px) [left-gutter] 1fr [end];
-  -ms-grid-rows: [top] 1fr [top-gutter] (64px)[8] [bottom-gutter] 1fr [bottom];
-  grid-template-rows: [top] 1fr [top-gutter] repeat(8,64px) [bottom-gutter] 1fr [bottom];
+  -ms-grid-columns: [start] 1fr [left-gutter] (86.6px) [16] [left-gutter] 1fr
+    [end];
+  grid-template-columns: [start] 1fr [left-gutter] repeat(16, 86.6px) [left-gutter] 1fr [end];
+  -ms-grid-rows: [top] 1fr [top-gutter] (64px) [8] [bottom-gutter] 1fr [bottom];
+  grid-template-rows: [top] 1fr [top-gutter] repeat(8, 64px) [bottom-gutter] 1fr [bottom];
   justify-content: center;
   margin: 0 -2%;
   transform: rotate(-12deg) skew(-12deg);
@@ -359,7 +539,6 @@ a {
   padding-bottom: 15px;
 }
 
-
 .flex-justifyContent--center {
   -ms-flex-pack: center;
   justify-content: center;
@@ -371,11 +550,9 @@ a {
   max-width: 1000px;
   background: white;
   border-radius: 4px;
-  box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
+  box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px,
+    rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
 }
-
-
-
 
 span {
   display: block;
@@ -397,24 +574,18 @@ label {
   border-radius: 4px;
   outline-color: rgb(84 105 212 / 0.5);
   background-color: rgb(255, 255, 255);
-  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 
 input[name="submit"] {
   background-color: rgb(84, 105, 212);
-  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0.12) 0px 1px 1px 0px,
-  rgb(84, 105, 212) 0px 0px 0px 1px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, rgb(84, 105, 212) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
   color: #fff;
   font-weight: 600;
   cursor: pointer;
@@ -480,42 +651,40 @@ input[name="submit"] {
   }
 }
 
-.flex{
+.flex {
   display: flex;
   justify-content: space-between;
   wrap-option: wrap;
 }
 
-.flex_deux{
-
+.flex_deux {
 }
 
-.description{
+.description {
   width: 100%;
   height: 100px;
 }
 
-input[name="urlImage"]{
+input[name="urlImage"] {
   width: 350px;
 }
 
-.nombreVotant{
+.nombreVotant {
   width: 175px;
 }
 
-.les_choix{
+.les_choix {
   display: flex;
   flex-wrap: wrap;
 }
 
-.choix{
+.choix {
   background: #1c57b5;
   margin: 10px;
   height: 100px;
 }
 
-input[name="nom_du_choix"]{
+input[name="nom_du_choix"] {
   width: 80%;
 }
-
 </style>
