@@ -6,7 +6,7 @@ exports.chercher = (req, res) => {
         if (election == null){
             res.status(401).json({ message: 'Non trouvé' });
         }
-        else if (election.nom === req.body.nom){
+        else if (election.code === req.body.code){
                 res.send(election._id);
             }
             else {
@@ -65,4 +65,8 @@ exports.findAll = (req, res) => {
             });
         });
 };
+
+exports.deleteElection = (req, res) => {
+  
+}
 
