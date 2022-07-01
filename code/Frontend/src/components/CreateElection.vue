@@ -316,7 +316,7 @@ export default {
                         v-model="choice.value"
                       />
                     </div>
-                    <div class="choix">
+                    <!--<div class="choix">
                       <label>Nom du choix : {{ index + 1 }}</label
                       ><br />
                       <input
@@ -324,7 +324,7 @@ export default {
                         placeholder="nom du choix"
                         v-model="choice.value"
                       />
-                    </div>
+                    </div>-->
                   </div>
                   <input type="button" value="Ajouter" v-on:click="addChoix" />
                 </div>
@@ -360,7 +360,7 @@ export default {
       /*choixA: "",
       choixB: "",
       choice: "",*/
-      choix: [{ value: "", value: "" }],
+      choix: [{ value: ""}, {value: "" }],
       resultats: [],
       dates: [],
       code: "",
@@ -369,7 +369,7 @@ export default {
   computed: {},
   methods: {
     createElection() {
-      this.choix.push(this.choixA, this.choixB);
+      // this.choix.push(this.choixA, this.choixB);
       this.dates.push(Date.now());
       const newElection = {
         nom: this.nom,
@@ -400,32 +400,32 @@ export default {
 
     addChoix() {
       this.choix.push({ value: "" });
-      let boxChoix = document.getElementById("les_choix");
-
-      let div = document.createElement("div");
-
-      div.className = "choix";
-
-      let label = document.createElement("label");
-      label.textContent = "Nom du choix:";
-      div.appendChild(label);
-      let br = document.createElement("br");
-      div.appendChild(br);
-
-      let input = document.createElement("input");
-      input.setAttribute("type", "text");
-      input.setAttribute("placeholder", "nom du choix");
-      input.setAttribute("v-model", "choice.value");
-      div.appendChild(input);
-
-      let button = document.createElement("input");
-      button.setAttribute("type", "submit");
-
-      div.style.background = "#1c57b5";
-      div.style.margin = "10px";
-      div.style.height = "100px";
-
-      boxChoix.appendChild(div);
+      // let boxChoix = document.getElementById("les_choix");
+      //
+      // let div = document.createElement("div");
+      //
+      // div.className = "choix";
+      //
+      // let label = document.createElement("label");
+      // label.textContent = "Nom du choix:";
+      // div.appendChild(label);
+      // let br = document.createElement("br");
+      // div.appendChild(br);
+      //
+      // let input = document.createElement("input");
+      // input.setAttribute("type", "text");
+      // input.setAttribute("placeholder", "nom du choix");
+      // input.setAttribute("v-model", "choice.value");
+      // div.appendChild(input);
+      //
+      // let button = document.createElement("input");
+      // button.setAttribute("type", "submit");
+      //
+      // div.style.background = "#1c57b5";
+      // div.style.margin = "10px";
+      // div.style.height = "100px";
+      //
+      // boxChoix.appendChild(div);
     },
   },
   mounted: function() {},
@@ -680,6 +680,7 @@ input[name="urlImage"] {
 
 .choix {
   background: #1c57b5;
+  flex-direction: row;
   margin: 10px;
   height: 100px;
 }
