@@ -1,5 +1,4 @@
 <template>
-  <Header2></Header2>
   <br>
   <h1 class="h1">Choose your type of acount :</h1>
     <br><h4>You could change it in the futur</h4>
@@ -26,7 +25,6 @@
 
 <script>
 import http from "@/http-common";
-import Header2 from "./Header2.vue";
 
 export default {
     name: "DifferentAcount",
@@ -51,7 +49,7 @@ export default {
                 },
                 {
                     id: 3,
-                    titre: "Premium+",
+                    titre: "Super",
                     avantage1: "Beast offer",
                     avantage2: "Can create vote of 500 participants maximum",
                     avantage3: "Can create 50 votes at the same time",
@@ -88,7 +86,7 @@ export default {
     mounted: function () {
         this.$nextTick();
     },
-    components: { Header2 }
+    components: {}
 }
 </script>
 

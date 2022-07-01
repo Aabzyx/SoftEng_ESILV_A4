@@ -89,9 +89,18 @@ export default {
     };
   },
   mounted() {
-    let recaptchaScript = document.createElement('script')
-    recaptchaScript.setAttribute('src', 'https://www.google.com/recaptcha/api.js')
-    document.head.appendChild(recaptchaScript)
+    if (localStorage.getItem('reloaded')) {
+      // The page was just reloaded. Clear the value from local storage
+      // so that it will reload the next time this page is visited.
+      localStorage.removeItem('reloaded');
+      let recaptchaScript = document.createElement('script')
+      recaptchaScript.setAttribute('src', 'https://www.google.com/recaptcha/api.js')
+      document.head.appendChild(recaptchaScript)
+    } else {
+      // Set a flag so that we know not to reload the page twice.
+      localStorage.setItem('reloaded', '1');
+      location.reload();
+    }
   },
   methods:{
     //login avec verification : captcha, jwt, mdp
