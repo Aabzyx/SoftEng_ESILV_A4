@@ -73,7 +73,7 @@ export default {
                 .put("/user/chooseTypeAccount", this.$store.state.actualClient)
                 .then(response => {
                 console.log(response.data);
-                alert("User update subscription");
+                  this.$router.push('/');
             })
                 .catch(e => {
                 if (e.response.status === 404) {

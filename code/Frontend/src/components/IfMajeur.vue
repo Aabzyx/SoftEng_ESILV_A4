@@ -1,5 +1,4 @@
 <template>
-  <Header2></Header2>
   <br><br>
   <div class="login-root">
     <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
@@ -72,7 +71,6 @@
 
 <script>
 import http from "@/http-common";
-import Header2 from "./Header2.vue";
 
 export default {
     name: "IfMajeur",
@@ -89,7 +87,7 @@ export default {
                 .put("/user/enterINE", this.$store.state.actualClient)
                 .then(response => {
                 console.log(response.data);
-                alert("User update INE");
+                  this.$router.push('HomePageVue')
             })
                 .catch(e => {
                 if (e.response.status === 404) {
@@ -101,7 +99,7 @@ export default {
     },
     mounted: function () {
     },
-    components: { Header2 }
+    components: {}
 }
 </script>
 

@@ -103,6 +103,18 @@ export default {
     }
   },
   methods:{
+    getAge(dateString)
+      {
+        var today = new Date();
+        var birthDate = new Date(dateString);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate()))
+        {
+          age--;
+        }
+        return age;
+      },
     //login avec verification : captcha, jwt, mdp
     login() {
       const captcha = document.querySelector('#g-recaptcha-response').value;
@@ -118,7 +130,12 @@ export default {
                   .post("/user/login", User)
                   .then(response => {
                     this.$store.state.actualClient = response.data
-                    this.$router.push('HomePageVue')
+                    if (this.getAge(this.$store.state.actualClient.dateDeNaissance.toString().substring(0, 10)) >= 18 && this.$store.state.actualClient.numElecteur == null){
+                      this.$router.push('IfMajeurVue')
+                    }
+                    else {
+                      this.$router.push('HomePageVue')
+                    }
                     sessionStorage.setItem("userData", JSON.stringify(response.data));
                     console.log(sessionStorage.getItem("userData"));
                     console.log(JSON.parse(sessionStorage.getItem("userData")).nom);

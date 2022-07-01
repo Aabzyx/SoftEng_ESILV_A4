@@ -52,12 +52,13 @@ const UserSchema = mongoose.Schema({
 
     subscription: {
         type: String,
-        enum: ['free','premium','super-premium'],
+        enum: ['none','free','premium','super-premium'],
         required: true
     },
 
     numElecteur: {
         type: String,
+        default: null
     },
 
     autorisedElections: {

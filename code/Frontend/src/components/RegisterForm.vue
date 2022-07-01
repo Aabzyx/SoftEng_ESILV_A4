@@ -119,7 +119,7 @@ export default {
       departement: "",
       local: [],
       urlImage: "",
-      subscription: 'free',
+      subscription: 'none',
       numElecteur: "",
       autorisedElections: []
     };
@@ -161,8 +161,8 @@ export default {
               http
                   .post("/user/register", newUser)
                   .then(response => {
-                    console.log(response.data);
-                    this.$router.push('/')
+                    this.$store.state.actualClient = response.data
+                    this.$router.push('DifferentAcount')
                   })
                   .catch(e => {
                     if (e.response.status === 500){
