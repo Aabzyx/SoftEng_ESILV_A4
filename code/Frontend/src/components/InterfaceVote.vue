@@ -92,8 +92,7 @@ export default {
     padding-right: 20px;
     padding-left: 5px;
     display: flex;
-    align-items: center; 
-    /* align-items: center; */
+    align-items: center;
   }
 
   .vote-item img {
@@ -196,15 +195,13 @@ input[name="submit"] {
 input[name = submit] {
   font-size: 16px;
   line-height: 28px;
-  /* padding: auto; */
   display: flex;
-justify-content: center;
+  justify-content: center;
   width: 100px;
   min-height: 44px;
   border: unset;
   border-radius: 4px;
   outline-color: rgb(84 105 212 / 0.5);
-  /* margin: auto; */
   margin: 10px auto 20px auto;
 }
 

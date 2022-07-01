@@ -1,5 +1,6 @@
 // import Election model
 const Election = require('../models/election.model');
+const http = require("http");
 
 exports.chercher = (req, res) => {
     Election.findOne({code: req.body.code}, function (err, election) {
@@ -67,6 +68,28 @@ exports.findAll = (req, res) => {
 };
 
 exports.deleteElection = (req, res) => {
-  
+  Election.findByIdAndRemove(req.params._id)
+      .then(election => {
+          if(!election){
+              return res.status(404).send({
+                  message: "Election not found with id " +
+                      req.params.id
+              });
+          }
+          res.send({message: "Election deleted successfully!"});
+
+      })
+      .catch(err => {
+          if (err.kind === 'ObjectId' || err.name === 'NotFound') {
+              return res.status(404).send({
+                  message: "Election not found with id " +
+                      req.params.id
+              });
+          }
+          return res.status(500).send({
+              message: "Could not delete election with id " +
+                  req.params.id
+          });
+      });
 }
 

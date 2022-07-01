@@ -9,4 +9,6 @@ module.exports = function(app) {
 
     // get all elections
     app.get('/api/election/getElection', election.findAll);
+
+    app.delete('/api/election/deleteElection/:id', election.deleteElection);
 }
