@@ -24,7 +24,7 @@ const ElectionSchema = mongoose.Schema({
     },
 
     choix: {
-        type: mongoose.Schema.Types.Mixed,
+        type: Array,
         required: true
     },
 
