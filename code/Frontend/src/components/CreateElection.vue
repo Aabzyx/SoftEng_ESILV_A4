@@ -1,148 +1,5 @@
 <template>
-  <!-- <template>
   <Header2></Header2>
-  <form>
-    <div>
-      <label><b>Nom de l'election :</b></label>
-      <input name="nom" placeholder="nom du vote" type="text" v-model="nom" />
-      <label><b>Description :</b></label>
-      <input
-        name="description"
-        placeholder="description"
-        type="text"
-        v-model="description"
-      />
-      <label><b>URL logo :</b></label>
-      <input
-        name="urlImage"
-        placeholder="Entrez l'URL"
-        type="url"
-        v-model="urlImage"
-      />
-      <label><b>Nombre de votants :</b></label>
-      <input name="nombreVotants" type="number" v-model="limite" />
-
-      <div>
-        <input
-          type="radio"
-          id="informel"
-          name="typeElection"
-          value="informel"
-          v-model="typeElection"
-          checked
-        />
-        <label for="informel">Informel</label>
-      </div>
-      <div>
-        <input
-          type="radio"
-          id="officiel"
-          name="typeElection"
-          value="officiel"
-          v-model="typeElection"
-        />
-        <label for="officiel">Officiel</label>
-      </div>
-
-      <div id="box-choix">
-        <div>
-          <label><b>Nom du choix:</b></label>
-          <input type="text" placeholder="nom du choix" v-model="choix" />
-        </div>
-        <div>
-          <label><b>Nom du choix:</b></label>
-          <input type="text" placeholder="nom du choix" v-model="choix" />
-        </div>
-      </div>
-      <div>
-        <input type="button" value="Ajouter" v-on:click="addChoix" />
-      </div>
-      <div>
-        <input type="submit" value="Créer" v-on:click="createElection" />
-      </div>
-    </div>
-  </form>
-</template>
-
-<script>
-import http from "../http-common";
-import Header2 from "./Header2.vue";
-
-export default {
-    name: "CreateElection",
-    data() {
-        return {
-            nom: "",
-            description: "",
-            urlImage: "",
-            limite: Number,
-            typeElection: "informel",
-            /*choixA: "",
-            choixB: "",
-            choice: "",*/
-            choix: [],
-            resultats: [],
-            dates: [],
-            code: "",
-        };
-    },
-    computed: {},
-    methods: {
-        createElection() {
-            //this.choix.push(this.choixA, this.choixB);
-            this.dates.push(Date.now());
-            const newElection = {
-                nom: this.nom,
-                description: this.description,
-                urlImage: this.urlImage,
-                type: this.typeElection,
-                choix: this.choix,
-                resultats: this.resultats,
-                dates: this.dates,
-                limite: this.limite,
-                code: this.code,
-            };
-            http
-                .post("/election/createElection", newElection)
-                .then((response) => {
-                console.log(response.data);
-                alert("Election added");
-            })
-                .catch((e) => {
-                if (e.response.status === 500) {
-                    alert("Invalid data");
-                }
-                else {
-                    alert("DB error");
-                }
-                console.log(e);
-            });
-        },
-        addChoix() {
-            let boxChoix = document.getElementById("box-choix");
-            let div = document.createElement("div");
-            let label = document
-                .createElement("label")
-                .appendChild(document.createElement("b"));
-            label.textContent = "Nom du choix:";
-            div.appendChild(label);
-            let input = document.createElement("input");
-            input.setAttribute("type", "text");
-            input.setAttribute("placeholder", "nom du choix");
-            input.setAttribute("v-model", "choix");
-            div.appendChild(input);
-            let button = document.createElement("input");
-            button.setAttribute("type", "submit");
-            boxChoix.appendChild(div);
-        },
-    },
-    mounted: function () { },
-    components: { Header2 }
-};
-</script>
-
-<style scoped></style> -->
-
   <div class="login-root">
     <div
       class="box-root flex-flex flex-direction--column"
@@ -291,16 +148,6 @@ export default {
                 </div>
 
                 <div class="flex_deux">
-                  <!-- <div class="les_choix" id="les_choix">
-                    <div class="choix">
-                      <label>Nom du choix :</label><br>
-                      <input name="nom_du_choix" placeholder="nom du choix"  />
-                    </div>
-                    <div class="choix">
-                      <label>Nom du choix :</label><br>
-                      <input name="nom_du_choix" placeholder="nom du choix"  />
-                    </div>
-                  </div> -->
                   <div
                     class="les_choix"
                     id="les_choix"
@@ -338,6 +185,7 @@ export default {
 
 <script>
 import http from "../http-common";
+import Header2 from "./Header2.vue";
 
 export default {
   name: "CreateElection",
@@ -348,9 +196,6 @@ export default {
       urlImage: "",
       limite: Number,
       typeElection: "informel",
-      /*choixA: "",
-      choixB: "",
-      choice: "",*/
       choix: [{ value: "" }, { value: "" }],
       resultats: [],
       dates: [],
@@ -360,7 +205,6 @@ export default {
   computed: {},
   methods: {
     createElection() {
-      // this.choix.push(this.choixA, this.choixB);
       this.dates.push(Date.now());
       const newElection = {
         nom: this.nom,
@@ -391,35 +235,10 @@ export default {
 
     addChoix() {
       this.choix.push({ value: "" });
-      // let boxChoix = document.getElementById("les_choix");
-      //
-      // let div = document.createElement("div");
-      //
-      // div.className = "choix";
-      //
-      // let label = document.createElement("label");
-      // label.textContent = "Nom du choix:";
-      // div.appendChild(label);
-      // let br = document.createElement("br");
-      // div.appendChild(br);
-      //
-      // let input = document.createElement("input");
-      // input.setAttribute("type", "text");
-      // input.setAttribute("placeholder", "nom du choix");
-      // input.setAttribute("v-model", "choice.value");
-      // div.appendChild(input);
-      //
-      // let button = document.createElement("input");
-      // button.setAttribute("type", "submit");
-      //
-      // div.style.background = "#1c57b5";
-      // div.style.margin = "10px";
-      // div.style.height = "100px";
-      //
-      // boxChoix.appendChild(div);
     },
   },
   mounted: function() {},
+  components: { Header2 },
 };
 </script>
 
