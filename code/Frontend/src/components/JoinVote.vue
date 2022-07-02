@@ -98,9 +98,11 @@ export default {
                 nom: this.nom,
                 code: this.code
             };
+            console.log(leTout)
             http
                 .post("election/chercherCode", leTout)
                 .then(r => {
+                  console.log(r);
                 if (!this.$store.state.actualClient.autorisedElections.includes(r.data)) {
                     this.$store.state.actualClient.autorisedElections.push(r.data);
                     http.put("user/joinVote", this.$store.state.actualClient)

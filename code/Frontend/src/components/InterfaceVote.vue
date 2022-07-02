@@ -53,6 +53,7 @@ export default {
                 this.$store.state.actualVote = response.data;
                 console.log(response.data);
                 alert("Vote add");
+                this.$router.push("/InterfaceVoteVue");
             })
                 .catch(e => {
                 if (e.response.status === 500) {

@@ -11,7 +11,7 @@ module.exports = function(app) {
     app.get('/api/vote/getVote/:id',vote.getVote);
 
     //Get all votes
-    app.get('/api/votes/getAllVotesOfElection/:id', vote.getAllVotesOfElection);
+    app.post('/api/votes/getAllVotesOfElection', vote.getAllVotesOfElection);
 
 
 }

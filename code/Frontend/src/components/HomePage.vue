@@ -40,20 +40,18 @@
       </div>
       <div class="formbg">
         <h4>Elections informels :</h4>
-        <div v-for="(election, index) in electionsInformel" v-bind:key="index" class="election-items">
+        <div v-for="(election, index) in electionsInformel" v-bind:key="index" class="election-items" v-on:load="showVote(election)">
           <p class="name-election">{{ election.nom }}</p>
           <div class="progress">
             <div class="progress-value">
             </div>
           </div>
+          <p>{{voteChoix}}</p>
           <div class="btns">
-            <!-- <button v-on:click="showDetails(index)" class="btn-home">Click</button>-->
             <button v-on:click="goVote(election)" class="btn-home">Vote</button>
             <button class="btn-home" >Delete</button>
+            <button v-on:click="goShowResultats" class="btn-home">Results</button>
           </div>
-       <!--   <div class="descript-election" :class="index == active ? activeClass : 'hidden'">
-            {{ election.description }}
-          </div>-->
         </div>
         <h4>Elections officiels :</h4>
         <div v-for="(election, index) in electionsOfficiel" v-bind:key="index" class="election-items">
@@ -63,12 +61,9 @@
             </div>
           </div>
           <div class="btns">
-            <!-- <button v-on:click="showDetails(index)" class="btn-home">Click</button>-->
             <button v-on:click="goVote(election)" class="btn-home">Vote</button>
+            <button v-on:click="goShowResultats" class="btn-home">Results</button>
           </div>
-          <!--   <div class="descript-election" :class="index == active ? activeClass : 'hidden'">
-               {{ election.description }}
-             </div>-->
         </div>
         <div class="div-btn-btm">
           <button class="btn-home-btm" v-on:click="goJoinElection">Join an election</button>
@@ -89,26 +84,13 @@ export default {
     return {
       electionsOfficiel: [],
       electionsInformel: [],
-      activeClass: 'is-visible',
-      toggle: false,
-      active: null
+      voteChoix: ""
     };
   },
   computed: {},
   methods: {
-    showDetails(i) {
-      this.active = i;
-      if (this.activeClass == 'is-visible') {
-        this.activeClass = 'hidden';
-      } else {
-        this.activeClass = 'is-visible';
-      }
-
-      console.log(this.active)
-    },
     //show election
     showElection() {
-      console.log("ok");
       http
           .get("/election/getElection")
           .then(response => {
@@ -123,21 +105,63 @@ export default {
 
               }
             });
-            console.log(response);
-            console.log(this.electionsInformel);
           })
           .catch(e => {
             console.log(e);
           });
     },
-    /*deleteElection(idElection){
-      if(this.$store.state.actualClient.autorisedElections.includes(idElection)){
-        http.delete();
-      }
-    },*/
     goVote(election) {
-      this.$store.state.actualElection = election;
-      this.$router.push("/InterfaceVoteVue");
+      const elect = {
+        electionData: election,
+        user: this.$store.state.actualClient
+      }
+      http
+          .post("/votes/getAllVotesOfElection", elect)
+          .then(response => {
+            if(response.data.length == 0){
+              this.$store.state.actualElection = election;
+              this.$router.push("/InterfaceVoteVue");
+            }
+            else{
+              response.data.forEach(r => {
+                  if(!r.idUser == this.$store.state.actualClient._id){
+                    this.$store.state.actualElection = election;
+                    this.$router.push("/InterfaceVoteVue");
+                  }
+                  else {
+                    alert("You have already voted !");
+                    this.$router.push("/ShowResultatsVue");
+                  }
+              })
+            }
+          })
+          .catch(e => {
+            if (e.response.status === 401) {
+              console.log(e);
+              alert("Not find this vote");
+            }
+          });
+    },
+    showVote(election){
+      const elect = {
+        electionData: election,
+        user: this.$store.state.actualClient
+      }
+      http
+          .post("/votes/getAllVotesOfElection", elect)
+          .then(response => {
+            response.data.forEach(r => {
+              if (r.idUser == this.$store.state.actualClient._id) {
+                this.voteChoix = r.choix;
+              }
+            })
+                .catch(e => {
+                  if (e.response.status === 401) {
+                    console.log(e);
+                    alert("Not find this vote");
+                  }
+                });
+          });
     },
     goJoinElection() {
       this.$router.push("/JoinVoteVue")
@@ -145,14 +169,13 @@ export default {
     goCreateElection() {
       this.$router.push("/CreateElectionVue")
     },
+    goShowResultats() {
+      this.$router.push("/ShowResultatsVue")
+    },
     redirection() {
       if (this.$store.state.actualClient === null) {
         this.$router.push("/");
       }
-      /*if(sessionStorage.getItem("userData") === null){
-        this.$router.push("/");
-      }*/
-
     }
   },
   mounted: function () {

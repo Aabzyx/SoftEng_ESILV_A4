@@ -72,14 +72,20 @@ exports.getVote = (req, res) => {
 
 //Get allVotes of a specific election
 exports.getAllVotesOfElection = (req,res) => {
-    Vote.find(req.body.actualElection.idElection === req.body.idElection)
-        .then(votes => {
-            res.send(votes);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message
-            });
-        })
+    console.log(req.body.electionData);
+        Vote.find({idElection: req.body.electionData._id})
+            .then(votes => {
+                console.log("les votes");
+                console.log(votes);
+                if(!votes){
+                    res.status(401).json({ message: 'Non trouvé' });
+                }
+                res.send(votes);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message
+                });
+            })
 }
 
