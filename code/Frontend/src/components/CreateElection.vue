@@ -288,6 +288,7 @@ export default {
                     class="description"
                     placeholder="Description"
                     v-model="description"
+                    style="border-radius: 4px;border: unset;box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;"
                   ></textarea>
                 </div>
 
@@ -299,17 +300,34 @@ export default {
                     :key="choice"
                   >
                     <div class="choix">
-                      <label>choix {{ index + 1 }}</label
+                      <label class="label_choix">choix {{ index + 1 }}</label
                       ><br />
+                      <div class="image">
+                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" style="max-width: 100%;max-height: 100%; border-radius: 5px">
+                      </div>
+                      <div class="les_fleches">
+                        <button class="fleche gauche">
+                          <img src="https://cdn3.iconfinder.com/data/icons/action-states-vol-3-flat/48/Action___States_-_Vol._3-19-512.png" style="max-width: 90%;max-height: 90%;border-radius: 5px;
+ ">
+                        </button>
+                        <button class="fleche droite">
+                          <img src="https://cdn3.iconfinder.com/data/icons/action-states-vol-3-flat/48/Action___States_-_Vol._3-19-512.png" style="max-width: 90%;max-height: 90%;-webkit-transform: rotate(180deg);
+   -moz-transform: rotate(180deg);
+   -ms-transform: rotate(180deg);
+   -o-transform: rotate(180deg);
+   transform: rotate(180deg);
+   border-radius: 5px">
+                        </button>
+                      </div>
                       <input
-                          name="nom_du_choix"
+                        name="nom_du_choix"
                         type="text"
                         placeholder="   Nom"
                         v-model="choice.value"
                       />
                     </div>
                   </div>
-                  <input type="button" value="Ajouter" v-on:click="addChoix" />
+                  <input type="button" value="Ajouter" v-on:click="addChoix" style="flex-direction: row;margin: 25px;height: 200px;width: 130px; "/>
                 </div>
                 <div class="field padding-bottom--24">
                   <input
@@ -669,16 +687,44 @@ input[name="urlImage"] {
 
 
 .choix {
-  background: #1c57b5;
+  background-color: #5469d4;
   flex-direction: row;
-  margin: 20px;
-  height: 100px;
-  width: 100px;
+  margin: 25px;
+  height: 200px;
+  width: 130px;
+  border-radius: 10px
 }
 
 input[name="nom_du_choix"] {
   width: 75px;
   display: block;
   margin: 0 auto;
+}
+
+.label_choix{
+  margin-left: 25%;
+}
+
+.image{
+  width: 75px;
+  height: 75px;
+  margin: 0 auto;
+}
+
+.les_fleches{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 10px;
+}
+
+
+.fleche{
+  width: 27px;
+  height: 27px;
+  background: white;
+  border: transparent;
+  border-radius: 8px;
+
 }
 </style>
