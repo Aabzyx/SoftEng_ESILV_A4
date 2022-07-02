@@ -1,4 +1,5 @@
 <template>
+  <Header2 v-if="$store.state.actualClient !== null"></Header2>
   <!-- <template>
   <Header2></Header2>
   <form>
@@ -329,9 +330,11 @@ export default {
 
 <script>
 import http from "../http-common";
+import Header2 from "@/components/Header2";
 
 export default {
   name: "CreateElection",
+  components: {Header2},
   data() {
     return {
       nom: "",

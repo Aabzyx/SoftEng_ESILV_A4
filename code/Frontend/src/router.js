@@ -13,6 +13,7 @@ import DifferentAcount from "@/components/DifferentAcount";
 import UpdateUser from "@/components/UpdateUser";
 import UpdateTypeAcount from "@/components/updateTypeAcount";
 import UpdatePassword from "@/components/UpdatePassword";
+import TestImage from "@/components/TestImage";
 
 const routes =  [
     {
@@ -118,6 +119,15 @@ const routes =  [
         path: "/UpdatePassword",
         name: "UpdatePassword",
         component: UpdatePassword,
+        meta: {
+            enterClass: "animate__animated animate__backInLeft",
+            leaveClass: "animate__animated animate__backOutRight"
+        }
+    },
+    {
+        path: "/TestImage",
+        name: "TestImage",
+        component: TestImage,
         meta: {
             enterClass: "animate__animated animate__backInLeft",
             leaveClass: "animate__animated animate__backOutRight"

@@ -7,6 +7,7 @@ export default createStore({
         actualVote: {},
         actualElection: {},
         votes : [],
+        tabImg: [],
     },
     getters: {},
     mutations: {
