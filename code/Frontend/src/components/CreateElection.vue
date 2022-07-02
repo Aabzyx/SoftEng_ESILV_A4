@@ -291,16 +291,6 @@ export default {
                 </div>
 
                 <div class="flex_deux">
-                  <!-- <div class="les_choix" id="les_choix">
-                    <div class="choix">
-                      <label>Nom du choix :</label><br>
-                      <input name="nom_du_choix" placeholder="nom du choix"  />
-                    </div>
-                    <div class="choix">
-                      <label>Nom du choix :</label><br>
-                      <input name="nom_du_choix" placeholder="nom du choix"  />
-                    </div>
-                  </div> -->
                   <div
                     class="les_choix"
                     id="les_choix"
@@ -308,20 +298,12 @@ export default {
                     :key="choice"
                   >
                     <div class="choix">
-                      <label>Nom du choix : {{ index + 1 }}</label
+                      <label>choix {{ index + 1 }}</label
                       ><br />
                       <input
+                          name="nom_du_choix"
                         type="text"
-                        placeholder="nom du choix"
-                        v-model="choice.value"
-                      />
-                    </div>
-                    <div class="choix">
-                      <label>Nom du choix : {{ index + 1 }}</label
-                      ><br />
-                      <input
-                        type="text"
-                        placeholder="nom du choix"
+                        placeholder="   Nom"
                         v-model="choice.value"
                       />
                     </div>
@@ -360,7 +342,7 @@ export default {
       /*choixA: "",
       choixB: "",
       choice: "",*/
-      choix: [{ value: "" }],
+      choix: [{ value: "" },{value : ""}],
       resultats: [],
       dates: [],
       code: "",
@@ -374,7 +356,6 @@ export default {
       }
     },
     createElection() {
-      this.choix.push(this.choixA, this.choixB);
       this.dates.push(Date.now());
       const newElection = {
         nom: this.nom,
@@ -405,32 +386,32 @@ export default {
 
     addChoix() {
       this.choix.push({ value: "" });
-      let boxChoix = document.getElementById("les_choix");
-
-      let div = document.createElement("div");
-
-      div.className = "choix";
-
-      let label = document.createElement("label");
-      label.textContent = "Nom du choix:";
-      div.appendChild(label);
-      let br = document.createElement("br");
-      div.appendChild(br);
-
-      let input = document.createElement("input");
-      input.setAttribute("type", "text");
-      input.setAttribute("placeholder", "nom du choix");
-      input.setAttribute("v-model", "choice.value");
-      div.appendChild(input);
-
-      let button = document.createElement("input");
-      button.setAttribute("type", "submit");
-
-      div.style.background = "#1c57b5";
-      div.style.margin = "10px";
-      div.style.height = "100px";
-
-      boxChoix.appendChild(div);
+      // let boxChoix = document.getElementById("les_choix");
+      //
+      // let div = document.createElement("div");
+      //
+      // div.className = "choix";
+      //
+      // let label = document.createElement("label");
+      // label.textContent = "Nom du choix:";
+      // div.appendChild(label);
+      // let br = document.createElement("br");
+      // div.appendChild(br);
+      //
+      // let input = document.createElement("input");
+      // input.setAttribute("type", "text");
+      // input.setAttribute("placeholder", "nom du choix");
+      // input.setAttribute("v-model", "choice.value");
+      // div.appendChild(input);
+      //
+      // let button = document.createElement("input");
+      // button.setAttribute("type", "submit");
+      //
+      // div.style.background = "#1c57b5";
+      // div.style.margin = "10px";
+      // div.style.height = "100px";
+      //
+      // boxChoix.appendChild(div);
     },
   },
   mounted: function() {
@@ -664,9 +645,6 @@ input[name="submit"] {
   wrap-option: wrap;
 }
 
-.flex_deux {
-}
-
 .description {
   width: 100%;
   height: 100px;
@@ -680,18 +658,24 @@ input[name="urlImage"] {
   width: 175px;
 }
 
-.les_choix {
+.flex_deux {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
 }
 
+
 .choix {
   background: #1c57b5;
-  margin: 10px;
+  flex-direction: row;
+  margin: 20px;
   height: 100px;
+  width: 100px;
 }
 
 input[name="nom_du_choix"] {
-  width: 80%;
+  width: 75px;
+  display: block;
+  margin: 0 auto;
 }
 </style>
