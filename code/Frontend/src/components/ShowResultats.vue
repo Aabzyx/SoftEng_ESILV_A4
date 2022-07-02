@@ -1,5 +1,5 @@
 <template>
-  <Header2></Header2>
+  <Header2 v-if="$store.state.actualClient !== null"></Header2>
   <p>ShowResultats</p>
 
   <div v-for="(resultat,index) in resultas" v-bind:key=index>
@@ -22,6 +22,11 @@ export default {
     },
     computed: {},
     methods: {
+      redirection() {
+        if (this.$store.state.actualClient === null) {
+          this.$router.push("/");
+        }
+      },
         getAllVotesElection() {
             const objet = {
                 actualVote: this.$store.state.actualVote,
@@ -53,6 +58,7 @@ export default {
         }
     },
     mounted: function () {
+      this.$nextTick(this.redirection);
     },
     components: { Header2 }
 }

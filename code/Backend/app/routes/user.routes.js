@@ -1,3 +1,4 @@
+const user = require("../controllers/user.controller");
 module.exports = function(app) {
     const user = require('../controllers/user.controller');
 
@@ -18,4 +19,10 @@ module.exports = function(app) {
 
     // verify captcah
     app.post('/api/user/verifyCaptcha', user.verifyCaptcha);
+
+    // updateUser
+    app.put('/api/user/updateUser', user.updateAccount);
+
+    // update password
+    app.put('/api/user/updatePassword', user.updatePassword);
 }

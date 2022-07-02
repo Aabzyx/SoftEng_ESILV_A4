@@ -368,6 +368,11 @@ export default {
   },
   computed: {},
   methods: {
+    redirection() {
+      if (this.$store.state.actualClient === null) {
+        this.$router.push("/");
+      }
+    },
     createElection() {
       this.choix.push(this.choixA, this.choixB);
       this.dates.push(Date.now());
@@ -428,7 +433,9 @@ export default {
       boxChoix.appendChild(div);
     },
   },
-  mounted: function() {},
+  mounted: function() {
+    this.$nextTick(this.redirection);
+  },
 };
 </script>
 

@@ -166,3 +166,66 @@ exports.verifyCaptcha = (req, res) => {
     return res.send({ success: true, msg: 'Captcha passed' });
 };
 
+// UPDATE a type of account user
+exports.updateAccount = (req, res) => {
+    //Find product and update it
+    User.findOneAndUpdate({ _id: req.body._id},
+        {$set : {urlImage: req.body.urlImage, nom: req.body.nom, prenom: req.body.prenom, mail: req.body.mail, local: req.body.local}},{new: true})
+        .then(user => {
+            if(!user) {
+                return res.status(404).send({
+                    message: "User not found with id " +
+                        req.body._id
+                });
+            }
+            res.send(user);
+        })
+        .catch(err => {
+            if(err.kind === 'ObjectId') {
+                return res.status(404).send({
+                    message: "User not found with id " +
+                        req.body._id
+                });
+            }
+            return res.status(500).send({
+                message: "Error updating user with id " +
+                    req.body._id
+            });
+        });
+};
+
+// change password user
+exports.updatePassword = (req, res) => {
+    const user = new User(req.body.user)
+
+    if (!user.comparePassword(req.body.previousPassword)){
+        res.status(403).json({ message: 'Authentication failed. Wrong password.' });
+    }
+    else{
+        //Find product and update it
+        User.findOneAndUpdate({ _id: req.body.user._id},
+            {$set : {password: bcrypt.hashSync(req.body.nextPassword, 10)}},{new: true})
+            .then(user => {
+                if(!user) {
+                    return res.status(404).send({
+                        message: "User not found with id " +
+                            req.body._id
+                    });
+                }
+                res.send(user);
+            })
+            .catch(err => {
+                if(err.kind === 'ObjectId') {
+                    return res.status(404).send({
+                        message: "User not found with id " +
+                            req.body._id
+                    });
+                }
+                return res.status(500).send({
+                    message: "Error updating user with id " +
+                        req.body._id
+                });
+            });
+    }
+};
+

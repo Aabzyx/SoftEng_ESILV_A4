@@ -1,5 +1,5 @@
 <template>
-  <Header2></Header2>
+  <Header2 v-if="$store.state.actualClient !== null"></Header2>
   <!-- <div class="container"> -->
     <div class="formbg">
       <div class="title">
@@ -35,6 +35,11 @@ export default {
     },
     computed: {},
     methods: {
+      redirection() {
+        if (this.$store.state.actualClient === null) {
+          this.$router.push("/");
+        }
+      },
         vote(c) {
             const newVote = {
                 idUser: this.$store.state.actualClient._id,
@@ -61,6 +66,7 @@ export default {
         }
     },
     mounted: function () {
+      this.$nextTick(this.redirection);
     },
     components: { Header2 }
 }

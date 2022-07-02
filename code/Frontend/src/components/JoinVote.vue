@@ -1,5 +1,5 @@
 <template>
-  <Header2></Header2>
+  <Header2 v-if="$store.state.actualClient !== null"></Header2>
   <br><br>
   <div class="login-root">
     <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
@@ -87,6 +87,11 @@ export default {
     },
     computed: {},
     methods: {
+      redirection() {
+        if (this.$store.state.actualClient === null) {
+          this.$router.push("/");
+        }
+      },
         joinVote() {
             const leTout = {
                 user: this.$store.state.actualClient,
@@ -125,7 +130,8 @@ export default {
         }
     },
     mounted: function () {
-        this.$nextTick(this.connectStore);
+      this.$nextTick(this.redirection);
+      this.$nextTick(this.connectStore);
     },
     components: { Header2 }
 }

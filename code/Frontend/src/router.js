@@ -10,7 +10,9 @@ import InterfaceVoteVue from "./components/InterfaceVote.vue";
 import JoinVoteVue from "./components/JoinVote.vue";
 import ShowResultatsVue from "./components/ShowResultats.vue";
 import DifferentAcount from "@/components/DifferentAcount";
-import ConfigureChoicesVue from "./components/ConfigureChoices.vue";
+import UpdateUser from "@/components/UpdateUser";
+import UpdateTypeAcount from "@/components/updateTypeAcount";
+import UpdatePassword from "@/components/UpdatePassword";
 
 const routes =  [
     {
@@ -58,11 +60,6 @@ const routes =  [
             leaveClass: "animate__animated animate__backOutRight"
         }
     },
-    // {
-    //     path: "/ChoixVoteVue",
-    //     name: "ChoixVoteVue",
-    //     component: ChoixVoteVue
-    // },
     {
         path: "/IfMajeurVue",
         name: "IfMajeurVue",
@@ -100,15 +97,32 @@ const routes =  [
         }
     },
     {
-        path: "/ConfigureChoicesVue",
-        name: "ConfigureChoicesVue",
-        component: ConfigureChoicesVue,
+        path: "/UpdateUser",
+        name: "UpdateUser",
+        component: UpdateUser,
         meta: {
             enterClass: "animate__animated animate__backInLeft",
             leaveClass: "animate__animated animate__backOutRight"
         }
     },
-    
+    {
+        path: "/UpdateTypeAcount",
+        name: "UpdateTypeAcount",
+        component: UpdateTypeAcount,
+        meta: {
+            enterClass: "animate__animated animate__backInLeft",
+            leaveClass: "animate__animated animate__backOutRight"
+        }
+    },
+    {
+        path: "/UpdatePassword",
+        name: "UpdatePassword",
+        component: UpdatePassword,
+        meta: {
+            enterClass: "animate__animated animate__backInLeft",
+            leaveClass: "animate__animated animate__backOutRight"
+        }
+    },
 ];
 
 const router = createRouter({

@@ -36,7 +36,7 @@
 
                     <span v-for="(menuItem, index) in menuItems" :key="index">
                         <li>
-                            <a :href="menuItem.link">
+                            <a v-on:click="home(menuItem.link)">
                                 <i class="bx" :class="menuItem.icon || 'bx-square-rounded'" />
                                 <span class="links_name">{{ menuItem.name }}</span>
                             </a>
@@ -47,7 +47,7 @@
             </div>
 
             <div class="profile">
-                <i v-if="isExitButton" class="bx bx-log-out" id="log_out" @click.stop="$emit('button-exit-clicked')" />
+                <i v-if="isExitButton" class="bx bx-log-out" id="log_out" v-on:click="logout"/>
             </div>
         </div>
     </div>
@@ -99,16 +99,22 @@
         type: Array,
         default: () => [
           {
-            link: '#',
+            link: '/HomePageVue',
             name: 'Home',
             tooltip: 'Home',
             icon: 'bx-grid-alt',
           },
           {
-            link: '#',
+            link: '/UpdateTypeAcount',
             name: 'Upgrade',
             tooltip: 'Upgrade',
             icon: 'bx-user',
+          },
+          {
+            link: '/UpdateUser',
+            name: 'Setting',
+            tooltip: 'Setting',
+            icon: 'bx-cog',
           },
         //   {
         //     link: '#',
@@ -140,12 +146,7 @@
         //     tooltip: 'Saved',
         //     icon: 'bx-heart',
         //   },
-          {
-            link: '#',
-            name: 'Setting',
-            tooltip: 'Setting',
-            icon: 'bx-cog',
-          },
+
         ],
       },
 
@@ -225,6 +226,15 @@
     data() {
       return {
         isOpened: false
+      }
+    },
+    methods:{
+      logout(){
+        this.$store.dispatch("logOut");
+        this.$router.push('/')
+      },
+      home(link){
+        this.$router.push(link);
       }
     },
     mounted() {

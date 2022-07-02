@@ -1,5 +1,5 @@
 <template>
-  <br><br>
+  <Header2 v-if="$store.state.actualClient !== null"></Header2>
   <div class="login-root">
     <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
       <div class="loginbackground box-background--white padding-top--64">
@@ -41,22 +41,33 @@
         <div class="formbg-outer">
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
-              <span class="padding-bottom--15"><b>You are major, to vote and verify your identity we need your INE</b></span>
-              <br>
-
+              <span class="padding-bottom--15"><b>Change your password</b></span>
               <form id="stripe-login">
+
                 <div class="field padding-bottom--24">
-                  <label><b>INE</b></label>
-                  <input type="password" name="password" placeholder="Numero of elector" v-model ="numElecteur" @keyup.enter="updateNumElector">
+                  <div class="grid--50-50">
+                    <label><b>Previous Password</b></label>
+                  </div>
+                  <input type="text" name="password" placeholder="Previous Password" v-model="previousPassword" @keyup.enter="register">
                 </div>
-                <div class="field padding-bottom--24">
-                  <input type="button" name="submit" value="Continue" v-on:click="updateNumElector">
+
+                <div class="field padding-bottom--24" v-if="previousPassword !== ''">
+                  <div class="grid--50-50">
+                    <label><b>Password</b></label>
+                  </div>
+                  <input type="password" name="password" placeholder="Next Password" v-model="nextPassword" @keyup.enter="register">
+                </div>
+
+                <div class="field padding-bottom--18">
+                  <br>
+                  <input type="button" name="submit" value="Update" v-on:click="updatePassword">
                 </div>
 
               </form>
             </div>
           </div>
           <div class="footer-link padding-top--24">
+
             <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
               <span><a href="#">Vote online</a></span>
               <span><a href="https://www.agh.edu.pl/">Contact</a></span>
@@ -70,46 +81,61 @@
 </template>
 
 <script>
+import Header2 from "@/components/Header2";
 import http from "@/http-common";
 
 export default {
-    name: "IfMajeur",
-    data() {
-        return {
-            numElecteur: "",
-        };
+  name: "UpdatePassword",
+  data() {
+    return {
+      previousPassword: "",
+      nextPassword: "",
+    };
+  },
+  methods:{
+    updatePassword(){
+      const data = {
+        user: this.$store.state.actualClient,
+        previousPassword: this.previousPassword,
+        nextPassword: this.nextPassword
+      }
+      http
+          .put("/user/updatePassword", data)
+          .then(response => {
+            this.$store.state.actualClient = response.data;
+            this.$router.push('HomePageVue')
+          })
+          .catch(e => {
+            if (e.response.status === 404) {
+              alert("Can't update your account");
+            }
+            if (e.response.status === 403) {
+              alert("Wrong previous password ! please reconect");
+              this.$router.push('/')
+            }
+            console.log(e);
+          });
     },
-    computed: {},
-    methods: {
-      redirection() {
-        if (this.$store.state.actualClient === null) {
-          this.$router.push("/");
-        }
-      },
-        updateNumElector() {
-            this.$store.state.actualClient.numElecteur = this.numElecteur;
-            http
-                .put("/user/enterINE", this.$store.state.actualClient)
-                .then(response => {
-                console.log(response.data);
-                  this.$router.push('HomePageVue')
-            })
-                .catch(e => {
-                if (e.response.status === 404) {
-                    alert("Can't update your account");
-                }
-                console.log(e);
-            });
-        }
+    redirection() {
+      if (this.$store.state.actualClient === null) {
+        this.$router.push("/");
+      }
     },
-    mounted: function () {
-      this.$nextTick(this.redirection);
-    },
-    components: {}
+  },
+  mounted: function () {
+    this.$nextTick(this.redirection);
+  },
+  components: {Header2}
 }
 </script>
 
 <style scoped>
+.test{
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
 * {
   color: #1a1f36;
   box-sizing: border-box;
@@ -330,5 +356,16 @@ input[name="submit"] {
   100% {
     transform: translateX(0px);
   }
+}
+
+.img-samere{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-bg{
+  border-radius: 50%;
 }
 </style>
