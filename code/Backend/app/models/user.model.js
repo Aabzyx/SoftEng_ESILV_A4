@@ -64,6 +64,11 @@ const UserSchema = mongoose.Schema({
     autorisedElections: {
         type: [String],
         default: []
+    },
+
+    createdElections: {
+        type: [String],
+        default: []
     }
 })
 

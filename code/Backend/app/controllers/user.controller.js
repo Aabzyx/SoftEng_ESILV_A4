@@ -84,7 +84,7 @@ exports.updateTypeAcount = (req, res) => {
 //Upadte elections
 exports.updateAutorisedElections = (req, res) => {
     User.findOneAndUpdate({ _id: req.body._id},
-        {$set : {autorisedElections: req.body.autorisedElections}},{new: true})
+        {$set : {autorisedElections: req.body.autorisedElections, createdElections: req.body.createdElections}},{new: true})
         .then(user => {
             console.log(user);
             if(!user) {
@@ -228,4 +228,5 @@ exports.updatePassword = (req, res) => {
             });
     }
 };
+
 

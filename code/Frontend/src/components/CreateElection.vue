@@ -283,8 +283,20 @@ export default {
       http
         .post("/election/createElection", newElection)
         .then((response) => {
-          console.log(response.data);
-          this.$router.push("/HomePageVue");
+                console.log(response.data);
+                if (!this.$store.state.actualClient.autorisedElections.includes(response.data._id)) {
+                  this.$store.state.actualClient.autorisedElections.push(response.data._id);
+                  this.$store.state.actualClient.createdElections.push(response.data._id);
+                  console.log("user avannt : ", this.$store.state.actualClient)
+                  http.put("user/joinVote", this.$store.state.actualClient)
+                      .then(r => {
+                        console.log("response :", r);
+                        this.$router.push("/HomePageVue");
+                      });
+                }
+                else {
+                  alert("You are already participating to this election");
+                }
         })
         .catch((e) => {
           if (e.response.status === 500) {
