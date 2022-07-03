@@ -1,9 +1,9 @@
 <template>
 <p>Test</p>
-  <input type="text" v-model="input">
+  <input type="text" v-model="input" v-on:keydown.enter="search">
   <button v-on:click="search">Search</button>
-  <div v-for="(url, index) in arr" v-bind:key="index">
-    {{url}}
+  <div v-for="(src, index) in arr" v-bind:key="index">
+    <img :src="src">
   </div>
 </template>
 
@@ -13,32 +13,28 @@ export default {
   data() {
     return {
       arr: [],
-      input: 'flower',
-      url: "https://api.unsplash.com/search/photos?query=" + this.input + "&per_page=30&client_id=U8gb60YrrIRNvvaC7AalrQV9wgXdGQ3qEqVC1rXJegc",
-
+      input: '',
     };
   },
   computed: {},
   methods: {
-    test(){
-      this.arr.push(1)
-      console.log(this.arr)
-    },
-    search() {
+    async search() {
+      let url = "https://api.unsplash.com/search/photos?query=" + this.input + "&per_page=30&client_id=U8gb60YrrIRNvvaC7AalrQV9wgXdGQ3qEqVC1rXJegc";
       let memory = new Array();
-    fetch(this.url)
-        .then(function (data){
-          return data.json();
-        })
-        .then(function (data){
-          data.results.forEach(photo => {
-            console.log(photo)
-            // memory.push(photo.urls.regular);
+      await fetch(url)
+          .then(async function (data) {
+            return await data.json();
           })
-        })
+          .then(function (data) {
+            data.results.forEach(photo => {
+              memory.push(photo.urls.regular);
+            })
+          })
       this.arr = memory;
-      console.log(this.arr)
-  }
+    }
+  },
+  mounted() {
+    this.$nextTick(this.search)
   }
 }
 </script>

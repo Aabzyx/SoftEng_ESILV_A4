@@ -221,6 +221,20 @@ export default {
   },
   computed: {},
   methods: {
+    async search(input) {
+      let url = "https://api.unsplash.com/search/photos?query=" + input + "&per_page=30&client_id=U8gb60YrrIRNvvaC7AalrQV9wgXdGQ3qEqVC1rXJegc";
+      let memory = new Array();
+      await fetch(url)
+          .then(async function (data) {
+            return await data.json();
+          })
+          .then(function (data) {
+            data.results.forEach(photo => {
+              memory.push(photo.urls.regular);
+            })
+          })
+      return memory;
+    },
     redirection() {
       if (this.$store.state.actualClient === null) {
         this.$router.push("/");
