@@ -144,7 +144,6 @@
                     class="description"
                     placeholder="Description"
                     v-model="description"
-                    style="border-radius: 4px;border: unset;box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;"
                   ></textarea>
                 </div>
 
@@ -155,15 +154,9 @@
                 </div>
 
                 <div class="flex_deux">
-                  <div
-                    class="les_choix"
-                    id="les_choix"
-                    v-for="(choice, index) in choix"
-                    :key="choice"
-                  >
+                  <div class="les_choix" id="les_choix" v-for="(choice, index) in choix" :key="choice">
                     <div class="choix">
-                      <label class="label_choix">choix {{ index + 1 }}</label
-                      ><br />
+                      <label class="label_choix">choix {{ index + 1 }}</label><br />
                       <div class="image">
                         <img
                           src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
@@ -174,58 +167,24 @@
                         <button class="fleche gauche">
                           <img
                             src="https://cdn3.iconfinder.com/data/icons/action-states-vol-3-flat/48/Action___States_-_Vol._3-19-512.png"
-                            style="max-width: 90%;max-height: 90%;border-radius: 5px;
- "
-                          />
+                            style="max-width: 90%;max-height: 90%;border-radius: 5px;"/>
                         </button>
                         <button class="fleche droite">
                           <img
                             src="https://cdn3.iconfinder.com/data/icons/action-states-vol-3-flat/48/Action___States_-_Vol._3-19-512.png"
-                            style="max-width: 90%;max-height: 90%;-webkit-transform: rotate(180deg);
-   -moz-transform: rotate(180deg);
-   -ms-transform: rotate(180deg);
-   -o-transform: rotate(180deg);
-   transform: rotate(180deg);
-   border-radius: 5px"
-                          />
+                            style="max-width: 90%;max-height: 90%;-webkit-transform: rotate(180deg);-moz-transform: rotate(180deg);-ms-transform: rotate(180deg);-o-transform: rotate(180deg);transform: rotate(180deg);border-radius: 5px"/>
                         </button>
                       </div>
-                      <input
-                        name="nom_du_choix"
-                        type="text"
-                        placeholder="   Nom"
-                        v-model="choice.value"
-                      /><br />
-                      <label>Description du choix :</label><br />
-                      <input
-                        type="text"
-                        placeholder="description"
-                        class="description"
-                        v-model="choice.desc"
-                      />
+                      <input name="nom_du_choix" type="text" placeholder="Nom" v-model="choice.value"/><br />
+                      <label class="label_choix">Description du choix :</label><br />
+                      <textarea type="text" placeholder="Description" class="description Dchoix" v-model="choice.desc"/>
                     </div>
                   </div>
-                  <input
-                    type="button"
-                    value="Ajouter"
-                    v-on:click="addChoix"
-                    style="flex-direction: row;margin: 25px;height: 200px;width: 130px; "
-                  />
-                  <input
-                    type="button"
-                    value="Enlever"
-                    v-on:click="delChoix"
-                    style="flex-direction: row;margin: 25px;height: 200px;width:
-                  130px;"
-                  />
+                  <button class="button-A-E" type="button" value="Ajouter" v-on:click="addChoix" >Ajouter</button>
+                  <input class="button-A-E" type="button" value="Enlever" v-on:click="delChoix" />
                 </div>
                 <div class="field padding-bottom--24">
-                  <input
-                    type="submit"
-                    name="submit"
-                    value="Continue"
-                    v-on:click="createElection"
-                  />
+                  <input type="submit" name="submit" value="Continue" v-on:click="createElection"/>
                 </div>
               </form>
             </div>
@@ -549,8 +508,19 @@ input[name="submit"] {
 }
 
 .description {
+  padding-left: 15px;
+  padding-top: 5px;
   width: 100%;
   height: 100px;
+  border-radius: 4px;
+  border: unset;
+  box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px,
+  rgb(0 0 0 / 0%) 0px 0px 0px 0px,
+  rgb(0 0 0 / 0%) 0px 0px 0px 0px,
+  rgb(60 66 87 / 16%) 0px 0px 0px 1px,
+  rgb(0 0 0 / 0%) 0px 0px 0px 0px,
+  rgb(0 0 0 / 0%) 0px 0px 0px 0px,
+  rgb(0 0 0 / 0%) 0px 0px 0px 0px;
 }
 
 input[name="urlImage"] {
@@ -565,31 +535,40 @@ input[name="urlImage"] {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  height: 500px;
+  justify-content: space-evenly;
+  min-height: 500px;
 }
 
 .choix {
   background-color: #5469d4;
   flex-direction: row;
   margin: 25px;
-  height: 300px;
-  width: 130px;
+  min-height: 450px;
+  min-width: 250px;
   border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+  rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
+  rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+  rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 
 input[name="nom_du_choix"] {
-  width: 75px;
+  width: 150px;
   display: block;
   margin: 0 auto;
+  text-align: center;
 }
 
 .label_choix {
-  margin-left: 25%;
+  display: block;
+  text-align: center;
+  color: white;
+  font-weight: bold;
 }
 
 .image {
-  width: 75px;
-  height: 75px;
+  width: 125px;
+  height: 125px;
   margin: 0 auto;
 }
 
@@ -606,5 +585,71 @@ input[name="nom_du_choix"] {
   background: white;
   border: transparent;
   border-radius: 8px;
+}
+
+.Dchoix{
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.button-A-E{
+  flex-direction: row;
+  margin: 25px;
+  height: 450px;
+  width: 250px;
+  border-radius: 8px;
+  border-color: transparent;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+  rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
+  rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+  rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+
+}
+
+.button_plus {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  background: #fff;
+  cursor: pointer;
+  border: 2px solid #095776;
+
+  /* Mittig */
+  top: 50%;
+  left: 50%;
+}
+
+.button_plus:after {
+  content: '';
+  position: absolute;
+  transform: translate(-50%, -50%);
+  height: 4px;
+  width: 50%;
+  background: #095776;
+  top: 50%;
+  left: 50%;
+}
+
+.button_plus:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #095776;
+  height: 50%;
+  width: 4px;
+}
+
+.button_plus:hover:before,
+.button_plus:hover:after {
+  background: #fff;
+  transition: 0.2s;
+}
+
+.button_plus:hover {
+  background-color: #095776;
+  transition: 0.2s;
 }
 </style>
