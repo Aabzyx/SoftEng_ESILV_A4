@@ -1,149 +1,5 @@
 <template>
   <Header2 v-if="$store.state.actualClient !== null"></Header2>
-  <!-- <template>
-  <Header2></Header2>
-  <form>
-    <div>
-      <label><b>Nom de l'election :</b></label>
-      <input name="nom" placeholder="nom du vote" type="text" v-model="nom" />
-      <label><b>Description :</b></label>
-      <input
-        name="description"
-        placeholder="description"
-        type="text"
-        v-model="description"
-      />
-      <label><b>URL logo :</b></label>
-      <input
-        name="urlImage"
-        placeholder="Entrez l'URL"
-        type="url"
-        v-model="urlImage"
-      />
-      <label><b>Nombre de votants :</b></label>
-      <input name="nombreVotants" type="number" v-model="limite" />
-
-      <div>
-        <input
-          type="radio"
-          id="informel"
-          name="typeElection"
-          value="informel"
-          v-model="typeElection"
-          checked
-        />
-        <label for="informel">Informel</label>
-      </div>
-      <div>
-        <input
-          type="radio"
-          id="officiel"
-          name="typeElection"
-          value="officiel"
-          v-model="typeElection"
-        />
-        <label for="officiel">Officiel</label>
-      </div>
-
-      <div id="box-choix">
-        <div>
-          <label><b>Nom du choix:</b></label>
-          <input type="text" placeholder="nom du choix" v-model="choix" />
-        </div>
-        <div>
-          <label><b>Nom du choix:</b></label>
-          <input type="text" placeholder="nom du choix" v-model="choix" />
-        </div>
-      </div>
-      <div>
-        <input type="button" value="Ajouter" v-on:click="addChoix" />
-      </div>
-      <div>
-        <input type="submit" value="Créer" v-on:click="createElection" />
-      </div>
-    </div>
-  </form>
-</template>
-
-<script>
-import http from "../http-common";
-import Header2 from "./Header2.vue";
-
-export default {
-    name: "CreateElection",
-    data() {
-        return {
-            nom: "",
-            description: "",
-            urlImage: "",
-            limite: Number,
-            typeElection: "informel",
-            /*choixA: "",
-            choixB: "",
-            choice: "",*/
-            choix: [],
-            resultats: [],
-            dates: [],
-            code: "",
-        };
-    },
-    computed: {},
-    methods: {
-        createElection() {
-            //this.choix.push(this.choixA, this.choixB);
-            this.dates.push(Date.now());
-            const newElection = {
-                nom: this.nom,
-                description: this.description,
-                urlImage: this.urlImage,
-                type: this.typeElection,
-                choix: this.choix,
-                resultats: this.resultats,
-                dates: this.dates,
-                limite: this.limite,
-                code: this.code,
-            };
-            http
-                .post("/election/createElection", newElection)
-                .then((response) => {
-                console.log(response.data);
-                alert("Election added");
-            })
-                .catch((e) => {
-                if (e.response.status === 500) {
-                    alert("Invalid data");
-                }
-                else {
-                    alert("DB error");
-                }
-                console.log(e);
-            });
-        },
-        addChoix() {
-            let boxChoix = document.getElementById("box-choix");
-            let div = document.createElement("div");
-            let label = document
-                .createElement("label")
-                .appendChild(document.createElement("b"));
-            label.textContent = "Nom du choix:";
-            div.appendChild(label);
-            let input = document.createElement("input");
-            input.setAttribute("type", "text");
-            input.setAttribute("placeholder", "nom du choix");
-            input.setAttribute("v-model", "choix");
-            div.appendChild(input);
-            let button = document.createElement("input");
-            button.setAttribute("type", "submit");
-            boxChoix.appendChild(div);
-        },
-    },
-    mounted: function () { },
-    components: { Header2 }
-};
-</script>
-
-<style scoped></style> -->
-
   <div class="login-root">
     <div
       class="box-root flex-flex flex-direction--column"
@@ -292,6 +148,12 @@ export default {
                   ></textarea>
                 </div>
 
+                <div class="field padding-bottom--24">
+                  <label><b>Date de fin:</b></label
+                  ><br />
+                  <input type="date" name="date" v-model="dateFin" />
+                </div>
+
                 <div class="flex_deux">
                   <div
                     class="les_choix"
@@ -303,20 +165,29 @@ export default {
                       <label class="label_choix">choix {{ index + 1 }}</label
                       ><br />
                       <div class="image">
-                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" style="max-width: 100%;max-height: 100%; border-radius: 5px">
+                        <img
+                          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+                          style="max-width: 100%;max-height: 100%; border-radius: 5px"
+                        />
                       </div>
                       <div class="les_fleches">
                         <button class="fleche gauche">
-                          <img src="https://cdn3.iconfinder.com/data/icons/action-states-vol-3-flat/48/Action___States_-_Vol._3-19-512.png" style="max-width: 90%;max-height: 90%;border-radius: 5px;
- ">
+                          <img
+                            src="https://cdn3.iconfinder.com/data/icons/action-states-vol-3-flat/48/Action___States_-_Vol._3-19-512.png"
+                            style="max-width: 90%;max-height: 90%;border-radius: 5px;
+ "
+                          />
                         </button>
                         <button class="fleche droite">
-                          <img src="https://cdn3.iconfinder.com/data/icons/action-states-vol-3-flat/48/Action___States_-_Vol._3-19-512.png" style="max-width: 90%;max-height: 90%;-webkit-transform: rotate(180deg);
+                          <img
+                            src="https://cdn3.iconfinder.com/data/icons/action-states-vol-3-flat/48/Action___States_-_Vol._3-19-512.png"
+                            style="max-width: 90%;max-height: 90%;-webkit-transform: rotate(180deg);
    -moz-transform: rotate(180deg);
    -ms-transform: rotate(180deg);
    -o-transform: rotate(180deg);
    transform: rotate(180deg);
-   border-radius: 5px">
+   border-radius: 5px"
+                          />
                         </button>
                       </div>
                       <input
@@ -324,10 +195,29 @@ export default {
                         type="text"
                         placeholder="   Nom"
                         v-model="choice.value"
+                      /><br />
+                      <label>Description du choix :</label><br />
+                      <input
+                        type="text"
+                        placeholder="description"
+                        class="description"
+                        v-model="choice.desc"
                       />
                     </div>
                   </div>
-                  <input type="button" value="Ajouter" v-on:click="addChoix" style="flex-direction: row;margin: 25px;height: 200px;width: 130px; "/>
+                  <input
+                    type="button"
+                    value="Ajouter"
+                    v-on:click="addChoix"
+                    style="flex-direction: row;margin: 25px;height: 200px;width: 130px; "
+                  />
+                  <input
+                    type="button"
+                    value="Enlever"
+                    v-on:click="delChoix"
+                    style="flex-direction: row;margin: 25px;height: 200px;width:
+                  130px;"
+                  />
                 </div>
                 <div class="field padding-bottom--24">
                   <input
@@ -352,7 +242,7 @@ import Header2 from "@/components/Header2";
 
 export default {
   name: "CreateElection",
-  components: {Header2},
+  components: { Header2 },
   data() {
     return {
       nom: "",
@@ -360,11 +250,12 @@ export default {
       urlImage: "",
       limite: Number,
       typeElection: "informel",
-      /*choixA: "",
-      choixB: "",
-      choice: "",*/
-      choix: [{ value: "" },{value : ""}],
+      choix: [
+        { value: "", desc: "" },
+        { value: "", desc: "" },
+      ],
       resultats: [],
+      dateFin: Date,
       dates: [],
       code: "",
     };
@@ -377,7 +268,7 @@ export default {
       }
     },
     createElection() {
-      this.dates.push(Date.now());
+      this.dates.push(Date.now(), this.dateFin);
       const newElection = {
         nom: this.nom,
         description: this.description,
@@ -407,32 +298,11 @@ export default {
 
     addChoix() {
       this.choix.push({ value: "" });
-      // let boxChoix = document.getElementById("les_choix");
-      //
-      // let div = document.createElement("div");
-      //
-      // div.className = "choix";
-      //
-      // let label = document.createElement("label");
-      // label.textContent = "Nom du choix:";
-      // div.appendChild(label);
-      // let br = document.createElement("br");
-      // div.appendChild(br);
-      //
-      // let input = document.createElement("input");
-      // input.setAttribute("type", "text");
-      // input.setAttribute("placeholder", "nom du choix");
-      // input.setAttribute("v-model", "choice.value");
-      // div.appendChild(input);
-      //
-      // let button = document.createElement("input");
-      // button.setAttribute("type", "submit");
-      //
-      // div.style.background = "#1c57b5";
-      // div.style.margin = "10px";
-      // div.style.height = "100px";
-      //
-      // boxChoix.appendChild(div);
+    },
+
+    delChoix() {
+      console.log("pop");
+      this.choix.pop();
     },
   },
   mounted: function() {
@@ -683,16 +553,16 @@ input[name="urlImage"] {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  height: 500px;
 }
-
 
 .choix {
   background-color: #5469d4;
   flex-direction: row;
   margin: 25px;
-  height: 200px;
+  height: 300px;
   width: 130px;
-  border-radius: 10px
+  border-radius: 10px;
 }
 
 input[name="nom_du_choix"] {
@@ -701,30 +571,28 @@ input[name="nom_du_choix"] {
   margin: 0 auto;
 }
 
-.label_choix{
+.label_choix {
   margin-left: 25%;
 }
 
-.image{
+.image {
   width: 75px;
   height: 75px;
   margin: 0 auto;
 }
 
-.les_fleches{
+.les_fleches {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   margin: 10px;
 }
 
-
-.fleche{
+.fleche {
   width: 27px;
   height: 27px;
   background: white;
   border: transparent;
   border-radius: 8px;
-
 }
 </style>
