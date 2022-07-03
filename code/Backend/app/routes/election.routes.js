@@ -11,4 +11,7 @@ module.exports = function(app) {
     app.get('/api/election/getElection', election.findAll);
 
     app.delete('/api/election/deleteElection/:id', election.deleteElection);
+
+    //updatelections
+    app.put('/api/election/updateElection', election.updateElection)
 }

@@ -393,7 +393,7 @@ export default {
         .post("/election/createElection", newElection)
         .then((response) => {
           console.log(response.data);
-          alert("Election added");
+          this.$router.push("/HomePageVue");
         })
         .catch((e) => {
           if (e.response.status === 500) {

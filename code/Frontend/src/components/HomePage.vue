@@ -50,7 +50,7 @@
           <div class="btns">
             <button v-on:click="goVote(election)" class="btn-home">Vote</button>
             <button class="btn-home" >Delete</button>
-            <button v-on:click="goShowResultats" class="btn-home">Results</button>
+            <button v-on:click="goShowResultats(election)" class="btn-home">Results</button>
           </div>
         </div>
         <h4>Elections officiels :</h4>
@@ -62,7 +62,7 @@
           </div>
           <div class="btns">
             <button v-on:click="goVote(election)" class="btn-home">Vote</button>
-            <button v-on:click="goShowResultats" class="btn-home">Results</button>
+            <button v-on:click="goShowResultats(election)" class="btn-home">Results</button>
           </div>
         </div>
         <div class="div-btn-btm">
@@ -130,7 +130,7 @@ export default {
                   }
                   else {
                     alert("You have already voted !");
-                    this.$router.push("/ShowResultatsVue");
+                    this.$router.push("/HomePageVue");
                   }
               })
             }
@@ -164,13 +164,14 @@ export default {
           });
     },
     goJoinElection() {
-      this.$router.push("/JoinVoteVue")
+      this.$router.push("/JoinVoteVue");
     },
     goCreateElection() {
-      this.$router.push("/CreateElectionVue")
+      this.$router.push("/CreateElectionVue");
     },
-    goShowResultats() {
-      this.$router.push("/ShowResultatsVue")
+    goShowResultats(election) {
+      this.$store.state.actualElection = election
+      this.$router.push("/ShowResultatsVue");
     },
     redirection() {
       if (this.$store.state.actualClient === null) {

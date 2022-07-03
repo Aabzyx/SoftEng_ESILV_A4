@@ -12,7 +12,7 @@ const VoteSchema = mongoose.Schema({
     },
 
     choix: {
-        type: String,
+        type: Object,
         required: true
     },
 })

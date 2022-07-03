@@ -1,6 +1,8 @@
 // import Election model
 const Election = require('../models/election.model');
 const http = require("http");
+const bcrypt = require("bcryptjs");
+const Vote = require("../models/vote.model");
 
 exports.chercher = (req, res) => {
     Election.findOne({code: req.body.code}, function (err, election) {
@@ -91,5 +93,34 @@ exports.deleteElection = (req, res) => {
                   req.params.id
           });
       });
+}
+
+//ajouter vote à l'election
+exports.updateElection = (req, res) =>{
+    Election.findOneAndUpdate({ _id: req.body._id},
+        {$set : {resultats: req.body.resultats}},{new: true})
+        .then(elec => {
+            console.log(elec);
+            if(!elec) {
+                return res.status(404).send({
+                    message: "User not found with id " +
+                        req.body._id
+                });
+            }
+            res.send(elec);
+        })
+        .catch(err => {
+            if(err.kind === 'ObjectId') {
+                return res.status(404).send({
+                    message: "User not found with id " +
+                        req.body._id
+                });
+            }
+            return res.status(500).send({
+
+                message: "Error updating user with id " +
+                    req.body._id
+            });
+        });
 }
 

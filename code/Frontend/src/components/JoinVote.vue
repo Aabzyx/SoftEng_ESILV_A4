@@ -109,7 +109,7 @@ export default {
                         .then(response => {
                         console.log("response :", response);
                         sessionStorage.setItem("userData", JSON.stringify(response.data));
-                        alert("User join vote");
+                        this.$router.push("/HomePageVue");
                     });
                 }
                 else {

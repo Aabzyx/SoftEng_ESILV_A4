@@ -9,8 +9,8 @@
       <div class="vote-item" v-for="(choix, index) in $store.state.actualElection.choix" v-bind:key="index">
         <!-- <img :src="choix.urlImg"> -->
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTryVmt8i7VYR32xc0ByNgVQKnN-Pt0apuS0VWXP3rjCA&s">
-        <label>{{ choix }}</label>
-        <input class="option-input radio" type="radio" value={{choix}} name="choix" v-on:change="choice(choix)">
+        <label>{{ choix.value }}</label>
+        <input class="option-input radio" type="radio" value={{choix.value}} name="choix" v-on:change="choice(index)">
       </div>
       <div>
         <input name="submit" type="submit" value="Vote" v-on:click="vote(choice(choix))" >
@@ -30,7 +30,7 @@ export default {
         return {
             idUser: Number,
             idElection: Number,
-            choix: ""
+            choix: Number
         };
     },
     computed: {},
@@ -41,19 +41,38 @@ export default {
         }
       },
         vote(c) {
+        let tab = [];
             const newVote = {
                 idUser: this.$store.state.actualClient._id,
                 idElection: this.$store.state.actualElection._id,
                 choix: c
             };
-            console.log(newVote);
             http
                 .post("/vote/createVote", newVote)
                 .then(response => {
                 this.$store.state.actualVote = response.data;
-                console.log(response.data);
-                alert("Vote add");
-                this.$router.push("/InterfaceVoteVue");
+                http
+                    .get("election/getElection")
+                    .then(r => {
+                        tab = r.data;
+                        tab.forEach(res => {
+                          if (res._id === this.$store.state.actualElection._id){
+                            res.resultats[this.choix] += 1;
+                            console.log(res);
+                            http
+                                .put("/election/updateElection", res)
+                                .then(responseDuFutur => {
+                                  console.log(responseDuFutur)
+                                  this.$router.push('HomePageVue')
+                                })
+                                .catch(errortamere => {
+                                  if (errortamere.response.status === 404) {
+                                    alert("Can't update your account");
+                                  }
+                                  console.log(errortamere);
+                                });
+                          }
+                              })})
             })
                 .catch(e => {
                 if (e.response.status === 500) {
