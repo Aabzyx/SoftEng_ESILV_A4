@@ -102,13 +102,19 @@
             link: '/HomePageVue',
             name: 'Home',
             tooltip: 'Home',
-            icon: 'bx-grid-alt',
+            icon: 'bx-home',
           },
           {
             link: '/UpdateTypeAcount',
             name: 'Upgrade',
             tooltip: 'Upgrade',
-            icon: 'bx-user',
+            icon: 'bx-chevron-up-circle',
+          },
+          {
+            link: '/UpdatePassword',
+            name: 'Change password',
+            tooltip: 'Update password',
+            icon: 'bx bxs-key',
           },
           {
             link: '/UpdateUser',
@@ -551,6 +557,7 @@
   }
   .sidebar .profile-details .name_job {
     display: none;
+    color:  var(--menu-items-text-color);
   }
   .sidebar.open .profile-details .name_job {
     display: flex;
