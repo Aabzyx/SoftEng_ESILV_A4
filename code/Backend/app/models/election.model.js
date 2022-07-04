@@ -44,6 +44,11 @@ const ElectionSchema = mongoose.Schema({
 
     limite: {  //limite maximale de personne
         type: Number
+    },
+
+    nbElecteurs: {
+        type: Number,
+        default: 1
     }
 })
 

@@ -1,67 +1,141 @@
 <template>
   <Header2 v-if="$store.state.actualClient !== null"></Header2>
-  <br><br>
+  <br /><br />
   <div class="login-root">
-    <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
+    <div
+      class="box-root flex-flex flex-direction--column"
+      style="min-height: 100vh; flex-grow: 1"
+    >
       <div class="loginbackground box-background--white padding-top--64">
         <div class="loginbackground-gridContainer">
-          <div class="box-root flex-flex" style="grid-area: top / start / 8 / end;">
-            <div class="box-root" style="background-image: linear-gradient(white 0%, rgb(247, 250, 252) 33%); flex-grow: 1;">
-            </div>
+          <div
+            class="box-root flex-flex"
+            style="grid-area: top / start / 8 / end"
+          >
+            <div
+              class="box-root"
+              style="
+                background-image: linear-gradient(
+                  white 0%,
+                  rgb(247, 250, 252) 33%
+                );
+                flex-grow: 1;
+              "
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5;">
-            <div class="box-root box-divider--light-all-2 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+          <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5">
+            <div
+              class="box-root box-divider--light-all-2 animationLeftRight tans3s"
+              style="flex-grow: 1"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 6 / start / auto / 2;">
-            <div class="box-root box-background--blue800" style="flex-grow: 1;"></div>
+          <div
+            class="box-root flex-flex"
+            style="grid-area: 6 / start / auto / 2"
+          >
+            <div
+              class="box-root box-background--blue800"
+              style="flex-grow: 1"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 7 / start / auto / 4;">
-            <div class="box-root box-background--blue animationLeftRight" style="flex-grow: 1;"></div>
+          <div
+            class="box-root flex-flex"
+            style="grid-area: 7 / start / auto / 4"
+          >
+            <div
+              class="box-root box-background--blue animationLeftRight"
+              style="flex-grow: 1"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6;">
-            <div class="box-root box-background--gray100 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+          <div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6">
+            <div
+              class="box-root box-background--gray100 animationLeftRight tans3s"
+              style="flex-grow: 1"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 2 / 15 / auto / end;">
-            <div class="box-root box-background--cyan200 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+          <div
+            class="box-root flex-flex"
+            style="grid-area: 2 / 15 / auto / end"
+          >
+            <div
+              class="box-root box-background--cyan200 animationRightLeft tans4s"
+              style="flex-grow: 1"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 3 / 14 / auto / end;">
-            <div class="box-root box-background--blue animationRightLeft" style="flex-grow: 1;"></div>
+          <div
+            class="box-root flex-flex"
+            style="grid-area: 3 / 14 / auto / end"
+          >
+            <div
+              class="box-root box-background--blue animationRightLeft"
+              style="flex-grow: 1"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 4 / 17 / auto / 20;">
-            <div class="box-root box-background--gray100 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+          <div class="box-root flex-flex" style="grid-area: 4 / 17 / auto / 20">
+            <div
+              class="box-root box-background--gray100 animationRightLeft tans4s"
+              style="flex-grow: 1"
+            ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 5 / 14 / auto / 17;">
-            <div class="box-root box-divider--light-all-2 animationRightLeft tans3s" style="flex-grow: 1;"></div>
+          <div class="box-root flex-flex" style="grid-area: 5 / 14 / auto / 17">
+            <div
+              class="box-root box-divider--light-all-2 animationRightLeft tans3s"
+              style="flex-grow: 1"
+            ></div>
           </div>
         </div>
       </div>
-      <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
-        <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
+      <div
+        class="box-root padding-top--24 flex-flex flex-direction--column"
+        style="flex-grow: 1; z-index: 9"
+      >
+        <div
+          class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center"
+        >
           <h1>Ekip vote</h1>
         </div>
         <div class="formbg-outer">
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
-              <span class="padding-bottom--15"><b>Connect your account to a vote</b></span>
-              <br>
+              <span class="padding-bottom--15"
+                ><b>Connect your account to a vote</b></span
+              >
+              <br />
               <form id="stripe-login">
                 <div class="field padding-bottom--24">
                   <label><b>Name</b></label>
-                  <input type="text" name="name" placeholder="Name" v-model ="nom">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    v-model="nom"
+                  />
                 </div>
                 <div class="field padding-bottom--24">
                   <label><b>Code</b></label>
-                  <input type="password" name="password" placeholder="Secret code" v-model ="code" @keyup.enter="joinVote">
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Secret code"
+                    v-model="code"
+                    @keyup.enter="joinVote"
+                  />
                 </div>
                 <div class="field padding-bottom--24">
-                  <input type="button" name="submit" value="Join" v-on:click="joinVote">
+                  <input
+                    type="button"
+                    name="submit"
+                    value="Join"
+                    v-on:click="joinVote"
+                  />
                 </div>
-
               </form>
             </div>
           </div>
           <div class="footer-link padding-top--24">
-            <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
+            <div
+              class="listing padding-top--24 padding-bottom--24 flex-flex center-center"
+            >
               <span><a href="#">Vote online</a></span>
               <span><a href="https://www.agh.edu.pl/">Contact</a></span>
               <span><a href="#">Privacy & terms</a></span>
@@ -78,65 +152,77 @@ import http from "../http-common";
 import Header2 from "./Header2.vue";
 
 export default {
-    name: "JoinVote",
-    data() {
-        return {
-            nom: "",
-            code: ""
-        };
+  name: "JoinVote",
+  data() {
+    return {
+      nom: "",
+      code: "",
+    };
+  },
+  computed: {},
+  methods: {
+    redirection() {
+      if (this.$store.state.actualClient === null) {
+        this.$router.push("/");
+      }
     },
-    computed: {},
-    methods: {
-      redirection() {
-        if (this.$store.state.actualClient === null) {
-          this.$router.push("/");
-        }
-      },
-        joinVote() {
-            const leTout = {
-                user: this.$store.state.actualClient,
-                nom: this.nom,
-                code: this.code
-            };
-            console.log(leTout)
-            http
-                .post("election/chercherCode", leTout)
-                .then(r => {
-                  console.log(r);
-                if (!this.$store.state.actualClient.autorisedElections.includes(r.data)) {
-                    this.$store.state.actualClient.autorisedElections.push(r.data);
-                    http.put("user/joinVote", this.$store.state.actualClient)
-                        .then(response => {
-                        console.log("response :", response);
-                        sessionStorage.setItem("userData", JSON.stringify(response.data));
-                        this.$router.push("/HomePageVue");
-                    });
-                }
-                else {
-                    alert("You are already participating to this election");
-                }
-            })
-                .catch(e => {
-                if (e.response.status === 401) {
-                    console.log(e);
-                    alert("Not find this vote");
-                }
-                else if (e.response.status === 402) {
-                    console.log(e);
-                    alert("Not the right combination");
-                }
-            });
-        },
-        connectStore() {
-            this.$store.state.actualClient = JSON.parse(sessionStorage.getItem("userData"));
-        }
+    joinVote() {
+      const leTout = {
+        user: this.$store.state.actualClient,
+        nom: this.nom,
+        code: this.code,
+      };
+      console.log(leTout);
+      http
+        .post("election/chercherCode", leTout)
+        .then((r) => {
+          console.log(r);
+          if (
+            !this.$store.state.actualClient.autorisedElections.includes(
+              r.data._id
+            )
+          ) {
+            if (r.data.nbElecteurs < r.data.limite) {
+              this.$store.state.actualClient.autorisedElections.push(r.data);
+              http
+                .put("user/joinVote", this.$store.state.actualClient)
+                .then((response) => {
+                  console.log("response :", response);
+                  sessionStorage.setItem(
+                    "userData",
+                    JSON.stringify(response.data)
+                  );
+                  this.$router.push("/HomePageVue");
+                });
+            } else {
+              alert("The election is FULL !");
+            }
+          } else {
+            alert("You are already participating to this election");
+          }
+        })
+        .catch((e) => {
+          if (e.response.status === 401) {
+            console.log(e);
+            alert("Not find this vote");
+          } else if (e.response.status === 402) {
+            console.log(e);
+            alert("Not the right combination");
+          }
+        });
     },
-    mounted: function () {
-      this.$nextTick(this.redirection);
-      this.$nextTick(this.connectStore);
+    connectStore() {
+      this.$store.state.actualClient = JSON.parse(
+        sessionStorage.getItem("userData")
+      );
     },
-    components: { Header2 }
-}
+  },
+  mounted: function () {
+    this.$nextTick(this.redirection);
+    this.$nextTick(this.connectStore);
+  },
+  components: { Header2 },
+};
 </script>
 
 <style scoped>
@@ -144,11 +230,11 @@ export default {
   color: #1a1f36;
   box-sizing: border-box;
   word-wrap: break-word;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Ubuntu,sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Ubuntu, sans-serif;
 }
 
-template
-{
+template {
   overflow: hidden;
 }
 
@@ -200,10 +286,11 @@ a {
 .loginbackground-gridContainer {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: [start] 1fr [left-gutter] (86.6px)[16] [left-gutter] 1fr [end];
-  grid-template-columns: [start] 1fr [left-gutter] repeat(16,86.6px) [left-gutter] 1fr [end];
-  -ms-grid-rows: [top] 1fr [top-gutter] (64px)[8] [bottom-gutter] 1fr [bottom];
-  grid-template-rows: [top] 1fr [top-gutter] repeat(8,64px) [bottom-gutter] 1fr [bottom];
+  -ms-grid-columns: [start] 1fr [left-gutter] (86.6px) [16] [left-gutter] 1fr
+    [end];
+  grid-template-columns: [start] 1fr [left-gutter] repeat(16, 86.6px) [left-gutter] 1fr [end];
+  -ms-grid-rows: [top] 1fr [top-gutter] (64px) [8] [bottom-gutter] 1fr [bottom];
+  grid-template-rows: [top] 1fr [top-gutter] repeat(8, 64px) [bottom-gutter] 1fr [bottom];
   justify-content: center;
   margin: 0 -2%;
   transform: rotate(-12deg) skew(-12deg);
@@ -245,7 +332,6 @@ a {
   padding-bottom: 15px;
 }
 
-
 .flex-justifyContent--center {
   -ms-flex-pack: center;
   justify-content: center;
@@ -257,7 +343,8 @@ a {
   max-width: 448px;
   background: white;
   border-radius: 4px;
-  box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
+  box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px,
+    rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
 }
 span {
   display: block;
@@ -279,24 +366,18 @@ label {
   border-radius: 4px;
   outline-color: rgb(84 105 212 / 0.5);
   background-color: rgb(255, 255, 255);
-  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 
 input[name="submit"] {
   background-color: rgb(84, 105, 212);
-  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0.12) 0px 1px 1px 0px,
-  rgb(84, 105, 212) 0px 0px 0px 1px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, rgb(84, 105, 212) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
   color: #fff;
   font-weight: 600;
   cursor: pointer;

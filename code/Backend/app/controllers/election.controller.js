@@ -4,13 +4,15 @@ const http = require("http");
 const bcrypt = require("bcryptjs");
 const Vote = require("../models/vote.model");
 
+
+
 exports.chercher = (req, res) => {
-    Election.findOne({code: req.body.code}, function (err, election) {
+    Election.findOne({nom: req.body.nom}, function (err, election) {
         if (election == null){
             res.status(401).json({ message: 'Non trouvé' });
         }
         else if (election.code === req.body.code){
-                res.send(election._id);
+                res.send(election);
             }
             else {
                 res.status(402).json({ message: 'Pas le bon match entre le nom et lid' });
