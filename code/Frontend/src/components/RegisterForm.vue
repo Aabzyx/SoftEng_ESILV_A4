@@ -120,7 +120,7 @@ export default {
       local: [],
       urlImage: "",
       subscription: 'none',
-      numElecteur: "",
+      numElecteur: null,
       autorisedElections: []
     };
   },

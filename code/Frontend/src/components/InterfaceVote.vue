@@ -19,6 +19,7 @@
           <p v-else>No description</p>
         </div>
       </div>
+        <button type="button" v-on:click="vote(choice(choix))">Vote</button>
     <!-- </div>
       <div class="vote-item" v-for="(choix, index) in $store.state.actualElection.choix" v-bind:key="index">
         <img :src="choix.urlImg">
@@ -75,6 +76,7 @@ export default {
                   .put("/election/updateElection", res)
                   .then((responseDuFutur) => {
                     console.log(responseDuFutur);
+                    this.$store.state.actualClient.autorisedElections.find(e => e.election === this.$store.state.actualElection._id).bool = true;
                     this.$router.push("HomePageVue");
                   })
                   .catch((errortamere) => {

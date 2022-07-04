@@ -83,6 +83,7 @@ exports.updateTypeAcount = (req, res) => {
 
 //Upadte elections
 exports.updateAutorisedElections = (req, res) => {
+    console.log(req.body)
     User.findOneAndUpdate({ _id: req.body._id},
         {$set : {autorisedElections: req.body.autorisedElections, createdElections: req.body.createdElections}},{new: true})
         .then(user => {

@@ -62,7 +62,7 @@ const UserSchema = mongoose.Schema({
     },
 
     autorisedElections: {
-        type: [String],
+        type: [Object],
         default: []
     },
 

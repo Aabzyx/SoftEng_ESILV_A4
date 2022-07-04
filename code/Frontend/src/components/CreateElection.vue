@@ -312,9 +312,11 @@ export default {
                     response.data._id
                 )
             ) {
-              this.$store.state.actualClient.autorisedElections.push(
-                  response.data._id
-              );
+              const newElection = {
+                election: response.data._id,
+                bool: false
+              }
+              this.$store.state.actualClient.autorisedElections.push(newElection);
               this.$store.state.actualClient.createdElections.push(
                   response.data._id
               );
@@ -338,7 +340,6 @@ export default {
             console.log(e);
           });
     },
-
     addChoix() {
       this.choix.push({ value: "" });
     },

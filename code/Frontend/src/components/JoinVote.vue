@@ -188,10 +188,6 @@ export default {
                 .put("user/joinVote", this.$store.state.actualClient)
                 .then((response) => {
                   console.log("response :", response);
-                  sessionStorage.setItem(
-                    "userData",
-                    JSON.stringify(response.data)
-                  );
                   this.$router.push("/HomePageVue");
                 });
             } else {
@@ -210,11 +206,6 @@ export default {
             alert("Not the right combination");
           }
         });
-    },
-    connectStore() {
-      this.$store.state.actualClient = JSON.parse(
-        sessionStorage.getItem("userData")
-      );
     },
   },
   mounted: function () {

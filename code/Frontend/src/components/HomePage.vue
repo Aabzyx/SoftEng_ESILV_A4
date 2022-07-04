@@ -53,7 +53,8 @@
             <button v-on:click="deleteElection(election)" class="btn-home" >Delete</button>
             <button v-on:click="goShowResultats(election)" class="btn-home">Results</button>
           </div>
-          <p >{{voted}}</p>
+          <p v-if="$store.state.actualClient.autorisedElections.find(e => e.election === election._id).bool" style="color: #2bb6a3">Voted</p>
+          <p v-else style="color: darkred">Not Voted</p>
         </div>
         <h4>Elections officiels :</h4>
         <div v-for="(election, index) in electionsOfficiel" v-bind:key="index" class="election-items">
@@ -85,7 +86,6 @@ export default {
     return {
       electionsOfficiel: [],
       electionsInformel: [],
-      voteChoix: "",
       voted: "Not voted",
       elect: Object,
       activeClass: 'is-visible',
@@ -103,15 +103,16 @@ export default {
           .get("/election/getElection")
           .then(response => {
             response.data.forEach(p => {
-              if (this.$store.state.actualClient.autorisedElections.includes(p._id)) {
-                if(p.type == "informel"){
-                  this.electionsInformel.push(p);
+              this.$store.state.actualClient.autorisedElections.forEach(elec => {
+                if (elec.election == p._id){
+                  if(p.type == "informel"){
+                    this.electionsInformel.push(p);
+                  }
+                  if(p.type == "officiel"){
+                    this.electionsOfficiel.push(p);
+                  }
                 }
-                if(p.type == "officiel"){
-                  this.electionsOfficiel.push(p);
-                }
-
-              }
+              })
             });
           })
           .catch(e => {

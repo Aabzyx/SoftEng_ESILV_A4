@@ -99,6 +99,7 @@ exports.deleteElection = (req, res) => {
 
 //ajouter vote à l'election
 exports.updateElection = (req, res) =>{
+    console.log("amdoulila=", req.body)
     Election.findOneAndUpdate({ _id: req.body._id},
         {$set : {resultats: req.body.resultats}},{new: true})
         .then(elec => {
