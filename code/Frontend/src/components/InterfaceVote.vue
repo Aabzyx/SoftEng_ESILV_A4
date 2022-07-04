@@ -12,7 +12,7 @@
           <button class='bx bxs-right-arrow rotate' v-on:click="func($event)"></button>
           <img :src="choix.img">
           <label>{{choix.value}}</label>
-          <input class="option-input radio" type="radio" value=choix1 name="choix" v-on:change="choice(choix)">
+          <input class="option-input radio" type="radio" value=choix1 name="choix" v-on:change="choice(index)">
         </div>
         <div class="description-data">
           <p v-if="choix.desc != ''">{{choix.desc}}</p>
@@ -70,8 +70,9 @@ export default {
             tab = r.data;
             tab.forEach((res) => {
               if (res._id === this.$store.state.actualElection._id) {
+                console.log(this.choix)
                 res.resultats[this.choix] += 1;
-                console.log(res);
+                console.log("resulat:", res);
                 http
                   .put("/election/updateElection", res)
                   .then((responseDuFutur) => {
