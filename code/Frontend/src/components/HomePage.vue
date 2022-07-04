@@ -40,18 +40,19 @@
       </div>
       <div class="formbg">
         <h4>Elections informels :</h4>
-        <div v-for="(election, index) in electionsInformel" v-bind:key="index" class="election-items" v-on:load="showVote(election)">
+        <div v-for="(election, index) in electionsInformel" v-bind:key="index" class="election-items">
           <p class="name-election">{{ election.nom }}</p>
           <div class="progress">
             <div class="progress-value">
             </div>
           </div>
-          <p>{{voteChoix}}</p>
+
           <div class="btns">
-            <button v-on:click="goVote(election)" class="btn-home">Vote</button>
-            <button class="btn-home" >Delete</button>
+            <button v-on:click="goVote(election) " class="btn-home">Vote</button>
+            <button v-on:click="deleteElection(election)" class="btn-home" >Delete</button>
             <button v-on:click="goShowResultats(election)" class="btn-home">Results</button>
           </div>
+          <p >{{voted}}</p>
         </div>
         <h4>Elections officiels :</h4>
         <div v-for="(election, index) in electionsOfficiel" v-bind:key="index" class="election-items">
@@ -77,18 +78,24 @@
 <script>
 import http from "@/http-common";
 import Header2 from "./Header2.vue";
-
 export default {
   name: "HomePage",
   data() {
     return {
       electionsOfficiel: [],
       electionsInformel: [],
-      voteChoix: ""
+      voteChoix: "",
+      voted: "Not voted",
+      elect: Object,
+      activeClass: 'is-visible',
+      active: null
     };
   },
-  computed: {},
+  computed: {
+
+  },
   methods: {
+
     //show election
     showElection() {
       http
@@ -124,11 +131,14 @@ export default {
             }
             else{
               response.data.forEach(r => {
-                  if(!r.idUser == this.$store.state.actualClient._id){
+                console.log(r.idUser);
+                console.log(this.$store.state.actualClient._id);
+                  if(r.idUser != this.$store.state.actualClient._id){
                     this.$store.state.actualElection = election;
                     this.$router.push("/InterfaceVoteVue");
                   }
                   else {
+                    this.voted = "Voted";
                     alert("You have already voted !");
                     this.$router.push("/HomePageVue");
                   }
@@ -142,17 +152,20 @@ export default {
             }
           });
     },
-    showVote(election){
+    showVoted(election, index){
       const elect = {
         electionData: election,
         user: this.$store.state.actualClient
       }
+      console.log(elect);
       http
           .post("/votes/getAllVotesOfElection", elect)
           .then(response => {
+            console.log(response.data);
             response.data.forEach(r => {
+              console.log(r.idUser);
               if (r.idUser == this.$store.state.actualClient._id) {
-                this.voteChoix = r.choix;
+                this.active = index;
               }
             })
                 .catch(e => {
@@ -161,6 +174,16 @@ export default {
                     alert("Not find this vote");
                   }
                 });
+          });
+    },
+    deleteElection(election){
+      http
+          .post("/election/deleteElection/", election)
+          .then(response => {
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
           });
     },
     goJoinElection() {
@@ -182,12 +205,23 @@ export default {
   mounted: function () {
     this.$nextTick(this.redirection);
     this.$nextTick(this.showElection);
+
   },
   components: {Header2}
 }
 </script>
 
 <style scoped>
+
+.hidden{
+  display: none;
+}
+
+.is-visible{
+  display: flex;
+}
+
+
 h1 {
   letter-spacing: -1px;
 }
@@ -252,6 +286,7 @@ h4 {
   display: flex;
   margin: 30px auto 25px;
   align-items: center;
+  width:900px;
 }
 
 .div-btn-btm {
