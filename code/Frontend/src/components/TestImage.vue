@@ -1,26 +1,30 @@
 <template>
-  <input v-model="input" v-on:keydown.enter="search">
-  <br>
+  <input v-model="input" v-on:keydown.enter="search" />
+  <br />
   <div class="grosse_div">
-  <Carousel :itemsToShow="1.75" :wrapAround="true">
-    <Slide v-for="slide in arr" :key="slide">
-        <img :src="slide" style="width: 100px; height: 100px" class="carousel__item">
-    </Slide>
-    <template #addons>
-<Navigation></Navigation>
-    </template>
-  </Carousel>
+    <Carousel :itemsToShow="1.75" :wrapAround="true">
+      <Slide v-for="slide in arr" :key="slide">
+        <img
+          :src="slide"
+          style="width: 100px; height: 100px"
+          class="carousel__item"
+        />
+      </Slide>
+      <template #addons>
+        <Navigation></Navigation>
+      </template>
+    </Carousel>
   </div>
 </template>
 
 <script>
-import { Navigation, Carousel, Slide } from 'vue3-carousel';
+import { Navigation, Carousel, Slide } from "vue3-carousel";
 
-import 'vue3-carousel/dist/carousel.css';
+import "vue3-carousel/dist/carousel.css";
 
 export default {
   name: "TestImage",
-  el: '#example',
+  el: "#example",
   components: {
     Carousel,
     Slide,
@@ -29,29 +33,31 @@ export default {
   data() {
     return {
       arr: [],
-      input: '',
+      input: "",
     };
   },
   computed: {},
   methods: {
     async search() {
-      let url = "https://api.unsplash.com/search/photos?query=" + this.input + "&per_page=30&client_id=U8gb60YrrIRNvvaC7AalrQV9wgXdGQ3qEqVC1rXJegc";
+      let url =
+        "https://api.unsplash.com/search/photos?query=" +
+        this.input +
+        "&per_page=30&client_id=U8gb60YrrIRNvvaC7AalrQV9wgXdGQ3qEqVC1rXJegc";
       let memory = new Array();
       await fetch(url)
-          .then(async function (data) {
-            return await data.json();
-          })
-          .then(function (data) {
-            data.results.forEach(photo => {
-              memory.push(photo.urls.regular);
-            })
-          })
+        .then(async function (data) {
+          return await data.json();
+        })
+        .then(function (data) {
+          data.results.forEach((photo) => {
+            memory.push(photo.urls.regular);
+          });
+        });
       this.arr = memory;
-    }
+    },
   },
-  mounted() {
-  }
-}
+  mounted() {},
+};
 </script>
 
 <style scoped>
@@ -74,11 +80,7 @@ export default {
   transform: scale(1.1);
 }
 
-.grosse_div{
+.grosse_div {
   width: 150px;
-}
-
-:root {
-  --vc-clr-primary: green;
 }
 </style>
