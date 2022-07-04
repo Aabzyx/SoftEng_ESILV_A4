@@ -52,7 +52,7 @@ const UserSchema = mongoose.Schema({
 
     subscription: {
         type: String,
-        enum: ['none','free','premium','super-premium'],
+        enum: ['none','free','premium','super-premium', 'admin'],
         required: true
     },
 

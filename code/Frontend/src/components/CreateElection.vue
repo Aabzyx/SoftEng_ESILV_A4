@@ -292,6 +292,10 @@ export default {
         test[i].click();
       }
       this.dates.push(Date.now(), this.dateFin);
+      if (this.$store.state.actualClient.subscription === 'admin'){
+        this.typeElection = "officiel";
+        this.code = null;
+      }
       const newElection = {
         nom: this.nom,
         description: this.description,

@@ -130,15 +130,31 @@ export default {
                   .post("/user/login", User)
                   .then(response => {
                     this.$store.state.actualClient = response.data
-                    if (this.getAge(this.$store.state.actualClient.dateDeNaissance.toString().substring(0, 10)) >= 18 && this.$store.state.actualClient.numElecteur == null){
-                      this.$router.push('IfMajeurVue')
+                    if (this.getAge(this.$store.state.actualClient.dateDeNaissance.toString().substring(0, 10)) >= 18){
+
+                      http.get("election/getElection").then((r) => {
+                            let tab = r.data;
+                            tab.forEach((res) => {
+                              if (res.type === 'officiel'){
+                                  const newElection = {
+                                    election: res._id,
+                                    bool: false
+                                  }
+                                let arrTest = this.$store.state.actualClient.autorisedElections.filter(o => o.election === res._id)
+                                if (arrTest.length === 0){
+                                    this.$store.state.actualClient.autorisedElections.push(newElection);
+                                    http.put("user/joinVote", this.$store.state.actualClient)
+                                }
+                                  }
+                                })}
+                      )
+                      if (this.$store.state.actualClient.numElecteur == null){this.$router.push('IfMajeurVue')}
+                      else {this.$router.push('/HomePageVue')}
+
                     }
                     else {
                       this.$router.push('HomePageVue')
                     }
-                    sessionStorage.setItem("userData", JSON.stringify(response.data));
-                    console.log(sessionStorage.getItem("userData"));
-                    console.log(JSON.parse(sessionStorage.getItem("userData")).nom);
                   })
                   .catch(e => {
                     if (e.response.status === 401){

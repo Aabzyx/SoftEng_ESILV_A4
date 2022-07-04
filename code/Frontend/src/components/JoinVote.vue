@@ -172,18 +172,19 @@ export default {
         nom: this.nom,
         code: this.code,
       };
-      console.log(leTout);
       http
         .post("election/chercherCode", leTout)
         .then((r) => {
-          console.log(r);
-          if (
-            !this.$store.state.actualClient.autorisedElections.includes(
-              r.data._id
-            )
+          console.log("election =", r.data);
+          const arrTest = this.$store.state.actualClient.autorisedElections.filter(o => o.election === r.data._id)
+          if (arrTest.length === 0
           ) {
             if (r.data.nbElecteurs < r.data.limite) {
-              this.$store.state.actualClient.autorisedElections.push(r.data);
+              const newElection = {
+                election: r.data._id,
+                bool: false
+              }
+              this.$store.state.actualClient.autorisedElections.push(newElection);
               http
                 .put("user/joinVote", this.$store.state.actualClient)
                 .then((response) => {
@@ -210,7 +211,6 @@ export default {
   },
   mounted: function () {
     this.$nextTick(this.redirection);
-    this.$nextTick(this.connectStore);
   },
   components: { Header2 },
 };

@@ -7,11 +7,11 @@ const Vote = require("../models/vote.model");
 
 
 exports.chercher = (req, res) => {
-    Election.findOne({nom: req.body.nom}, function (err, election) {
+    Election.findOne({code: req.body.code}, function (err, election) {
         if (election == null){
             res.status(401).json({ message: 'Non trouvé' });
         }
-        else if (election.code === req.body.code){
+        else if (election.nom === req.body.nom){
                 res.send(election);
             }
             else {
@@ -44,8 +44,10 @@ exports.createElection = (req, res) => {
     while(strCode.length < 4) {
       strCode = "0"+strCode;
     }
-
-    newElection.code = strCode;
+    if (newElection.code === null){
+        newElection.code = null
+    }
+    else newElection.code = strCode;
 
     newElection.save()
       .then(data => {
