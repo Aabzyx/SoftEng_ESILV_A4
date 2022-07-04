@@ -41,12 +41,13 @@
       <div class="formbg">
         <h4>Elections informels :</h4>
         <div v-for="(election, index) in electionsInformel" v-bind:key="index" class="election-items">
-          <p class="name-election">{{ election.nom }}</p>
-          <div class="progress">
-            <div class="progress-value">
+          <div class="election-head">
+            <p class="name-election">{{ election.nom }}</p>
+            <div class="progress">
+              <div class="progress-value">
+              </div>
             </div>
           </div>
-
           <div class="btns">
             <button v-on:click="goVote(election) " class="btn-home">Vote</button>
             <button v-on:click="deleteElection(election)" class="btn-home" >Delete</button>
@@ -266,10 +267,10 @@ h4 {
   }
 }
 
-.election-item {
+/* .election-item {
   margin-right: 5px;
   margin-bottom: 10px;
-}
+} */
 
 .formbg {
   margin: 0px auto;
@@ -284,9 +285,54 @@ h4 {
 
 .election-items {
   display: flex;
+  flex-wrap: wrap;
   margin: 30px auto 25px;
   align-items: center;
-  width:900px;
+  /* width:900px; */
+}
+
+.election-items .election-head {
+  display: flex;
+}
+
+@media (max-width: 1200px) {
+  .btns {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .btn-home {
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 770px) {
+  .election-items .election-head {
+  flex-direction: column;
+  }
+
+  .election-head {
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    
+  }
+}
+
+@media (max-width: 560px) {
+  .election-items {
+    display: flex;
+    flex-direction: column;
+  }
+
+  
+  .name-election {
+    text-align: center;
+  }
+  .progress {
+    align-items: center;
+    margin-bottom: 10px;
+  }
 }
 
 .div-btn-btm {
@@ -338,9 +384,9 @@ h4 {
   border: unset;
 }
 
-.descript-election {
+/* .descript-election {
   animation: show 2s forwards;
-}
+} */
 
 @keyframes show {
   0% {
