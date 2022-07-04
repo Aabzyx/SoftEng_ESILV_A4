@@ -163,32 +163,22 @@
                     <div class="choix">
                       <label class="label_choix">choix {{ index + 1 }}</label
                       ><br />
-                      <div class="image">
-                        <Carousel :itemsToShow="1.75" :wrapAround="true">
-                          <Slide
-                              v-for="slide in this.arrayCarrousel[index]"
-                              :key="slide"
-                          >
-                            <img
-                                :src="slide"
-                                style="width: 100px; height: 100px"
-                                class="carousel__item"
-                            />
+                      <div class="image" style="display: flex; justify-content: center; align-items: center; flex-direction: column">
+                        <Carousel :itemsToShow="1.5" :wrapAround="true" style="width: 200px">
+                          <Slide v-for="slide in this.arrayCarrousel[index]" :key="slide" style="display: flex; flex-direction: column">
+                            <img :src="slide" style="width: 100px; height: 100px" class="carousel__item"/>
+                            <button class="buttonTamere" type="button" v-on:click="confirmerChoix(slide, index)" style="display: none">OK</button>
                           </Slide>
                           <template #addons>
                             <Navigation></Navigation>
                           </template>
                         </Carousel>
-                        <button
-                            type="button"
-                            v-on:click="
-                            search({
+                        <br>
+                        <br>
+                        <button type="button" v-on:click="search({
                               input: choice.value,
                               i: index,
-                              url: slide,
-                            })
-                          "
-                        >
+                            })">
                           Search
                         </button>
                       </div>
@@ -286,8 +276,10 @@ export default {
             });
           });
       console.log(memory);
-      this.choix[input.i].img = input.url;
       this.arrayCarrousel.push(memory);
+    },
+    confirmerChoix(slide, index){
+      this.choix[index].img = slide;
     },
     redirection() {
       if (this.$store.state.actualClient === null) {
@@ -295,6 +287,10 @@ export default {
       }
     },
     createElection() {
+      let test = document.getElementsByClassName("buttonTamere");
+      for(let i = 0; i < test.length; i++){
+        test[i].click();
+      }
       this.dates.push(Date.now(), this.dateFin);
       const newElection = {
         nom: this.nom,
