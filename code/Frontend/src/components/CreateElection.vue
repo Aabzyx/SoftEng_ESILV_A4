@@ -3,90 +3,90 @@
   <div class="login-root">
     <div
       class="box-root flex-flex flex-direction--column"
-      style="min-height: 100vh;flex-grow: 1;"
+      style="min-height: 100vh; flex-grow: 1"
     >
       <div class="loginbackground box-background--white padding-top--64">
         <div class="loginbackground-gridContainer">
           <div
             class="box-root flex-flex"
-            style="grid-area: top / start / 8 / end;"
+            style="grid-area: top / start / 8 / end"
           >
             <div
               class="box-root"
-              style="background-image: linear-gradient(white 0%, rgb(247, 250, 252) 33%); flex-grow: 1;"
+              style="
+                background-image: linear-gradient(
+                  white 0%,
+                  rgb(247, 250, 252) 33%
+                );
+                flex-grow: 1;
+              "
             ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5;">
+          <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5">
             <div
               class="box-root box-divider--light-all-2 animationLeftRight tans3s"
-              style="flex-grow: 1;"
+              style="flex-grow: 1"
             ></div>
           </div>
           <div
             class="box-root flex-flex"
-            style="grid-area: 6 / start / auto / 2;"
+            style="grid-area: 6 / start / auto / 2"
           >
             <div
               class="box-root box-background--blue800"
-              style="flex-grow: 1;"
+              style="flex-grow: 1"
             ></div>
           </div>
           <div
             class="box-root flex-flex"
-            style="grid-area: 7 / start / auto / 4;"
+            style="grid-area: 7 / start / auto / 4"
           >
             <div
               class="box-root box-background--blue animationLeftRight"
-              style="flex-grow: 1;"
+              style="flex-grow: 1"
             ></div>
           </div>
-          <div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6;">
+          <div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6">
             <div
               class="box-root box-background--gray100 animationLeftRight tans3s"
-              style="flex-grow: 1;"
+              style="flex-grow: 1"
             ></div>
           </div>
           <div
             class="box-root flex-flex"
-            style="grid-area: 2 / 15 / auto / end;"
+            style="grid-area: 2 / 15 / auto / end"
           >
             <div
               class="box-root box-background--cyan200 animationRightLeft tans4s"
-              style="flex-grow: 1;"
+              style="flex-grow: 1"
             ></div>
           </div>
           <div
             class="box-root flex-flex"
-            style="grid-area: 3 / 14 / auto / end;"
+            style="grid-area: 3 / 14 / auto / end"
           >
             <div
               class="box-root box-background--blue animationRightLeft"
-              style="flex-grow: 1;"
+              style="flex-grow: 1"
             ></div>
           </div>
-          <div
-            class="box-root flex-flex"
-            style="grid-area: 4 / 17 / auto / 20;"
-          >
+          <div class="box-root flex-flex" style="grid-area: 4 / 17 / auto / 20">
             <div
               class="box-root box-background--gray100 animationRightLeft tans4s"
-              style="flex-grow: 1;"
+              style="flex-grow: 1"
             ></div>
           </div>
-          <div
-            class="box-root flex-flex"
-            style="grid-area: 5 / 14 / auto / 17;"
-          >
+          <div class="box-root flex-flex" style="grid-area: 5 / 14 / auto / 17">
             <div
               class="box-root box-divider--light-all-2 animationRightLeft tans3s"
-              style="flex-grow: 1;"
+              style="flex-grow: 1"
             ></div>
           </div>
         </div>
       </div>
       <div
         class="box-root padding-top--24 flex-flex flex-direction--column"
-        style="flex-grow: 1; z-index: 9;"
+        style="flex-grow: 1; z-index: 9"
       >
         <div
           class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center"
@@ -154,37 +154,83 @@
                 </div>
 
                 <div class="flex_deux">
-                  <div class="les_choix" id="les_choix" v-for="(choice, index) in choix" :key="choice">
+                  <div
+                    class="les_choix"
+                    id="les_choix"
+                    v-for="(choice, index) in choix"
+                    :key="choice"
+                  >
                     <div class="choix">
-                      <label class="label_choix">choix {{ index + 1 }}</label><br />
+                      <label class="label_choix">choix {{ index + 1 }}</label
+                      ><br />
                       <div class="image">
-                        <img
-                          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-                          style="max-width: 100%;max-height: 100%; border-radius: 5px"
-                        />
-                      </div>
-                      <div class="les_fleches">
-                        <button class="fleche gauche">
-                          <img
-                            src="https://cdn3.iconfinder.com/data/icons/action-states-vol-3-flat/48/Action___States_-_Vol._3-19-512.png"
-                            style="max-width: 90%;max-height: 90%;border-radius: 5px;"/>
+                        <Carousel :itemsToShow="1.75" :wrapAround="true">
+                          <Slide
+                            v-for="slide in this.arrayCarrousel[index]"
+                            :key="slide"
+                          >
+                            <img
+                              :src="slide"
+                              style="width: 100px; height: 100px"
+                              class="carousel__item"
+                            />
+                          </Slide>
+                          <template #addons>
+                            <Navigation></Navigation>
+                          </template>
+                        </Carousel>
+                        <button
+                          type="button"
+                          v-on:click="
+                            search({
+                              input: choice.value,
+                              i: index,
+                              url: slide,
+                            })
+                          "
+                        >
+                          Search
                         </button>
-                        <button class="fleche droite">
-                          <img
-                            src="https://cdn3.iconfinder.com/data/icons/action-states-vol-3-flat/48/Action___States_-_Vol._3-19-512.png"
-                            style="max-width: 90%;max-height: 90%;-webkit-transform: rotate(180deg);-moz-transform: rotate(180deg);-ms-transform: rotate(180deg);-o-transform: rotate(180deg);transform: rotate(180deg);border-radius: 5px"/>
-                        </button>
                       </div>
-                      <input name="nom_du_choix" type="text" placeholder="Nom" v-model="choice.value"/><br />
-                      <label class="label_choix">Description du choix :</label><br />
-                      <textarea type="text" placeholder="Description" class="description Dchoix" v-model="choice.desc"/>
+
+                      <input
+                        name="nom_du_choix"
+                        type="text"
+                        placeholder="Nom"
+                        v-model="choice.value"
+                      /><br />
+                      <label class="label_choix">Description du choix :</label
+                      ><br />
+                      <textarea
+                        type="text"
+                        placeholder="Description"
+                        class="description Dchoix"
+                        v-model="choice.desc"
+                      />
                     </div>
                   </div>
-                  <button class="button-A-E" type="button" value="Ajouter" v-on:click="addChoix" >Ajouter</button>
-                  <input class="button-A-E" type="button" value="Enlever" v-on:click="delChoix" />
+                  <button
+                    class="button-A-E"
+                    type="button"
+                    value="Ajouter"
+                    v-on:click="addChoix"
+                  >
+                    Ajouter
+                  </button>
+                  <input
+                    class="button-A-E"
+                    type="button"
+                    value="Enlever"
+                    v-on:click="delChoix"
+                  />
                 </div>
                 <div class="field padding-bottom--24">
-                  <input type="submit" name="submit" value="Continue" v-on:click="createElection"/>
+                  <input
+                    type="button"
+                    name="submit"
+                    value="Continue"
+                    v-on:click="createElection"
+                  />
                 </div>
               </form>
             </div>
@@ -198,10 +244,12 @@
 <script>
 import http from "../http-common";
 import Header2 from "@/components/Header2";
+import { Navigation, Carousel, Slide } from "vue3-carousel";
+import "vue3-carousel/dist/carousel.css";
 
 export default {
   name: "CreateElection",
-  components: { Header2 },
+  components: { Header2, Carousel, Slide, Navigation },
   data() {
     return {
       nom: "",
@@ -210,9 +258,10 @@ export default {
       limite: Number,
       typeElection: "informel",
       choix: [
-        { value: "", desc: "" },
-        { value: "", desc: "" },
+        { value: "", desc: "", img: "" },
+        { value: "", desc: "", img: "" },
       ],
+      arrayCarrousel: [],
       resultats: [],
       dateFin: Date,
       dates: [],
@@ -222,18 +271,23 @@ export default {
   computed: {},
   methods: {
     async search(input) {
-      let url = "https://api.unsplash.com/search/photos?query=" + input + "&per_page=30&client_id=U8gb60YrrIRNvvaC7AalrQV9wgXdGQ3qEqVC1rXJegc";
+      let url =
+        "https://api.unsplash.com/search/photos?query=" +
+        input.input +
+        "&per_page=30&client_id=U8gb60YrrIRNvvaC7AalrQV9wgXdGQ3qEqVC1rXJegc";
       let memory = new Array();
       await fetch(url)
-          .then(async function (data) {
-            return await data.json();
-          })
-          .then(function (data) {
-            data.results.forEach(photo => {
-              memory.push(photo.urls.regular);
-            })
-          })
-      return memory;
+        .then(async function (data) {
+          return await data.json();
+        })
+        .then(function (data) {
+          data.results.forEach((photo) => {
+            memory.push(photo.urls.regular);
+          });
+        });
+      console.log(memory);
+      this.choix[input.i].img = input.url;
+      this.arrayCarrousel.push(memory);
     },
     redirection() {
       if (this.$store.state.actualClient === null) {
@@ -256,20 +310,28 @@ export default {
       http
         .post("/election/createElection", newElection)
         .then((response) => {
-                console.log(response.data);
-                if (!this.$store.state.actualClient.autorisedElections.includes(response.data._id)) {
-                  this.$store.state.actualClient.autorisedElections.push(response.data._id);
-                  this.$store.state.actualClient.createdElections.push(response.data._id);
-                  console.log("user avannt : ", this.$store.state.actualClient)
-                  http.put("user/joinVote", this.$store.state.actualClient)
-                      .then(r => {
-                        console.log("response :", r);
-                        this.$router.push("/HomePageVue");
-                      });
-                }
-                else {
-                  alert("You are already participating to this election");
-                }
+          console.log(response.data);
+          if (
+            !this.$store.state.actualClient.autorisedElections.includes(
+              response.data._id
+            )
+          ) {
+            this.$store.state.actualClient.autorisedElections.push(
+              response.data._id
+            );
+            this.$store.state.actualClient.createdElections.push(
+              response.data._id
+            );
+            console.log("user avannt : ", this.$store.state.actualClient);
+            http
+              .put("user/joinVote", this.$store.state.actualClient)
+              .then((r) => {
+                console.log("response :", r);
+                this.$router.push("/HomePageVue");
+              });
+          } else {
+            alert("You are already participating to this election");
+          }
         })
         .catch((e) => {
           if (e.response.status === 500) {
@@ -290,7 +352,7 @@ export default {
       this.choix.pop();
     },
   },
-  mounted: function() {
+  mounted: function () {
     this.$nextTick(this.redirection);
   },
 };
@@ -528,13 +590,10 @@ input[name="submit"] {
   height: 100px;
   border-radius: 4px;
   border: unset;
-  box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px,
-  rgb(0 0 0 / 0%) 0px 0px 0px 0px,
-  rgb(0 0 0 / 0%) 0px 0px 0px 0px,
-  rgb(60 66 87 / 16%) 0px 0px 0px 1px,
-  rgb(0 0 0 / 0%) 0px 0px 0px 0px,
-  rgb(0 0 0 / 0%) 0px 0px 0px 0px,
-  rgb(0 0 0 / 0%) 0px 0px 0px 0px;
+  box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px,
+    rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px,
+    rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px,
+    rgb(0 0 0 / 0%) 0px 0px 0px 0px;
 }
 
 input[name="urlImage"] {
@@ -561,9 +620,9 @@ input[name="urlImage"] {
   min-width: 250px;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 
 input[name="nom_du_choix"] {
@@ -601,13 +660,13 @@ input[name="nom_du_choix"] {
   border-radius: 8px;
 }
 
-.Dchoix{
+.Dchoix {
   width: 80%;
   margin-left: 10%;
   margin-right: 10%;
 }
 
-.button-A-E{
+.button-A-E {
   flex-direction: row;
   margin: 25px;
   height: 450px;
@@ -615,10 +674,9 @@ input[name="nom_du_choix"] {
   border-radius: 8px;
   border-color: transparent;
   box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px;
-
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 
 .button_plus {
@@ -635,7 +693,7 @@ input[name="nom_du_choix"] {
 }
 
 .button_plus:after {
-  content: '';
+  content: "";
   position: absolute;
   transform: translate(-50%, -50%);
   height: 4px;
@@ -646,7 +704,7 @@ input[name="nom_du_choix"] {
 }
 
 .button_plus:before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -665,5 +723,24 @@ input[name="nom_du_choix"] {
 .button_plus:hover {
   background-color: #095776;
   transition: 0.2s;
+}
+
+.carousel__slide > .carousel__item {
+  transform: scale(1);
+  opacity: 0.5;
+  transition: 0.5s;
+}
+.carousel__slide--visible > .carousel__item {
+  opacity: 1;
+  transform: rotateY(0);
+}
+.carousel__slide--next > .carousel__item {
+  transform: scale(0.9) translate(-10px);
+}
+.carousel__slide--prev > .carousel__item {
+  transform: scale(0.9) translate(10px);
+}
+.carousel__slide--active > .carousel__item {
+  transform: scale(1.1);
 }
 </style>
