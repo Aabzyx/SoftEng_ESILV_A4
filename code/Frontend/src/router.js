@@ -1,10 +1,8 @@
 import { createWebHistory, createRouter } from "vue-router";
-//import Header from "./components/Header";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import HomePageVue from "./components/HomePage.vue";
 import CreateElectionVue from "./components/CreateElection.vue";
-//import ChoixVoteVue from "./components/ChoixVote.vue";
 import IfMajeurVue from "./components/IfMajeur.vue";
 import InterfaceVoteVue from "./components/InterfaceVote.vue";
 import JoinVoteVue from "./components/JoinVote.vue";
@@ -13,7 +11,6 @@ import DifferentAcount from "@/components/DifferentAcount";
 import UpdateUser from "@/components/UpdateUser";
 import UpdateTypeAcount from "@/components/updateTypeAcount";
 import UpdatePassword from "@/components/UpdatePassword";
-import TestImage from "@/components/TestImage";
 
 const routes =  [
     {
@@ -119,15 +116,6 @@ const routes =  [
         path: "/UpdatePassword",
         name: "UpdatePassword",
         component: UpdatePassword,
-        meta: {
-            enterClass: "animate__animated animate__backInLeft",
-            leaveClass: "animate__animated animate__backOutRight"
-        }
-    },
-    {
-        path: "/TestImage",
-        name: "TestImage",
-        component: TestImage,
         meta: {
             enterClass: "animate__animated animate__backInLeft",
             leaveClass: "animate__animated animate__backOutRight"
