@@ -1,8 +1,4 @@
 <template>
-    <nav class="container-fluid">
-      <router-link class="mr-1 btn btn-primary" to="/UpdatePassword">PasswordUpadte</router-link>
-      <router-link class="mr-1 btn btn-primary" to="/TestImage">TestImage</router-link>
-    </nav>
   <router-view>
   </router-view>
 </template>
