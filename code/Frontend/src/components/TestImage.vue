@@ -1,15 +1,31 @@
 <template>
-<p>Test</p>
-  <input type="text" v-model="input" v-on:keydown.enter="search">
-  <button v-on:click="search">Search</button>
-  <div v-for="(src, index) in arr" v-bind:key="index">
-    <img :src="src">
+  <input v-model="input" v-on:keydown.enter="search">
+  <br>
+  <div class="grosse_div">
+  <Carousel :itemsToShow="1.75" :wrapAround="true">
+    <Slide v-for="slide in arr" :key="slide">
+        <img :src="slide" style="width: 100px; height: 100px" class="carousel__item">
+    </Slide>
+    <template #addons>
+<Navigation></Navigation>
+    </template>
+  </Carousel>
   </div>
 </template>
 
 <script>
+import { Navigation, Carousel, Slide } from 'vue3-carousel';
+
+import 'vue3-carousel/dist/carousel.css';
+
 export default {
   name: "TestImage",
+  el: '#example',
+  components: {
+    Carousel,
+    Slide,
+    Navigation,
+  },
   data() {
     return {
       arr: [],
@@ -34,11 +50,35 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(this.search)
   }
 }
 </script>
 
 <style scoped>
+.carousel__slide > .carousel__item {
+  transform: scale(1);
+  opacity: 0.5;
+  transition: 0.5s;
+}
+.carousel__slide--visible > .carousel__item {
+  opacity: 1;
+  transform: rotateY(0);
+}
+.carousel__slide--next > .carousel__item {
+  transform: scale(0.9) translate(-10px);
+}
+.carousel__slide--prev > .carousel__item {
+  transform: scale(0.9) translate(10px);
+}
+.carousel__slide--active > .carousel__item {
+  transform: scale(1.1);
+}
 
+.grosse_div{
+  width: 150px;
+}
+
+:root {
+  --vc-clr-primary: green;
+}
 </style>
