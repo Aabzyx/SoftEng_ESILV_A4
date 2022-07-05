@@ -1,5 +1,5 @@
 <template>
-  <br>
+  <div class="main-container">
   <h1 class="h1">Choose your type of acount :</h1>
     <br><h4>You could change it in the futur</h4>
   <div class="flex">
@@ -14,13 +14,12 @@
       <br><br><p class="price">{{type.prix}}</p>
       <span class="link-text">
       Purchase
-      <svg width="25" height="16" viewBox="0 0 25 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M17.8631 0.929124L24.2271 7.29308C24.6176 7.68361 24.6176 8.31677 24.2271 8.7073L17.8631 15.0713C17.4726 15.4618 16.8394 15.4618 16.4489 15.0713C16.0584 14.6807 16.0584 14.0476 16.4489 13.657L21.1058 9.00019H0.47998V7.00019H21.1058L16.4489 2.34334C16.0584 1.95281 16.0584 1.31965 16.4489 0.929124C16.8394 0.538599 17.4726 0.538599 17.8631 0.929124Z" fill="floralwhite"/>
-</svg>
+      <i class='bx bx-right-arrow-alt'></i>
     </span>
     </a>
   </section>
   </div>
+</div>
 </template>
 
 <script>
@@ -93,8 +92,9 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700&display=swap");
 
-* {
-  box-sizing: border-box;
+
+.main-container {
+  margin-top: 60px;
 }
 
 .flex{
@@ -114,72 +114,77 @@ h4{
 }
 
 .page-contain {
-  display: flex;
-  min-height: 100vh;
+  /*display: flex;
   align-items: center;
-  justify-content: center;
-  border: 0.75em solid white;
-  padding: 2em;
+  justify-content: center;*/
+  /*height: 540px;*/
+  border: 12px solid white;
+  /*padding: 32px;*/
   font-family: "Open Sans", sans-serif;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .data-card {
   display: flex;
   flex-direction: column;
   height: 540px;
-  max-width: 20.75em;
-  min-height: 20.75em;
+  width: 332px;
+  min-height: 332px;
   overflow: hidden;
-  border-radius: 0.9em;
+  border-radius: 14px;
   text-decoration: none;
   background: #212d63;
-  margin: 1em;
-  margin-top: -200px;
-  padding: 2.75em 2.5em;
-  box-shadow: 0 1.5em 2.5em -0.5em rgba(0, 0, 0, 0.1);
+  /*margin: 16px;*/
+  /*margin-top: -200px;*/
+  padding: 44px 40px;
+  box-shadow: 0 24px 40px -8px rgba(0, 0, 0, 0.1);
   transition: transform 0.45s ease, background 0.45s ease;
 }
 .data-card h3 {
   text-align: center;
   color: whitesmoke;
-  font-size: 3.5em;
+  font-size: 56px;
   font-weight: 600;
   line-height: 1;
-  padding-bottom: 0.5em;
-  margin: 0 0 0.142857143em;
+  padding-bottom: 8px;
+  margin: 0 0 15px;
   border-bottom: 2px solid antiquewhite;
   transition: color 0.45s ease, border 0.45s ease;
 }
 .data-card h4 {
   color: #697386;
   text-transform: uppercase;
-  font-size: 1.125em;
+  font-size: 18px;
   font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.1em;
-  margin: 0 0 1.777777778em;
+  line-height: 2px;
+  letter-spacing: 2px;
+  margin: 0 0 29px;
   transition: color 0.45s ease;
 }
 .data-card p {
-  opacity: 0;
+  opacity: 1;
   color: #7fd3ed;
   font-weight: 600;
   line-height: 1.8;
-  margin: 0 0 1.25em;
-  transform: translateY(-1em);
+  margin: 0 0 20;
+  transform: translateY(-16px);
   transition: opacity 0.45s ease, transform 0.5s ease;
 }
 .data-card .link-text {
   display: block;
   color: floralwhite;
-  font-size: 1.125em;
+  font-size: 18px;
   font-weight: 600;
   line-height: 1.2;
   margin: auto 0 0;
   transition: color 0.45s ease;
 }
 .data-card .link-text svg {
-  margin-left: 0.5em;
+  margin-left: 8px;
   transition: transform 0.6s ease;
 }
 .data-card .link-text svg path {
@@ -216,7 +221,7 @@ h4{
     transform: translateX(0);
   }
   100% {
-    transform: translateX(0.125em);
+    transform: translateX(2px);
   }
 }
 
@@ -225,7 +230,7 @@ h4{
     transform: translateX(0);
   }
   100% {
-    transform: translateX(0.125em);
+    transform: translateX(2px);
   }
 }
 
