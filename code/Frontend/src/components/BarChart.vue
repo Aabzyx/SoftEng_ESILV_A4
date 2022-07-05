@@ -19,6 +19,7 @@ import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, Li
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default {
+  extends: Bar,
   name: 'BarChart',
   components: { Bar },
   props: {
@@ -55,76 +56,34 @@ export default {
     return {
       chartData: {
         labels: [
-          ''
+          'Kupata',
+          'Roro',
+          'Tonio',
+          'Franco',
+          'Benji',
+          'Hermanno'
         ],
-        datasets: [
-        {
-          label: 'Kupata',
-          data: [65],
-          backgroundColor: 'rgba(255, 099, 132, 0.2)',
-          borderColor: 'rgb(255, 099, 132)',
+        datasets: [{
+          label: 'Dataset',
+          data: [65, 59, 80, 81, 56, 55],
+          backgroundColor: [
+            'rgba(255, 099, 132, 0.2)',
+            'rgba(255, 159, 064, 0.2)',
+            'rgba(255, 205, 086, 0.2)',
+            'rgba(075, 192, 192, 0.2)',
+            'rgba(054, 162, 235, 0.2)',
+            'rgba(153, 102, 255, 0.2)'
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+            'rgb(153, 102, 255)'
+          ],
           borderWidth: 1
-        },
-        {
-          label: 'Roro',
-          data: [59],
-          backgroundColor: 'rgba(255, 159, 064, 0.2)',
-          borderColor: 'rgb(255, 159, 064)',
-          borderWidth: 1
-        },
-          {
-            label: 'Tonio',
-            data: [80],
-            backgroundColor: 'rgba(255, 205, 086, 0.2)',
-            borderColor: 'rgb(255, 205, 086)',
-            borderWidth: 1
-          },
-          {
-            label: 'Franco',
-            data: [37],
-            backgroundColor: 'rgba(075, 192, 192, 0.2)',
-            borderColor: 'rgb(075, 192, 192)',
-            borderWidth: 1
-          },
-          {
-            label: 'Benji',
-            data: [56],
-            backgroundColor: 'rgba(054, 162, 235, 0.2)',
-            borderColor: 'rgb(054, 162, 235)',
-            borderWidth: 1
-          },
-          {
-            label: 'Hermanno',
-            data: [55],
-            backgroundColor: 'rgba(153, 102, 255, 0.2)',
-            borderColor: 'rgb(153, 102, 255)',
-            borderWidth: 1
-          }
-
-          /*
-        label: 'Dataset',
-        data: [65, 59, 80, 81, 56, 55],
-        backgroundColor: [
-          'rgba(255, 099, 132, 0.2)',
-          'rgba(255, 159, 064, 0.2)',
-          'rgba(255, 205, 086, 0.2)',
-          'rgba(075, 192, 192, 0.2)',
-          'rgba(054, 162, 235, 0.2)',
-          'rgba(153, 102, 255, 0.2)'
-        ],
-        borderColor: [
-          'rgb(255, 099, 132)',
-          'rgb(255, 159, 064)',
-          'rgb(255, 205, 086)',
-          'rgb(075, 192, 192)',
-          'rgb(054, 162, 235)',
-          'rgb(153, 102, 255)'
-        ],
-        borderWidth: 1
-      }
-      */
-        ]
-
+        }]
       },
       chartOptions: {
         responsive: true,
@@ -132,5 +91,42 @@ export default {
       },
     }
   }
-};
+    /* // old do not use, do not delete either still useful
+    extends: Pie,
+    props: {
+      label: {
+        type: String
+      },
+      chartData: {
+        type: Array
+      },
+      options: {
+        type: Object
+      }
+    },
+    mounted() {
+      const voted = this.chartData.map(d => d.voted);
+      const notVoted = this.chartData.map(d => d.notVoted);
+
+      this.renderChart(
+        {
+          labels: [
+            'Has Voted',
+            'Has not Voted'
+          ],
+          datasets: [{
+            label: this.label,
+            data: [voted, notVoted],
+            backgroundColor: [
+              'rgb(255, 99, 132)',
+              'rgb(54, 162, 235)',
+              'rgb(255, 205, 86)'
+            ]
+          }]
+        },
+        this.options
+      );
+    }
+    */
+  };
 </script>

@@ -19,6 +19,7 @@ import { Chart as ChartJS, ArcElement, Title, Tooltip, Legend, CategoryScale, Li
 ChartJS.register(ArcElement, Title, Tooltip, Legend, CategoryScale, LinearScale);
 
 export default {
+  extends: Pie,
   name: 'PieChart',
   components: { Pie },
   props: {

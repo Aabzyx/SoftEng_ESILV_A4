@@ -5,7 +5,7 @@
 <!--    <div>{{electionBrut.choix[index].value}} : {{election}} %</div>-->
 
 <!--  </div>-->
-  <h1 style="display: flex; justify-content: center; margin-top: 15px">Résultats élection</h1>
+  <h1 style="display: flex; justify-content: center; margin-top: 15px">Résultats éléction</h1>
   <div class="entie">
     <div class="podium">
 <!--      <div class="deuxieme">-->
@@ -57,12 +57,12 @@
   </div>
 
   <div id="app" class="container">
-    <div class="col mt-5">
-      <div class="row mt-5">
+    <div class="row mt-5">
+      <div class="col mt-5">
         <h2> Suffrages Exprimés </h2>
         <PieChart />
       </div>
-      <div class="row mt-5">
+      <div class="col mt-5">
         <h2> Résultats Complets </h2>
         <BarChart />
       </div>
@@ -73,8 +73,8 @@
 
 <script>
 import Header2 from "./Header2.vue";
-import PieChart from "./PieChart.vue";
-import BarChart from "./BarChart.vue";
+import PieChart from './PieChart.vue'
+import BarChart from './BarChart.vue'
 
 export default {
     name: "ShowResultats",
@@ -227,22 +227,6 @@ body {
 
 .slide-in-bottom {
   animation: slide-in-bottom 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
-
-.row {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  margin: 50px auto;
-}
-
-.col {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  margin: 50px auto;
 }
 
 @keyframes slide-in-bottom {

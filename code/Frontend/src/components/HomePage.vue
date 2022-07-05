@@ -94,11 +94,17 @@
             </div>
           </div>
           <div class="btns">
-            <button v-on:click="goVote(election)" class="btn-home">Vote</button>
+            <button
+              v-on:click="goVote(election)"
+              class="btn-home"
+              v-show="election.isActive"
+            >
+              Vote
+            </button>
             <button
               v-on:click="closeElection(election)"
               class="btn-home"
-              v-if="
+              v-show="
                 $store.state.actualClient.createdElections.find(
                   (e) => e === election._id
                 ) !== undefined && election.isActive
@@ -109,7 +115,7 @@
             <button
               v-on:click="deleteElection(election)"
               class="btn-home"
-              v-if="
+              v-show="
                 $store.state.actualClient.createdElections.find(
                   (e) => e === election._id
                 ) !== undefined
@@ -120,7 +126,7 @@
             <button
               v-on:click="goShowResultats(election)"
               class="btn-home"
-              v-if="!election.isActive"
+              v-show="!election.isActive"
             >
               Results
             </button>
@@ -265,6 +271,7 @@ export default {
       });
     },
     closeElection(election) {
+      election.isActive = false;
       http
         .put("/election/closeElection", election)
         .then((response) => {
