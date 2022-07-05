@@ -4,8 +4,6 @@ const http = require("http");
 const bcrypt = require("bcryptjs");
 const Vote = require("../models/vote.model");
 
-
-
 exports.chercher = (req, res) => {
     Election.findOne({nom: req.body.nom}, function (err, election) {
         if (election == null){

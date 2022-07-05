@@ -243,4 +243,17 @@ exports.updatePassword = (req, res) => {
     }
 };
 
+//getalluser
+exports.findAll = (req, res) => {
+    User.find()
+        .then(user => {
+            res.send(user);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message
+            });
+        });
+};
+
 
