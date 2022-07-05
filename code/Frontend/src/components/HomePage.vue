@@ -1,76 +1,166 @@
 <template>
   <Header2 v-if="$store.state.actualClient !== null"></Header2>
-  <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
+  <div
+    class="box-root flex-flex flex-direction--column"
+    style="min-height: 100vh; flex-grow: 1"
+  >
     <div class="loginbackground box-background--white padding-top--64">
       <div class="loginbackground-gridContainer">
-        <div class="box-root flex-flex" style="grid-area: top / start / 8 / end;">
-          <div class="box-root"
-               style="background-image: linear-gradient(white 0%, rgb(247, 250, 252) 33%); flex-grow: 1;">
-          </div>
+        <div
+          class="box-root flex-flex"
+          style="grid-area: top / start / 8 / end"
+        >
+          <div
+            class="box-root"
+            style="
+              background-image: linear-gradient(
+                white 0%,
+                rgb(247, 250, 252) 33%
+              );
+              flex-grow: 1;
+            "
+          ></div>
         </div>
-        <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5;">
-          <div class="box-root box-divider--light-all-2 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+        <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5">
+          <div
+            class="box-root box-divider--light-all-2 animationLeftRight tans3s"
+            style="flex-grow: 1"
+          ></div>
         </div>
-        <div class="box-root flex-flex" style="grid-area: 6 / start / auto / 2;">
-          <div class="box-root box-background--blue800" style="flex-grow: 1;"></div>
+        <div class="box-root flex-flex" style="grid-area: 6 / start / auto / 2">
+          <div
+            class="box-root box-background--blue800"
+            style="flex-grow: 1"
+          ></div>
         </div>
-        <div class="box-root flex-flex" style="grid-area: 7 / start / auto / 4;">
-          <div class="box-root box-background--blue animationLeftRight" style="flex-grow: 1;"></div>
+        <div class="box-root flex-flex" style="grid-area: 7 / start / auto / 4">
+          <div
+            class="box-root box-background--blue animationLeftRight"
+            style="flex-grow: 1"
+          ></div>
         </div>
-        <div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6;">
-          <div class="box-root box-background--gray100 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+        <div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6">
+          <div
+            class="box-root box-background--gray100 animationLeftRight tans3s"
+            style="flex-grow: 1"
+          ></div>
         </div>
-        <div class="box-root flex-flex" style="grid-area: 2 / 15 / auto / end;">
-          <div class="box-root box-background--cyan200 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+        <div class="box-root flex-flex" style="grid-area: 2 / 15 / auto / end">
+          <div
+            class="box-root box-background--cyan200 animationRightLeft tans4s"
+            style="flex-grow: 1"
+          ></div>
         </div>
-        <div class="box-root flex-flex" style="grid-area: 3 / 14 / auto / end;">
-          <div class="box-root box-background--blue animationRightLeft" style="flex-grow: 1;"></div>
+        <div class="box-root flex-flex" style="grid-area: 3 / 14 / auto / end">
+          <div
+            class="box-root box-background--blue animationRightLeft"
+            style="flex-grow: 1"
+          ></div>
         </div>
-        <div class="box-root flex-flex" style="grid-area: 4 / 17 / auto / 20;">
-          <div class="box-root box-background--gray100 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+        <div class="box-root flex-flex" style="grid-area: 4 / 17 / auto / 20">
+          <div
+            class="box-root box-background--gray100 animationRightLeft tans4s"
+            style="flex-grow: 1"
+          ></div>
         </div>
-        <div class="box-root flex-flex" style="grid-area: 5 / 14 / auto / 17;">
-          <div class="box-root box-divider--light-all-2 animationRightLeft tans3s" style="flex-grow: 1;"></div>
+        <div class="box-root flex-flex" style="grid-area: 5 / 14 / auto / 17">
+          <div
+            class="box-root box-divider--light-all-2 animationRightLeft tans3s"
+            style="flex-grow: 1"
+          ></div>
         </div>
       </div>
     </div>
-    <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
-      <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
+    <div
+      class="box-root padding-top--24 flex-flex flex-direction--column"
+      style="flex-grow: 1; z-index: 9"
+    >
+      <div
+        class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center"
+      >
         <h1>EkipVote</h1>
       </div>
       <div class="formbg">
         <h4>Elections informels :</h4>
-        <div v-for="(election, index) in electionsInformel" v-bind:key="index" class="election-items">
+        <div
+          v-for="(election, index) in electionsInformel"
+          v-bind:key="index"
+          class="election-items"
+        >
           <div class="election-head">
             <p class="name-election">{{ election.nom }}</p>
             <div class="progress">
-              <div class="progress-value">
-              </div>
-            </div>
-          </div>
-          <div class="btns">
-            <button v-on:click="goVote(election) " class="btn-home">Vote</button>
-            <button v-on:click="deleteElection(election)" class="btn-home" >Delete</button>
-            <button v-on:click="goShowResultats(election)" class="btn-home">Results</button>
-          </div>
-          <p v-if="$store.state.actualClient.autorisedElections.find(e => e.election === election._id).bool" style="color: #2bb6a3">Voted</p>
-          <p v-else style="color: darkred">Not Voted</p>
-        </div>
-        <h4>Elections officiels :</h4>
-        <div v-for="(election, index) in electionsOfficiel" v-bind:key="index" class="election-items">
-          <p class="name-election">{{ election.nom }}</p>
-          <div class="progress">
-            <div class="progress-value">
+              <div class="progress-value"></div>
             </div>
           </div>
           <div class="btns">
             <button v-on:click="goVote(election)" class="btn-home">Vote</button>
-            <button v-on:click="goShowResultats(election)" class="btn-home">Results</button>
+            <button
+              v-on:click="closeElection(election)"
+              class="btn-home"
+              v-if="
+                $store.state.actualClient.createdElections.find(
+                  (e) => e === election._id
+                ) !== undefined && election.isActive
+              "
+            >
+              Close
+            </button>
+            <button
+              v-on:click="deleteElection(election)"
+              class="btn-home"
+              v-if="
+                $store.state.actualClient.createdElections.find(
+                  (e) => e === election._id
+                ) !== undefined
+              "
+            >
+              Delete
+            </button>
+            <button
+              v-on:click="goShowResultats(election)"
+              class="btn-home"
+              v-if="!election.isActive"
+            >
+              Results
+            </button>
+          </div>
+          <p
+            v-if="
+              $store.state.actualClient.autorisedElections.find(
+                (e) => e.election === election._id
+              ).bool
+            "
+            style="color: #2bb6a3"
+          >
+            Voted
+          </p>
+          <p v-else style="color: darkred">Not Voted</p>
+        </div>
+        <h4>Elections officiels :</h4>
+        <div
+          v-for="(election, index) in electionsOfficiel"
+          v-bind:key="index"
+          class="election-items"
+        >
+          <p class="name-election">{{ election.nom }}</p>
+          <div class="progress">
+            <div class="progress-value"></div>
+          </div>
+          <div class="btns">
+            <button v-on:click="goVote(election)" class="btn-home">Vote</button>
+            <button v-on:click="goShowResultats(election)" class="btn-home">
+              Results
+            </button>
           </div>
         </div>
         <div class="div-btn-btm">
-          <button class="btn-home-btm" v-on:click="goJoinElection">Join an election</button>
-          <button class="btn-home-btm" v-on:click="goCreateElection">Create an election</button>
+          <button class="btn-home-btm" v-on:click="goJoinElection">
+            Join an election
+          </button>
+          <button class="btn-home-btm" v-on:click="goCreateElection">
+            Create an election
+          </button>
         </div>
       </div>
     </div>
@@ -88,105 +178,112 @@ export default {
       electionsInformel: [],
       voted: "Not voted",
       elect: Object,
-      activeClass: 'is-visible',
-      active: null
+      activeClass: "is-visible",
+      active: null,
     };
   },
-  computed: {
-
-  },
+  computed: {},
   methods: {
-
     //show election
     showElection() {
       http
-          .get("/election/getElection")
-          .then(response => {
-            response.data.forEach(p => {
-              this.$store.state.actualClient.autorisedElections.forEach(elec => {
-                if (elec.election == p._id){
-                  if(p.type == "informel"){
+        .get("/election/getElection")
+        .then((response) => {
+          response.data.forEach((p) => {
+            this.$store.state.actualClient.autorisedElections.forEach(
+              (elec) => {
+                if (elec.election == p._id) {
+                  if (p.type == "informel") {
                     this.electionsInformel.push(p);
                   }
-                  if(p.type == "officiel"){
+                  if (p.type == "officiel") {
                     this.electionsOfficiel.push(p);
                   }
                 }
-              })
-            });
-          })
-          .catch(e => {
-            console.log(e);
+              }
+            );
           });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     },
     goVote(election) {
       const elect = {
         electionData: election,
-        user: this.$store.state.actualClient
-      }
+        user: this.$store.state.actualClient,
+      };
       http
-          .post("/votes/getAllVotesOfElection", elect)
-          .then(response => {
-            if(response.data.length == 0){
-              this.$store.state.actualElection = election;
-              this.$router.push("/InterfaceVoteVue");
-            }
-            else{
-              response.data.forEach(r => {
-                console.log(r.idUser);
-                console.log(this.$store.state.actualClient._id);
-                  if(r.idUser != this.$store.state.actualClient._id){
-                    this.$store.state.actualElection = election;
-                    this.$router.push("/InterfaceVoteVue");
-                  }
-                  else {
-                    this.voted = "Voted";
-                    alert("You have already voted !");
-                    this.$router.push("/HomePageVue");
-                  }
-              })
+        .post("/votes/getAllVotesOfElection", elect)
+        .then((response) => {
+          if (response.data.length == 0) {
+            this.$store.state.actualElection = election;
+            this.$router.push("/InterfaceVoteVue");
+          } else {
+            response.data.forEach((r) => {
+              console.log(r.idUser);
+              console.log(this.$store.state.actualClient._id);
+              if (r.idUser != this.$store.state.actualClient._id) {
+                this.$store.state.actualElection = election;
+                this.$router.push("/InterfaceVoteVue");
+              } else {
+                this.voted = "Voted";
+                alert("You have already voted !");
+                this.$router.push("/HomePageVue");
+              }
+            });
+          }
+        })
+        .catch((e) => {
+          if (e.response.status === 401) {
+            console.log(e);
+            alert("Not find this vote");
+          }
+        });
+    },
+    showVoted(election, index) {
+      const elect = {
+        electionData: election,
+        user: this.$store.state.actualClient,
+      };
+      console.log(elect);
+      http.post("/votes/getAllVotesOfElection", elect).then((response) => {
+        console.log(response.data);
+        response.data
+          .forEach((r) => {
+            console.log(r.idUser);
+            if (r.idUser == this.$store.state.actualClient._id) {
+              this.active = index;
             }
           })
-          .catch(e => {
+          .catch((e) => {
             if (e.response.status === 401) {
               console.log(e);
               alert("Not find this vote");
             }
           });
+      });
     },
-    showVoted(election, index){
-      const elect = {
-        electionData: election,
-        user: this.$store.state.actualClient
-      }
-      console.log(elect);
+    closeElection(election) {
       http
-          .post("/votes/getAllVotesOfElection", elect)
-          .then(response => {
-            console.log(response.data);
-            response.data.forEach(r => {
-              console.log(r.idUser);
-              if (r.idUser == this.$store.state.actualClient._id) {
-                this.active = index;
-              }
-            })
-                .catch(e => {
-                  if (e.response.status === 401) {
-                    console.log(e);
-                    alert("Not find this vote");
-                  }
-                });
-          });
+        .put("/election/closeElection", election)
+        .then((response) => {
+          alert("Election close !");
+          console.log(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     },
-    deleteElection(election){
+    deleteElection(election) {
       http
-          .post("/election/deleteElection/", election)
-          .then(response => {
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
+        .post("/election/deleteElection/", election)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     },
     goJoinElection() {
       this.$router.push("/JoinVoteVue");
@@ -195,34 +292,31 @@ export default {
       this.$router.push("/CreateElectionVue");
     },
     goShowResultats(election) {
-      this.$store.state.actualElection = election
+      this.$store.state.actualElection = election;
       this.$router.push("/ShowResultatsVue");
     },
     redirection() {
       if (this.$store.state.actualClient === null) {
         this.$router.push("/");
       }
-    }
+    },
   },
   mounted: function () {
     this.$nextTick(this.redirection);
     this.$nextTick(this.showElection);
-
   },
-  components: {Header2}
-}
+  components: { Header2 },
+};
 </script>
 
 <style scoped>
-
-.hidden{
+.hidden {
   display: none;
 }
 
-.is-visible{
+.is-visible {
   display: flex;
 }
-
 
 h1 {
   letter-spacing: -1px;
@@ -279,7 +373,8 @@ h4 {
   max-width: 80%;
   background: white;
   border-radius: 4px;
-  box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
+  box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px,
+    rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
   display: flex;
   flex-direction: column;
 }
@@ -309,14 +404,13 @@ h4 {
 
 @media (max-width: 770px) {
   .election-items .election-head {
-  flex-direction: column;
+    flex-direction: column;
   }
 
   .election-head {
     align-items: center;
     justify-content: center;
     align-items: center;
-    
   }
 }
 
@@ -326,7 +420,6 @@ h4 {
     flex-direction: column;
   }
 
-  
   .name-election {
     text-align: center;
   }
@@ -345,13 +438,10 @@ h4 {
   margin-right: 45px;
   margin-left: 45px;
   width: 90px;
-  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0.12) 0px 1px 1px 0px,
-  rgb(84, 105, 212) 0px 0px 0px 1px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, rgb(84, 105, 212) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
   color: rgb(84, 105, 212);
   font-weight: 600;
   border-radius: 4px;
@@ -370,13 +460,10 @@ h4 {
   background-color: rgb(84, 105, 212);
   width: 200px;
   margin-right: 45px;
-  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0.12) 0px 1px 1px 0px,
-  rgb(84, 105, 212) 0px 0px 0px 1px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, rgb(84, 105, 212) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
   color: #fff;
   font-weight: 600;
   border-radius: 4px;
@@ -406,7 +493,6 @@ h4 {
   display: none;
 }
 
-
 .loginbackground {
   min-height: 692px;
   position: fixed;
@@ -434,9 +520,11 @@ h4 {
 .loginbackground-gridContainer {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: [start] 1fr [left-gutter] (86.6px) [ 16 ] [ left-gutter ] 1 fr [ end ];
+  -ms-grid-columns: [start] 1fr [left-gutter] (86.6px) [ 16 ] [ left-gutter ] 1
+    fr [ end ];
   grid-template-columns: [start] 1fr [left-gutter] repeat(16, 86.6px) [left-gutter] 1fr [end];
-  -ms-grid-rows: [top] 1fr [top-gutter] (64px) [ 8 ] [ bottom-gutter ] 1 fr [ bottom ];
+  -ms-grid-rows: [top] 1fr [top-gutter] (64px) [ 8 ] [ bottom-gutter ] 1 fr [
+    bottom ];
   grid-template-rows: [top] 1fr [top-gutter] repeat(8, 64px) [bottom-gutter] 1fr [bottom];
   justify-content: center;
   margin: 0 -2%;
@@ -541,5 +629,4 @@ h4 {
     transform: translateX(0px);
   }
 }
-
 </style>
