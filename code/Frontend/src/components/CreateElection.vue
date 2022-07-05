@@ -388,7 +388,11 @@ export default {
         });
     },
     addChoix() {
-      this.choix.push({ value: "" });
+      if (this.choix.length >= 9) {
+        alert("Trop de choix !");
+      } else {
+        this.choix.push({ value: "" });
+      }
     },
 
     delChoix() {
