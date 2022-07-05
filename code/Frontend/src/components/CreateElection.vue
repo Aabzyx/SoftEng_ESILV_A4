@@ -129,6 +129,8 @@
                         <input
                           name="nombreVotants"
                           type="number"
+                          min="2"
+                          :max="maxLimite"
                           v-model="limite"
                         />
                       </div>
@@ -287,7 +289,7 @@ export default {
       nom: "",
       description: "",
       urlImage: "",
-      limite: Number,
+      limite: 10,
       typeElection: "informel",
       choix: [
         { value: "", desc: "", img: "" },
@@ -300,7 +302,17 @@ export default {
       code: "",
     };
   },
-  computed: {},
+  computed: {
+    maxLimite() {
+      if (this.$store.state.actualClient.subscription == "free") {
+        return 10;
+      } else if (this.$store.state.actualClient.subscription == "premium") {
+        return 100;
+      } else {
+        return 500;
+      }
+    },
+  },
   methods: {
     async search(input) {
       let url =
