@@ -176,15 +176,25 @@ export default {
         .post("election/chercherCode", leTout)
         .then((r) => {
           console.log("election =", r.data);
-          const arrTest = this.$store.state.actualClient.autorisedElections.filter(o => o.election === r.data._id)
-          if (arrTest.length === 0
-          ) {
+          const arrTest =
+            this.$store.state.actualClient.autorisedElections.filter(
+              (o) => o.election === r.data._id
+            );
+          if (arrTest.length === 0) {
             if (r.data.nbElecteurs < r.data.limite) {
               const newElection = {
                 election: r.data._id,
-                bool: false
-              }
-              this.$store.state.actualClient.autorisedElections.push(newElection);
+                bool: false,
+              };
+              //ajout du nombre d'électeur
+              r.data.nbElecteurs++;
+              http.put("election/addElector", r.data).then((response) => {
+                console.log("updated election:", response);
+              });
+              //fin ajout du nombre d'électeur
+              this.$store.state.actualClient.autorisedElections.push(
+                newElection
+              );
               http
                 .put("user/joinVote", this.$store.state.actualClient)
                 .then((response) => {

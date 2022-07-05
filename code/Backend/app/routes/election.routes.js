@@ -12,6 +12,9 @@ module.exports = function(app) {
 
     app.delete('/api/election/deleteElection/:id', election.deleteElection);
 
+    //add number of elector in election
+    app.put('/api/election/addElector', election.addElector);
+
     //updatelections
     app.put('/api/election/updateElection', election.updateElection)
 }

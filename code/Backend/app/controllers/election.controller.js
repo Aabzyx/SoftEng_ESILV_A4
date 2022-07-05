@@ -7,11 +7,11 @@ const Vote = require("../models/vote.model");
 
 
 exports.chercher = (req, res) => {
-    Election.findOne({code: req.body.code}, function (err, election) {
+    Election.findOne({nom: req.body.nom}, function (err, election) {
         if (election == null){
             res.status(401).json({ message: 'Non trouvé' });
         }
-        else if (election.nom === req.body.nom){
+        else if (election.code === req.body.code){
                 res.send(election);
             }
             else {
@@ -97,6 +97,34 @@ exports.deleteElection = (req, res) => {
                   req.params.id
           });
       });
+}
+
+//ajouter nombre electeur à l'election
+exports.addElector = (req, res) => {
+    Election.findOneAndUpdate({_id: req.body._id},
+        {$set : {nbElecteurs: req.body.nbElecteurs}},{new: true})
+        .then(elec => {
+            console.log(elec);
+            if(!elec) {
+                return res.status(404).send({
+                    message: "User not found with id "+ req.body._id
+                });
+            }
+            res.send(elec);
+        })
+        .catch(err => {
+            if(err.kind === 'ObjectId') {
+                return res.status(404).send({
+                    message: "User not found with id " +
+                        req.body._id
+                });
+            }
+            return res.status(500).send({
+
+                message: "Error updating user with id " +
+                    req.body._id
+            });
+        });
 }
 
 //ajouter vote à l'election
