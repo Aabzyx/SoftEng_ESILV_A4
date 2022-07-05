@@ -1,4 +1,5 @@
 // import User model
+
 const User = require("../models/user.model");
 
 // import bcryptjs - hashing function
@@ -83,7 +84,7 @@ exports.updateTypeAcount = (req, res) => {
 
 //Upadte elections
 exports.updateAutorisedElections = (req, res) => {
-    console.log(req.body)
+    console.log("here", req.body)
     User.findOneAndUpdate({ _id: req.body._id},
         {$set : {autorisedElections: req.body.autorisedElections, createdElections: req.body.createdElections}},{new: true})
         .then(user => {
@@ -107,6 +108,18 @@ exports.updateAutorisedElections = (req, res) => {
 
                 message: "Error updating user with id " +
                     req.body._id
+            });
+        });
+}
+
+exports.getAllUsers = (req, res) => {
+    User.find()
+        .then(users => {
+            res.send(users);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message
             });
         });
 }

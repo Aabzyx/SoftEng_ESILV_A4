@@ -247,29 +247,6 @@ export default {
           }
         });
     },
-    showVoted(election, index) {
-      const elect = {
-        electionData: election,
-        user: this.$store.state.actualClient,
-      };
-      console.log(elect);
-      http.post("/votes/getAllVotesOfElection", elect).then((response) => {
-        console.log(response.data);
-        response.data
-          .forEach((r) => {
-            console.log(r.idUser);
-            if (r.idUser == this.$store.state.actualClient._id) {
-              this.active = index;
-            }
-          })
-          .catch((e) => {
-            if (e.response.status === 401) {
-              console.log(e);
-              alert("Not find this vote");
-            }
-          });
-      });
-    },
     closeElection(election) {
       election.isActive = false;
       http
@@ -287,11 +264,58 @@ export default {
         .post("/election/deleteElection/", election)
         .then((response) => {
           console.log(response.data);
+          console.log("before", this.$store.state.actualClient.createdElections);
+          this.$store.state.actualClient.createdElections = this.$store.state.actualClient.createdElections.filter((e) => e !== election._id )
+          console.log("after", this.$store.state.actualClient.createdElections);
+          console.log("test", this.$store.state.actualClient.createdElections);
+          const newUser = {
+            _id : this.$store.state.actualClient._id,
+            autorisedElections : this.$store.state.actualClient.autorisedElections,
+            createdElections: this.$store.state.actualClient.createdElections
+          }
+          console.log("newUser = ",newUser);
+          http
+              .put("user/joinVote", newUser)
+              .then((e) => {
+                console.log("response :", e);
+                this.$router.push("/HomePageVue");
+              })
+              .catch((e) => {
+                console.log(e);
+              });
+          http
+              .get("user/getUsers")
+              .then((response) => {
+                console.log(response.data);
+                  response.data.forEach((r) => {
+                    console.log(r)
+                    r.autorisedElections = r.autorisedElections.filter(e => e.election !== election._id);
+
+                    http
+                        .put("user/joinVote", r)
+                        .then((e) => {
+                          console.log("response :", e);
+                          this.$router.push("/HomePageVue");
+                        })
+                        .catch((e) => {
+                            console.log(e);
+                        });
+                  })
+              })
+              .catch((e) => {
+                console.log(e);
+              });
         })
         .catch((e) => {
           console.log(e);
         });
     },
+   /* deleteVotes(election){
+      http
+          .post()
+          .then()
+          .catch()
+    },*/
     goJoinElection() {
       this.$router.push("/JoinVoteVue");
     },

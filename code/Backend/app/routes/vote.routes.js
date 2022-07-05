@@ -5,7 +5,7 @@ module.exports = function(app) {
     app.post('/api/vote/createVote', vote.create);
 
     //Delete a vote
-    app.delete('/api/vote/delete/:id', vote.delete);
+    app.post('/api/vote/delete/', vote.delete);
 
     //Get one vote
     app.get('/api/vote/getVote/:id',vote.getVote);

@@ -19,12 +19,12 @@ exports.create = (req, res) => {
 
 //DELETE a vote
 exports.delete = (req,res) => {
-    Vote.findByIdAndRemove(req.params.id)
+    Vote.findByIdAndRemove(req.body.id)
         .then(vote => {
             if(!vote){
                 return res.status(404).send({
                     message: "Vote not found with id " +
-                        req.params.id
+                        req.body.id
                 });
             }
             res.send({message: "Vote deleted successfully!"});

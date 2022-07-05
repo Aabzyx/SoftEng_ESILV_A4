@@ -10,7 +10,7 @@ module.exports = function(app) {
     // get all elections
     app.get('/api/election/getElection', election.findAll);
 
-    app.delete('/api/election/deleteElection/:id', election.deleteElection);
+    app.post('/api/election/deleteElection/', election.deleteElection);
 
     //add number of elector in election
     app.put('/api/election/addElector', election.addElector);

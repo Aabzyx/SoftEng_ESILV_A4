@@ -74,12 +74,12 @@ exports.findAll = (req, res) => {
 };
 
 exports.deleteElection = (req, res) => {
-  Election.findByIdAndRemove(req.params._id)
+  Election.findByIdAndRemove(req.body._id)
       .then(election => {
           if(!election){
               return res.status(404).send({
                   message: "Election not found with id " +
-                      req.params.id
+                      req.body.id
               });
           }
           res.send({message: "Election deleted successfully!"});
@@ -89,12 +89,12 @@ exports.deleteElection = (req, res) => {
           if (err.kind === 'ObjectId' || err.name === 'NotFound') {
               return res.status(404).send({
                   message: "Election not found with id " +
-                      req.params.id
+                      req.body.id
               });
           }
           return res.status(500).send({
               message: "Could not delete election with id " +
-                  req.params.id
+                  req.body.id
           });
       });
 }
