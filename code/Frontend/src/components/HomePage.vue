@@ -94,7 +94,13 @@
             </div>
           </div>
           <div class="btns">
-            <button v-on:click="goVote(election)" class="btn-home">Vote</button>
+            <button
+              v-on:click="goVote(election)"
+              class="btn-home"
+              v-show="election.isActive"
+            >
+              Vote
+            </button>
             <button
               v-on:click="closeElection(election)"
               class="btn-home"
