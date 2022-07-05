@@ -180,19 +180,30 @@
                           style="width: 200px"
                         >
                           <Slide
-                            v-for="slide in this.arrayCarrousel[index]"
+                            v-for="(slide, indexBis) in this.arrayCarrousel[
+                              index
+                            ]"
                             :key="slide"
                             style="display: flex; flex-direction: column"
                           >
                             <img
-                              :src="slide"
+                              :src="this.arrayCarrousel[index][indexBis]"
                               style="width: 100px; height: 100px"
                               class="carousel__item"
                             />
                             <button
                               class="buttonTamere"
                               type="button"
-                              v-on:click="confirmerChoix(slide, index)"
+                              v-on:click="
+                                confirmerChoix(
+                                  this.arrayCarrousel[index][
+                                    indexBis -
+                                      this.arrayCarrousel[index].length +
+                                      1
+                                  ],
+                                  index
+                                )
+                              "
                               style="display: none"
                             >
                               OK
@@ -216,10 +227,7 @@
                           class="search"
                           type="button"
                           v-on:click="
-                            search({
-                              input: choice.value,
-                              i: index,
-                            })
+                            search({ input: choice.value, index: index })
                           "
                         >
                           Search
@@ -315,6 +323,7 @@ export default {
   },
   methods: {
     async search(input) {
+      console.log(input.input);
       let url =
         "https://api.unsplash.com/search/photos?query=" +
         input.input +
@@ -330,7 +339,21 @@ export default {
           });
         });
       console.log(memory);
-      this.arrayCarrousel.push(memory);
+      if (memory.length > 0) {
+        if (input.index == this.arrayCarrousel.length) {
+          this.arrayCarrousel.push([]);
+          this.arrayCarrousel[input.index] = memory;
+        } else if (input.index < this.arrayCarrousel.length) {
+          this.arrayCarrousel[input.index] = memory;
+        } else {
+          while (input.index > this.arrayCarrousel.length) {
+            this.arrayCarrousel.push([]);
+          }
+          this.arrayCarrousel[input.index] = memory;
+        }
+        //this.arrayCarrousel.pop();
+        //this.arrayCarrousel.push(memory);
+      }
     },
     confirmerChoix(slide, index) {
       this.choix[index].img = slide;
