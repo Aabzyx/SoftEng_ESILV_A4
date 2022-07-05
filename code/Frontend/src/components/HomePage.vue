@@ -283,6 +283,28 @@ export default {
               .catch((e) => {
                 console.log(e);
               });
+          const elect = {
+            electionData: election,
+            user: this.$store.state.actualClient,
+          };
+          http
+              .post("votes/getAllVotesOfElection", elect)
+              .then((response) => {
+                response.data.forEach((r) => {
+                    http
+                        .post("/vote/delete/", r._id)
+                        .then((response) =>{
+                          console.log(response.data);
+                        })
+                        .catch((e) => {
+                          console.log(e);
+                        });
+                })
+              })
+              .catch((e) => {
+                console.log(e);
+              });
+
           http
               .get("user/getUsers")
               .then((response) => {
@@ -300,6 +322,20 @@ export default {
                         .catch((e) => {
                             console.log(e);
                         });
+
+                    if(r.createdElections.includes(election._id)){
+                        r.createdElections = r.createdElections.filter(e => e !== election._id);
+                        console.log(r);
+                      http
+                          .put("user/joinVote", r)
+                          .then((e) => {
+                            console.log("response :", e);
+                            this.$router.push("/HomePageVue");
+                          })
+                          .catch((e) => {
+                            console.log(e);
+                          });
+                    }
                   })
               })
               .catch((e) => {

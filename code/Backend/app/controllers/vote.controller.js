@@ -34,12 +34,12 @@ exports.delete = (req,res) => {
             if (err.kind === 'ObjectId' || err.name === 'NotFound') {
                 return res.status(404).send({
                     message: "Vote not found with id " +
-                        req.params.id
+                        req.body.id
                 });
             }
             return res.status(500).send({
                 message: "Could not delete vote with id " +
-                    req.params.id
+                    req.body.id
             });
         });
 };
