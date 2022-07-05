@@ -19,7 +19,7 @@
           <p v-else>No description</p>
         </div>
       </div>
-        <button type="button" v-on:click="vote(choice(choix))">Vote</button>
+        <button id="vote-button" type="button" v-on:click="vote(choice(choix))">Vote</button>
     <!-- </div>
       <div class="vote-item" v-for="(choix, index) in $store.state.actualElection.choix" v-bind:key="index">
         <img :src="choix.urlImg">
@@ -130,27 +130,33 @@ export default {
     rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
   display: flex;
   flex-direction: column;
+  margin-top: 60px;
+  padding: 20px 0px;
 }
 
   .vote-container {
     display: flex;
     flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .vote-item {
     width: 90%;
-    max-width: 700px; 
+    max-width: 400px; 
     min-width: 250px;
-    min-height: 50px;
+    min-height: 60px;
     margin: auto;
     margin-bottom: 10px;
     background-color: #5469d4;
     border-radius: 5px;
-    padding-right: 20px;
-    padding-left: 5px;
+    /* padding-right: 20px;
+    padding-left: 5px; */
     display: flex;
     flex-direction: column;
     align-items: center; 
+    justify-content: center;
     /* align-items: center; */
   }
 
@@ -158,18 +164,35 @@ export default {
     display: flex; 
     width : 100%;
     height: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     background-color : #5469d4;
     align-items: center; 
+    text-align: center;
+    justify-content: center;
   }
 
-button {
-  background-color: #5469d4;
-  border : none;
-  cursor : pointer;
-}
+  .vote-item .main-data label{
+    margin: auto;
+  }
+
+
+  button {
+    background-color: #5469d4;
+    border : none;
+    cursor : pointer;
+  }
+
+  #vote-button {
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    margin-top:30px ;
+  }
 
   .vote-item .description-data {
     width: auto;
+    border-radius: 5px;
     overflow-wrap: break-word;
     overflow: hidden;
     word-wrap: break-word;
@@ -177,16 +200,17 @@ button {
   }
 
 .vote-item img {
-  height: 45px;
-  width: 45px;
+  height: 90px;
+  width: 90px;
+  margin: 20px 0px;
   overflow: hidden;
   object-fit: cover;
   border-radius: 5px;
   margin-right: 10px;
+  border-image-width: 5px;
+  border: black;
 }
-/* .formbg .vote-item input {
-    float: right;
-  } */
+
 
 .title {
   margin: auto;
@@ -215,11 +239,11 @@ button {
   color: #fff;
   cursor: pointer;
   /* display: inline-block; */
-  margin-right: 0.5rem;
+  margin-right: 20px;
   outline: none;
   position: relative;
   z-index: 1000;
-  margin-left: auto;
+  /* margin-left: auto; */
 }
 .option-input:hover {
   background: #9faab7;
@@ -281,16 +305,34 @@ input[name="submit"] {
   margin: 10px auto 20px auto;
 }
 
+
+
 .vote-item.closed .description-data{
   display : none;
-  transition: 0.5s
-  
+  /* transition: 0.5s */
+}
+
+.vote-item.closed .main-data{
+  border-radius: 5px;
+}
+
+.vote-item .description-data {
+  width: 100%;
+  color: white;
+  background-color: #212d63;
+  display: flex;
+}
+
+.vote-item .description-data p {
+  background-color: #212d63;
+  margin: 0px 10px;
 }
 
 .rotate{
     -moz-transition: all 0.2s linear;
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
+    margin: 0px 10px;
 }
 
 .rotate.down{
