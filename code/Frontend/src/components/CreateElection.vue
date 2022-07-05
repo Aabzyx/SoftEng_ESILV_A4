@@ -160,7 +160,7 @@
                       v-for="(choice, index) in choix"
                       :key="choice"
                   >
-                    <div class="choix">
+                    <div class="choix anim-creation">
                       <label class="label_choix">choix {{ index + 1 }}</label
                       ><br />
                       <div class="image" style="display: flex; justify-content: center; align-items: center; flex-direction: column">
@@ -175,20 +175,24 @@
                         </Carousel>
                         <br>
                         <br>
-                        <button type="button" v-on:click="search({
+
+                      </div>
+                      <div class="input-button-serach">
+                        <input
+                            name="nom_du_choix"
+                            type="text"
+                            placeholder="Nom"
+                            v-model="choice.value"
+                        />
+                        <button class="search" type="button" v-on:click="search({
                               input: choice.value,
                               i: index,
                             })">
                           Search
                         </button>
-                      </div>
 
-                      <input
-                          name="nom_du_choix"
-                          type="text"
-                          placeholder="Nom"
-                          v-model="choice.value"
-                      /><br />
+                      </div><br />
+
                       <label class="label_choix">Description du choix :</label
                       ><br />
                       <textarea
@@ -199,20 +203,26 @@
                       />
                     </div>
                   </div>
-                  <button
-                      class="button-A-E"
-                      type="button"
-                      value="Ajouter"
-                      v-on:click="addChoix"
-                  >
-                    Ajouter
-                  </button>
-                  <input
-                      class="button-A-E"
-                      type="button"
-                      value="Enlever"
-                      v-on:click="delChoix"
-                  />
+                  <div class="div-button-A-E">
+<!--                  <button-->
+<!--                      class="button-A-E"-->
+<!--                      type="button"-->
+<!--                      value="Ajouter"-->
+<!--                      v-on:click="addChoix"-->
+<!--                  >-->
+<!--                    Ajouter-->
+<!--                  </button>-->
+                    <div class="button_plus" v-on:click="addChoix"></div>
+                  </div>
+                  <div class="div-button-A-E">
+<!--                  <input-->
+<!--                      class="button-A-E"-->
+<!--                      type="button"-->
+<!--                      value="Enlever"-->
+<!--                      v-on:click="delChoix"-->
+<!--                  />-->
+                    <div class="button_moins" v-on:click="delChoix"></div>
+                  </div>
                 </div>
                 <div class="field padding-bottom--24">
                   <input
@@ -349,8 +359,14 @@ export default {
     },
 
     delChoix() {
-      console.log("pop");
-      this.choix.pop();
+      if (this.choix.length <= 2){
+        alert("impossible")
+      }
+      else {
+        console.log("pop");
+        this.choix.pop();
+      }
+
     },
   },
   mounted: function () {
@@ -628,10 +644,19 @@ input[name="urlImage"] {
 
 input[name="nom_du_choix"] {
   width: 150px;
-  display: block;
-  margin: 0 auto;
+  /*display: block;*/
+  margin-left: 25px;
+  margin-right: 5px;
   text-align: center;
+  border-radius: 5px;
+  border-color: transparent;
 }
+
+.search{
+  border-color: transparent;
+  border-radius: 5px;
+}
+
 
 .label_choix {
   display: block;
@@ -646,20 +671,7 @@ input[name="nom_du_choix"] {
   margin: 0 auto;
 }
 
-.les_fleches {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  margin: 10px;
-}
 
-.fleche {
-  width: 27px;
-  height: 27px;
-  background: white;
-  border: transparent;
-  border-radius: 8px;
-}
 
 .Dchoix {
   width: 80%;
@@ -667,64 +679,40 @@ input[name="nom_du_choix"] {
   margin-right: 10%;
 }
 
-.button-A-E {
+.div-button-A-E {
   flex-direction: row;
   margin: 25px;
   height: 450px;
   width: 250px;
   border-radius: 8px;
   border-color: transparent;
-  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+  /*box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,*/
+  /*rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,*/
+  /*rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,*/
+  /*rgba(0, 0, 0, 0) 0px 0px 0px 0px;*/
+  background: transparent;
 }
 
-.button_plus {
-  position: absolute;
-  width: 35px;
-  height: 35px;
-  background: #fff;
-  cursor: pointer;
-  border: 2px solid #095776;
+.button-A-E:hover{
+  border-color: #1c57b5;
 
-  /* Mittig */
-  top: 50%;
-  left: 50%;
 }
 
-.button_plus:after {
-  content: "";
-  position: absolute;
-  transform: translate(-50%, -50%);
-  height: 4px;
-  width: 50%;
-  background: #095776;
-  top: 50%;
-  left: 50%;
+.anim-creation{
+  animation: myAnim 1s ease 0s 1 normal forwards;
 }
 
-.button_plus:before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #095776;
-  height: 50%;
-  width: 4px;
+@keyframes myAnim {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
-.button_plus:hover:before,
-.button_plus:hover:after {
-  background: #fff;
-  transition: 0.2s;
-}
 
-.button_plus:hover {
-  background-color: #095776;
-  transition: 0.2s;
-}
 
 .carousel__slide > .carousel__item {
   transform: scale(1);
@@ -744,4 +732,57 @@ input[name="nom_du_choix"] {
 .carousel__slide--active > .carousel__item {
   transform: scale(1.1);
 }
+
+.button_plus, .button_moins {
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  cursor: pointer;
+  border: 2px solid #095776;
+  font-size: 30px;
+  margin-left: 50%;
+  margin-top: 80%;
+
+
+}
+
+.button_moins:before {
+  content: '';
+  display: block;
+  transform: translate(-50%, -50%);
+  margin-left: 50%;
+  margin-top: 50%;
+  z-index: 9;
+  height: 4px;
+  width: 50%;
+  background: #095776;
+  /*top: 50%;*/
+  /*left: 50%;*/
+}
+
+.button_plus:before {
+  content: '';
+  display: block;
+  z-index: 100;
+  /*top: 50%;*/
+  /*left: 50%;*/
+  transform: translate(-50%, -50%);
+  background: #095776;
+  margin-left: 50%;
+  margin-top: 50%;
+  height: 50%;
+  width: 4px;
+}
+
+.button_plus:hover:before,
+.button_plus:hover:after {
+  background: #fff;
+  transition: 0.2s;
+}
+
+.button_plus:hover {
+  background-color: #095776;
+  transition: 0.2s;
+}
+
 </style>
