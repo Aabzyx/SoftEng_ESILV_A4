@@ -2,18 +2,18 @@
   <Header2 v-if="$store.state.actualClient !== null"></Header2>
   <div class="login-root">
     <div
-        class="box-root flex-flex flex-direction--column"
-        style="min-height: 100vh; flex-grow: 1"
+      class="box-root flex-flex flex-direction--column"
+      style="min-height: 100vh; flex-grow: 1"
     >
       <div class="loginbackground box-background--white padding-top--64">
         <div class="loginbackground-gridContainer">
           <div
-              class="box-root flex-flex"
-              style="grid-area: top / start / 8 / end"
+            class="box-root flex-flex"
+            style="grid-area: top / start / 8 / end"
           >
             <div
-                class="box-root"
-                style="
+              class="box-root"
+              style="
                 background-image: linear-gradient(
                   white 0%,
                   rgb(247, 250, 252) 33%
@@ -24,72 +24,72 @@
           </div>
           <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5">
             <div
-                class="box-root box-divider--light-all-2 animationLeftRight tans3s"
-                style="flex-grow: 1"
+              class="box-root box-divider--light-all-2 animationLeftRight tans3s"
+              style="flex-grow: 1"
             ></div>
           </div>
           <div
-              class="box-root flex-flex"
-              style="grid-area: 6 / start / auto / 2"
+            class="box-root flex-flex"
+            style="grid-area: 6 / start / auto / 2"
           >
             <div
-                class="box-root box-background--blue800"
-                style="flex-grow: 1"
+              class="box-root box-background--blue800"
+              style="flex-grow: 1"
             ></div>
           </div>
           <div
-              class="box-root flex-flex"
-              style="grid-area: 7 / start / auto / 4"
+            class="box-root flex-flex"
+            style="grid-area: 7 / start / auto / 4"
           >
             <div
-                class="box-root box-background--blue animationLeftRight"
-                style="flex-grow: 1"
+              class="box-root box-background--blue animationLeftRight"
+              style="flex-grow: 1"
             ></div>
           </div>
           <div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6">
             <div
-                class="box-root box-background--gray100 animationLeftRight tans3s"
-                style="flex-grow: 1"
+              class="box-root box-background--gray100 animationLeftRight tans3s"
+              style="flex-grow: 1"
             ></div>
           </div>
           <div
-              class="box-root flex-flex"
-              style="grid-area: 2 / 15 / auto / end"
+            class="box-root flex-flex"
+            style="grid-area: 2 / 15 / auto / end"
           >
             <div
-                class="box-root box-background--cyan200 animationRightLeft tans4s"
-                style="flex-grow: 1"
+              class="box-root box-background--cyan200 animationRightLeft tans4s"
+              style="flex-grow: 1"
             ></div>
           </div>
           <div
-              class="box-root flex-flex"
-              style="grid-area: 3 / 14 / auto / end"
+            class="box-root flex-flex"
+            style="grid-area: 3 / 14 / auto / end"
           >
             <div
-                class="box-root box-background--blue animationRightLeft"
-                style="flex-grow: 1"
+              class="box-root box-background--blue animationRightLeft"
+              style="flex-grow: 1"
             ></div>
           </div>
           <div class="box-root flex-flex" style="grid-area: 4 / 17 / auto / 20">
             <div
-                class="box-root box-background--gray100 animationRightLeft tans4s"
-                style="flex-grow: 1"
+              class="box-root box-background--gray100 animationRightLeft tans4s"
+              style="flex-grow: 1"
             ></div>
           </div>
           <div class="box-root flex-flex" style="grid-area: 5 / 14 / auto / 17">
             <div
-                class="box-root box-divider--light-all-2 animationRightLeft tans3s"
-                style="flex-grow: 1"
+              class="box-root box-divider--light-all-2 animationRightLeft tans3s"
+              style="flex-grow: 1"
             ></div>
           </div>
         </div>
       </div>
       <div
-          class="box-root padding-top--24 flex-flex flex-direction--column"
-          style="flex-grow: 1; z-index: 9"
+        class="box-root padding-top--24 flex-flex flex-direction--column"
+        style="flex-grow: 1; z-index: 9"
       >
         <div
-            class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center"
+          class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center"
         >
           <h1>EKIP VOTE</h1>
         </div>
@@ -103,10 +103,10 @@
                     <label><b>Nom de l'election :</b></label
                     ><br />
                     <input
-                        type="text"
-                        name="nom"
-                        placeholder="Nom de l'election"
-                        v-model="nom"
+                      type="text"
+                      name="nom"
+                      placeholder="Nom de l'election"
+                      v-model="nom"
                     />
                   </div>
 
@@ -115,10 +115,10 @@
                       <label><b>URL logo :</b></label
                       ><br />
                       <input
-                          name="urlImage"
-                          placeholder="Entrez l'URL"
-                          type="url"
-                          v-model="urlImage"
+                        name="urlImage"
+                        placeholder="Entrez l'URL"
+                        type="url"
+                        v-model="urlImage"
                       />
                     </div>
                   </div>
@@ -127,9 +127,9 @@
                       <div>
                         <label><b>Nombre de votants :</b></label>
                         <input
-                            name="nombreVotants"
-                            type="number"
-                            v-model="limite"
+                          name="nombreVotants"
+                          type="number"
+                          v-model="limite"
                         />
                       </div>
                     </div>
@@ -139,11 +139,11 @@
                   <label><b>Description :</b></label
                   ><br />
                   <textarea
-                      type="text"
-                      name="description"
-                      class="description"
-                      placeholder="Description"
-                      v-model="description"
+                    type="text"
+                    name="description"
+                    class="description"
+                    placeholder="Description"
+                    v-model="description"
                   ></textarea>
                 </div>
 
@@ -155,17 +155,17 @@
 
                 <div class="flex_deux">
                   <div
-                      class="les_choix"
-                      id="les_choix"
-                      v-for="(choice, index) in choix"
-                      :key="choice"
+                    class="les_choix"
+                    id="les_choix"
+                    v-for="(choice, index) in choix"
+                    :key="choice"
                   >
                     <div class="choix anim-creation">
                       <label class="label_choix">choix {{ index + 1 }}</label
                       ><br />
                       <div
-                          class="image"
-                          style="
+                        class="image"
+                        style="
                           display: flex;
                           justify-content: center;
                           align-items: center;
@@ -173,25 +173,25 @@
                         "
                       >
                         <Carousel
-                            :itemsToShow="1.5"
-                            :wrapAround="true"
-                            style="width: 200px"
+                          :itemsToShow="1.5"
+                          :wrapAround="true"
+                          style="width: 200px"
                         >
                           <Slide
-                              v-for="slide in this.arrayCarrousel[index]"
-                              :key="slide"
-                              style="display: flex; flex-direction: column"
+                            v-for="slide in this.arrayCarrousel[index]"
+                            :key="slide"
+                            style="display: flex; flex-direction: column"
                           >
                             <img
-                                :src="slide"
-                                style="width: 100px; height: 100px"
-                                class="carousel__item"
+                              :src="slide"
+                              style="width: 100px; height: 100px"
+                              class="carousel__item"
                             />
                             <button
-                                class="buttonTamere"
-                                type="button"
-                                v-on:click="confirmerChoix(slide, index)"
-                                style="display: none"
+                              class="buttonTamere"
+                              type="button"
+                              v-on:click="confirmerChoix(slide, index)"
+                              style="display: none"
                             >
                               OK
                             </button>
@@ -205,15 +205,15 @@
                       </div>
                       <div class="input-button-serach">
                         <input
-                            name="nom_du_choix"
-                            type="text"
-                            placeholder="Nom"
-                            v-model="choice.value"
+                          name="nom_du_choix"
+                          type="text"
+                          placeholder="Nom"
+                          v-model="choice.value"
                         />
                         <button
-                            class="search"
-                            type="button"
-                            v-on:click="
+                          class="search"
+                          type="button"
+                          v-on:click="
                             search({
                               input: choice.value,
                               i: index,
@@ -228,10 +228,10 @@
                       <label class="label_choix">Description du choix :</label
                       ><br />
                       <textarea
-                          type="text"
-                          placeholder="Description"
-                          class="description Dchoix"
-                          v-model="choice.desc"
+                        type="text"
+                        placeholder="Description"
+                        class="description Dchoix"
+                        v-model="choice.desc"
                       />
                     </div>
                   </div>
@@ -258,10 +258,10 @@
                 </div>
                 <div class="field padding-bottom--24">
                   <input
-                      type="button"
-                      name="submit"
-                      value="Continue"
-                      v-on:click="createElection"
+                    type="button"
+                    name="submit"
+                    value="Continue"
+                    v-on:click="createElection"
                   />
                 </div>
               </form>
@@ -304,19 +304,19 @@ export default {
   methods: {
     async search(input) {
       let url =
-          "https://api.unsplash.com/search/photos?query=" +
-          input.input +
-          "&per_page=30&client_id=U8gb60YrrIRNvvaC7AalrQV9wgXdGQ3qEqVC1rXJegc";
+        "https://api.unsplash.com/search/photos?query=" +
+        input.input +
+        "&per_page=30&client_id=U8gb60YrrIRNvvaC7AalrQV9wgXdGQ3qEqVC1rXJegc";
       let memory = new Array();
       await fetch(url)
-          .then(async function (data) {
-            return await data.json();
-          })
-          .then(function (data) {
-            data.results.forEach((photo) => {
-              memory.push(photo.urls.regular);
-            });
+        .then(async function (data) {
+          return await data.json();
+        })
+        .then(function (data) {
+          data.results.forEach((photo) => {
+            memory.push(photo.urls.regular);
           });
+        });
       console.log(memory);
       this.arrayCarrousel.push(memory);
     },
@@ -350,45 +350,49 @@ export default {
         code: this.code,
       };
       http
-          .post("/election/createElection", newElection)
-          .then((response) => {
-            console.log(response.data);
-            if (
-                !this.$store.state.actualClient.autorisedElections.includes(
-                    response.data._id
-                )
-            ) {
-              const newElection = {
-                election: response.data._id,
-                bool: false,
-              };
-              this.$store.state.actualClient.autorisedElections.push(newElection);
-              this.$store.state.actualClient.createdElections.push(
-                  response.data._id
-              );
-              console.log("user avant : ", this.$store.state.actualClient);
-              http
-                  .put("user/joinVote", this.$store.state.actualClient)
-                  .then((r) => {
-                    console.log("response :", r);
-                    alert("Le code pour rejoindre :" + response.data.code);
-                    this.$router.push("/HomePageVue");
-                  });
-            } else {
-              alert("You are already participating to this election");
-            }
-          })
-          .catch((e) => {
-            if (e.response.status === 500) {
-              alert("Invalid data");
-            } else {
-              alert("DB error");
-            }
-            console.log(e);
-          });
+        .post("/election/createElection", newElection)
+        .then((response) => {
+          console.log(response.data);
+          if (
+            !this.$store.state.actualClient.autorisedElections.includes(
+              response.data._id
+            )
+          ) {
+            const newElection = {
+              election: response.data._id,
+              bool: false,
+            };
+            this.$store.state.actualClient.autorisedElections.push(newElection);
+            this.$store.state.actualClient.createdElections.push(
+              response.data._id
+            );
+            console.log("user avant : ", this.$store.state.actualClient);
+            http
+              .put("user/joinVote", this.$store.state.actualClient)
+              .then((r) => {
+                console.log("response :", r);
+                alert("Le code pour rejoindre :" + response.data.code);
+                this.$router.push("/HomePageVue");
+              });
+          } else {
+            alert("You are already participating to this election");
+          }
+        })
+        .catch((e) => {
+          if (e.response.status === 500) {
+            alert("Invalid data");
+          } else {
+            alert("DB error");
+          }
+          console.log(e);
+        });
     },
     addChoix() {
-      this.choix.push({ value: "" });
+      if (this.choix.length >= 9) {
+        alert("Trop de choix !");
+      } else {
+        this.choix.push({ value: "" });
+      }
     },
 
     delChoix() {
@@ -412,7 +416,7 @@ export default {
   box-sizing: border-box;
   word-wrap: break-word;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-  Helvetica Neue, Ubuntu, sans-serif;
+    Helvetica Neue, Ubuntu, sans-serif;
 }
 
 template {
@@ -468,7 +472,7 @@ a {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: [start] 1fr [left-gutter] (86.6px) [16] [left-gutter] 1fr
-[end];
+    [end];
   grid-template-columns: [start] 1fr [left-gutter] repeat(16, 86.6px) [left-gutter] 1fr [end];
   -ms-grid-rows: [top] 1fr [top-gutter] (64px) [8] [bottom-gutter] 1fr [bottom];
   grid-template-rows: [top] 1fr [top-gutter] repeat(8, 64px) [bottom-gutter] 1fr [bottom];
@@ -525,7 +529,7 @@ a {
   background: white;
   border-radius: 4px;
   box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px,
-  rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
+    rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
 }
 
 span {
@@ -549,17 +553,17 @@ label {
   outline-color: rgb(84 105 212 / 0.5);
   background-color: rgb(255, 255, 255);
   box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 
 input[name="submit"] {
   background-color: rgb(84, 105, 212);
   box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, rgb(84, 105, 212) 0px 0px 0px 1px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+    rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, rgb(84, 105, 212) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
   color: #fff;
   font-weight: 600;
   cursor: pointer;
@@ -639,9 +643,9 @@ input[name="submit"] {
   border-radius: 4px;
   border: unset;
   box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px,
-  rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px,
-  rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px,
-  rgb(0 0 0 / 0%) 0px 0px 0px 0px;
+    rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px,
+    rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px,
+    rgb(0 0 0 / 0%) 0px 0px 0px 0px;
 }
 
 input[name="urlImage"] {
@@ -668,9 +672,9 @@ input[name="urlImage"] {
   min-width: 250px;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-  rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 
 input[name="nom_du_choix"] {
