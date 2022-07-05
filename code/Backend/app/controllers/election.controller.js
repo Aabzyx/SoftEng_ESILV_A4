@@ -107,7 +107,7 @@ exports.addElector = (req, res) => {
             console.log(elec);
             if(!elec) {
                 return res.status(404).send({
-                    message: "User not found with id "+ req.body._id
+                    message: "Election not found with id "+ req.body._id
                 });
             }
             res.send(elec);
@@ -115,13 +115,13 @@ exports.addElector = (req, res) => {
         .catch(err => {
             if(err.kind === 'ObjectId') {
                 return res.status(404).send({
-                    message: "User not found with id " +
+                    message: "Election not found with id " +
                         req.body._id
                 });
             }
             return res.status(500).send({
 
-                message: "Error updating user with id " +
+                message: "Error updating Election with id " +
                     req.body._id
             });
         });
@@ -136,6 +136,35 @@ exports.updateElection = (req, res) =>{
             console.log(elec);
             if(!elec) {
                 return res.status(404).send({
+                    message: "Election not found with id " +
+                        req.body._id
+                });
+            }
+            res.send(elec);
+        })
+        .catch(err => {
+            if(err.kind === 'ObjectId') {
+                return res.status(404).send({
+                    message: "Election not found with id " +
+                        req.body._id
+                });
+            }
+            return res.status(500).send({
+
+                message: "Error updating Election with id " +
+                    req.body._id
+            });
+        });
+}
+
+//changer le bool isActive
+exports.closeElection = (req, res) => {
+    Election.findOneAndUpdate({_id: req.body._id},
+        {$set: {isActive: false}},{new: true})
+        .then(elec => {
+            console.log(elec);
+            if(!elec) {
+                return res.status(404).send({
                     message: "User not found with id " +
                         req.body._id
                 });
@@ -145,13 +174,13 @@ exports.updateElection = (req, res) =>{
         .catch(err => {
             if(err.kind === 'ObjectId') {
                 return res.status(404).send({
-                    message: "User not found with id " +
+                    message: "Election not found with id " +
                         req.body._id
                 });
             }
             return res.status(500).send({
 
-                message: "Error updating user with id " +
+                message: "Error updating Election with id " +
                     req.body._id
             });
         });

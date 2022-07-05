@@ -38,6 +38,11 @@ const ElectionSchema = mongoose.Schema({
         default: [Date.now()]
     },
 
+    isActive: {
+        type: Boolean,
+        default: true
+    },
+
     code: {  //code généré pour rejoindre l'élection
         type: String,
     },

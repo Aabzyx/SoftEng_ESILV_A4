@@ -17,4 +17,7 @@ module.exports = function(app) {
 
     //updatelections
     app.put('/api/election/updateElection', election.updateElection)
+
+    //close election
+    app.put('/api/election/closeElection', election.closeElection)
 }
