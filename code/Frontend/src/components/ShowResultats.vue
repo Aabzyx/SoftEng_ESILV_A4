@@ -48,15 +48,31 @@
     </div>
   </div>
 
-  <div id="app" class="container slide-in-bottom">
+  <div class="container">
     <div class="col mt-5">
       <div class="row mt-5">
-        <h2> Suffrages Exprimés </h2>
+        <h2> Votes Cast </h2>
         <PieChart />
       </div>
       <div class="row mt-5">
-        <h2> Résultats Complets </h2>
+        <h2> Complete Results </h2>
         <BarChart />
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="col mt-5">
+      <div class="row mt-5">
+        <h2> Country </h2>
+        <PolarAreaChart />
+      </div>
+      <div class="row mt-5">
+        <h2> Region </h2>
+        <PolarAreaChart />
+      </div>
+      <div class="row mt-5">
+        <h2> Department </h2>
+        <PolarAreaChart />
       </div>
     </div>
   </div>
@@ -67,6 +83,7 @@
 import Header2 from "./Header2.vue";
 import PieChart from './PieChart.vue'
 import BarChart from './BarChart.vue'
+import PolarAreaChart from './PolarAreaChart.vue'
 
 export default {
     name: "ShowResultats",
@@ -106,7 +123,7 @@ export default {
       this.$nextTick(this.redirection);
       this.$nextTick(this.miseEnFormeRes);
     },
-    components: { Header2, PieChart, BarChart }
+    components: { Header2, PieChart, BarChart, PolarAreaChart }
 }
 </script>
 
