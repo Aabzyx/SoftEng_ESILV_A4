@@ -244,34 +244,23 @@
                       />
                     </div>
                   </div>
-                  <div class="div-button-A-E">
-                    <!--                  <button-->
-                    <!--                      class="button-A-E"-->
-                    <!--                      type="button"-->
-                    <!--                      value="Ajouter"-->
-                    <!--                      v-on:click="addChoix"-->
-                    <!--                  >-->
-                    <!--                    Ajouter-->
-                    <!--                  </button>-->
-                    <div class="button_plus" v-on:click="addChoix"></div>
-                  </div>
-                  <div class="div-button-A-E">
-                    <!--                  <input-->
-                    <!--                      class="button-A-E"-->
-                    <!--                      type="button"-->
-                    <!--                      value="Enlever"-->
-                    <!--                      v-on:click="delChoix"-->
-                    <!--                  />-->
-                    <div class="button_moins" v-on:click="delChoix"></div>
-                  </div>
+
                 </div>
-                <div class="field padding-bottom--24">
+                <div class="field padding-bottom--24 les-boutons">
                   <input
                     type="button"
                     name="submit"
                     value="Continue"
                     v-on:click="createElection"
                   />
+                  <i class='bx bx-plus-circle bx-spin-hover icon plus' v-on:click="addChoix"></i>
+                  <i class='bx bx-minus-circle bx-spin-hover icon moins' v-on:click="delChoix"></i>
+<!--                  <div class="div-button-A-E">-->
+<!--                    <div class="button_plus" v-on:click="addChoix"></div>-->
+<!--                  </div>-->
+<!--                  <div class="div-button-A-E">-->
+<!--                    <div class="button_moins" v-on:click="delChoix"></div>-->
+<!--                  </div>-->
                 </div>
               </form>
             </div>
@@ -445,6 +434,11 @@ export default {
 </script>
 
 <style scoped>
+
+/* Google Font Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import url('https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css');
+
 * {
   color: #1a1f36;
   box-sizing: border-box;
@@ -846,4 +840,24 @@ input[name="nom_du_choix"] {
   background-color: #095776;
   transition: 0.2s;
 }
+
+.les-boutons{
+  display: flex;
+}
+
+.icon{
+  font-size: 44px;
+  cursor: pointer;
+  margin-left: 10px;
+
+}
+
+.plus{
+  color: darkgreen;
+}
+
+.moins{
+  color: darkred;
+}
+
 </style>
