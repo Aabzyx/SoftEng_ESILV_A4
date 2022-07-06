@@ -1,6 +1,7 @@
 <template>
 <Header2 v-if="$store.state.actualClient !== null"></Header2>
 
+
   <div class="slide-in-bottom" v-if="$store.state.actualResult.length != 0">
   <h1 style="display: flex; justify-content: center; margin-top: 50px">Elections results</h1>
 

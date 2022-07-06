@@ -78,9 +78,9 @@
       <div
         class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center"
       >
-        <h1>EkipVote</h1>
+        <h1 class="slide-in-right">EkipVote</h1>
       </div>
-      <div class="formbg">
+      <div class="formbg slide-in-right">
         <h4>Elections informels :</h4>
         <div
           v-for="(election, index) in electionsInformel"
@@ -658,6 +658,21 @@ h4 {
   }
   100% {
     transform: translateX(0px);
+  }
+}
+
+.slide-in-right {
+  animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 </style>

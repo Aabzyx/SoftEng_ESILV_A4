@@ -1,12 +1,12 @@
 <template>
   <Header2 v-if="$store.state.actualClient !== null"></Header2>
   <!-- <div class="container"> -->
-    <div class="formbg">
-      <div class="title">
+    <div class="formbg slide-in-right">
+      <div class="title slide-in-right">
         <h1>Vote now</h1>
         <p>Nom de l'election : {{$store.state.actualElection.nom}}</p>
       </div>
-      <div class="vote-container">
+      <div class="vote-container slide-in-right">
       <div class="vote-item closed" v-for="(choix, index) in $store.state.actualElection.choix" v-bind:key="index">
         <div class="main-data">
           <button class='bx bxs-right-arrow rotate' v-on:click="func($event)"></button>
@@ -359,5 +359,19 @@ input[name="submit"] {
   }
 }
 
+.slide-in-right {
+  animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 
 </style>

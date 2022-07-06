@@ -1,8 +1,8 @@
 <template>
-  <div class="main-container">
+  <div class="main-container slide-in-right">
   <h1 class="h1">Choose your type of acount :</h1>
     <br><h4>You could change it in the futur</h4>
-  <div class="flex">
+  <div class="flex slide-in-right">
   <section class="page-contain" v-for="type in typeAccounts" v-bind:key="type.id">
     <a href="#" class="data-card" @click="chooseOffer(type)">
       <h3>{{type.titre}}</h3>
@@ -237,5 +237,20 @@ h4{
 .data-card .price{
   color: indianred;
   font-size: 25px;
+}
+
+.slide-in-right {
+  animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 </style>
