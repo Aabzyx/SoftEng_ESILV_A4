@@ -175,6 +175,7 @@ export default {
       http
         .post("election/chercherCode", leTout)
         .then((r) => {
+          if (r.data.isActive) {
           console.log("election =", r.data);
           const arrTest =
             this.$store.state.actualClient.autorisedElections.filter(
@@ -207,7 +208,9 @@ export default {
           } else {
             alert("You are already participating to this election");
           }
-        })
+        }
+        else {alert("Election actually closed");
+            this.$router.push("/HomePageVue");}})
         .catch((e) => {
           if (e.response.status === 401) {
             console.log(e);
