@@ -139,17 +139,19 @@ export default {
     getData(){
       for(let i = 0; i < this.$store.state.actualElection.resultats.length; i++){
         let match = [this.getRandomInt(256), this.getRandomInt(256), this.getRandomInt(256), 0.2];
-        this.chartData.datasets.push({label: this.$store.state.actualElection.choix[i].value,
-                                          data: [this.$store.state.actualElection.resultats[i]],
-          backgroundColor: 'rgba(' + [match[0],match[1],match[2],match[3]].join(',') + ')',
-          borderColor: 'rgb(' + [match[0],match[1],match[2]].join(',') + ')',
-          borderWidth: 1
+        this.chartData.datasets.push(
+            {label: this.$store.state.actualElection.choix[i].value,
+              data: [this.$store.state.actualElection.resultats[i]],
+              image: this.$store.state.actualElection.choix[i].img,
+              backgroundColor: 'rgba(' + [match[0],match[1],match[2],match[3]].join(',') + ')',
+              borderColor: 'rgb(' + [match[0],match[1],match[2]].join(',') + ')',
+              borderWidth: 1
         })
       }
       this.chartData.datasets.sort(function (a, b){
         return b.data[0] - a.data[0]
       });
-      console.log(this.chartData.datasets);
+      this.$store.state.actualResult = this.chartData.datasets;
     }
   },
   mounted() {

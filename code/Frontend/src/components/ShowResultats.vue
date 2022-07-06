@@ -48,7 +48,7 @@
             </svg>
           </div>
         </div>
-        <div class="podium__item slide-in-bottom">
+        <div class="podium__item slide-in-bottom" v-if="$store.state.actualResult.length > 2">
           <div class="choix slide-in-bottom"></div>
           <div class="podium__rank third slide-in-bottom">3</div>
         </div>
@@ -100,18 +100,9 @@ export default {
     //},
     computed: {},
     methods: {
-      // //A finir kupata ?
-      // sorted(){
-      //   let test = this.$store.state.actualElection.resultats.sort()
-      //   test.forEach(r => this.indexSorted.push(this.$store.state.actualElection.resultats.indexOf(r)))
-      // },
-      // miseEnFormeRes(){
-      //   this.electionBrut = this.$store.state.actualElection
-      //   for (let i = 0; i < this.electionBrut.resultats.length; i++){
-      //     this.electionBrut.resultats[i] = (this.electionBrut.resultats[i] * 100) / this.electionBrut.resultats.length
-      //   }
-      //   console.log(this.electionBrut)
-      // },
+      test(){
+        this.$store.state.nombreTotVotants;
+      },
       redirection() {
         if (this.$store.state.actualClient === null) {
           this.$router.push("/");

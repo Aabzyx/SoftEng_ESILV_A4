@@ -183,4 +183,3 @@ exports.closeElection = (req, res) => {
             });
         });
 }
-

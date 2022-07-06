@@ -85,7 +85,7 @@ export default {
             let allIdElection = [];
             users.data.forEach(u => allIdElection.push(this.idElect(u.autorisedElections)));
             const nombreTot = allIdElection.flat().filter(id => id === this.$store.state.actualElection._id).length
-
+            this.$store.state.nombreTotVotants = nombreTot;
             const reducer = (accumulator, curr) => accumulator + curr;
             const nombreVote = this.$store.state.actualElection.resultats.reduce(reducer);
             this.chartData.datasets[0].data[0] = nombreVote;
