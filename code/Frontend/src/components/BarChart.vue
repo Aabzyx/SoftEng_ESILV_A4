@@ -58,48 +58,48 @@ export default {
           ''
         ],
         datasets: [
-        {
-          label: 'Kupata',
-          data: [65],
-          backgroundColor: 'rgba(255, 099, 132, 0.2)',
-          borderColor: 'rgb(255, 099, 132)',
-          borderWidth: 1
-        },
-        {
-          label: 'Roro',
-          data: [59],
-          backgroundColor: 'rgba(255, 159, 064, 0.2)',
-          borderColor: 'rgb(255, 159, 064)',
-          borderWidth: 1
-        },
-          {
-            label: 'Tonio',
-            data: [80],
-            backgroundColor: 'rgba(255, 205, 086, 0.2)',
-            borderColor: 'rgb(255, 205, 086)',
-            borderWidth: 1
-          },
-          {
-            label: 'Franco',
-            data: [37],
-            backgroundColor: 'rgba(075, 192, 192, 0.2)',
-            borderColor: 'rgb(075, 192, 192)',
-            borderWidth: 1
-          },
-          {
-            label: 'Benji',
-            data: [56],
-            backgroundColor: 'rgba(054, 162, 235, 0.2)',
-            borderColor: 'rgb(054, 162, 235)',
-            borderWidth: 1
-          },
-          {
-            label: 'Hermanno',
-            data: [55],
-            backgroundColor: 'rgba(153, 102, 255, 0.2)',
-            borderColor: 'rgb(153, 102, 255)',
-            borderWidth: 1
-          }
+            // {
+        //   label: 'Kupata',
+        //   data: [65],
+        //   backgroundColor: 'rgba(255, 099, 132, 0.2)',
+        //   borderColor: 'rgb(255, 099, 132)',
+        //   borderWidth: 1
+        // },
+        // {
+        //   label: 'Roro',
+        //   data: [59],
+        //   backgroundColor: 'rgba(255, 159, 064, 0.2)',
+        //   borderColor: 'rgb(255, 159, 064)',
+        //   borderWidth: 1
+        // },
+        //   {
+        //     label: 'Tonio',
+        //     data: [80],
+        //     backgroundColor: 'rgba(255, 205, 086, 0.2)',
+        //     borderColor: 'rgb(255, 205, 086)',
+        //     borderWidth: 1
+        //   },
+        //   {
+        //     label: 'Franco',
+        //     data: [37],
+        //     backgroundColor: 'rgba(075, 192, 192, 0.2)',
+        //     borderColor: 'rgb(075, 192, 192)',
+        //     borderWidth: 1
+        //   },
+        //   {
+        //     label: 'Benji',
+        //     data: [56],
+        //     backgroundColor: 'rgba(054, 162, 235, 0.2)',
+        //     borderColor: 'rgb(054, 162, 235)',
+        //     borderWidth: 1
+        //   },
+        //   {
+        //     label: 'Hermanno',
+        //     data: [55],
+        //     backgroundColor: 'rgba(153, 102, 255, 0.2)',
+        //     borderColor: 'rgb(153, 102, 255)',
+        //     borderWidth: 1
+        //   }
 
           /*
         label: 'Dataset',
@@ -131,6 +131,29 @@ export default {
         maintainAspectRatio: false
       },
     }
+  },
+  methods:{
+    getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+},
+    getData(){
+      for(let i = 0; i < this.$store.state.actualElection.resultats.length; i++){
+        let match = [this.getRandomInt(256), this.getRandomInt(256), this.getRandomInt(256), 0.2];
+        this.chartData.datasets.push({label: this.$store.state.actualElection.choix[i].value,
+                                          data: [this.$store.state.actualElection.resultats[i]],
+          backgroundColor: 'rgba(' + [match[0],match[1],match[2],match[3]].join(',') + ')',
+          borderColor: 'rgb(' + [match[0],match[1],match[2]].join(',') + ')',
+          borderWidth: 1
+        })
+      }
+      this.chartData.datasets.sort(function (a, b){
+        return b.data[0] - a.data[0]
+      });
+      console.log(this.chartData.datasets);
+    }
+  },
+  mounted() {
+    this.$nextTick(this.getData)
   }
 };
 </script>

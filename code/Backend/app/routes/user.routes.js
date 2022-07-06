@@ -27,4 +27,7 @@ module.exports = function(app) {
     app.put('/api/user/updatePassword', user.updatePassword);
 
     app.get('/api/user/getUsers', user.getAllUsers);
+
+    // update user
+    app.get('/api/user/getAllUser', user.findAll);
 }

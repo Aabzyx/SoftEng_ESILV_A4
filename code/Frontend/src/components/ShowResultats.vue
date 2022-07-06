@@ -85,33 +85,33 @@ export default {
           arrVoters: []
         };
     },
-    async created() {
-      /*
-      // affect data in the arrays here in forEach loop
-      data
-      data.forEach(d => {
-        const {
-          hasVoted,
-          hasNotVoted
-        } = d;
-      })
-      */
-      this.arrVoters.push({voted: 60, notVoted: 40});
-    },
+    // async created() {
+    //   /*
+    //   // affect data in the arrays here in forEach loop
+    //   data
+    //   data.forEach(d => {
+    //     const {
+    //       hasVoted,
+    //       hasNotVoted
+    //     } = d;
+    //   })
+    //   */
+    //   this.arrVoters.push({voted: 60, notVoted: 40});
+    //},
     computed: {},
     methods: {
-      //A finir kupata ?
-      sorted(){
-        let test = this.$store.state.actualElection.resultats.sort()
-        test.forEach(r => this.indexSorted.push(this.$store.state.actualElection.resultats.indexOf(r)))
-      },
-      miseEnFormeRes(){
-        this.electionBrut = this.$store.state.actualElection
-        for (let i = 0; i < this.electionBrut.resultats.length; i++){
-          this.electionBrut.resultats[i] = (this.electionBrut.resultats[i] * 100) / this.electionBrut.resultats.length
-        }
-        console.log(this.electionBrut)
-      },
+      // //A finir kupata ?
+      // sorted(){
+      //   let test = this.$store.state.actualElection.resultats.sort()
+      //   test.forEach(r => this.indexSorted.push(this.$store.state.actualElection.resultats.indexOf(r)))
+      // },
+      // miseEnFormeRes(){
+      //   this.electionBrut = this.$store.state.actualElection
+      //   for (let i = 0; i < this.electionBrut.resultats.length; i++){
+      //     this.electionBrut.resultats[i] = (this.electionBrut.resultats[i] * 100) / this.electionBrut.resultats.length
+      //   }
+      //   console.log(this.electionBrut)
+      // },
       redirection() {
         if (this.$store.state.actualClient === null) {
           this.$router.push("/");

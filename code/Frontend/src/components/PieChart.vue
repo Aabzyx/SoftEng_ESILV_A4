@@ -15,6 +15,7 @@
 <script>
 import { Pie } from 'vue-chartjs'
 import { Chart as ChartJS, ArcElement, Title, Tooltip, Legend, CategoryScale, LinearScale} from 'chart.js'
+import http from "../http-common";
 
 ChartJS.register(ArcElement, Title, Tooltip, Legend, CategoryScale, LinearScale);
 
@@ -53,6 +54,7 @@ export default {
     }
   },
   data() {
+    //votant //non votants
     return {
       chartData: {
         labels: [
@@ -61,7 +63,7 @@ export default {
         ],
         datasets: [{
           label: 'Dataset',
-          data: [26089654, 13957365],
+          data: [0, 0],
           backgroundColor: [
             'rgb(54, 162, 235)',
             'rgb(128, 128, 128)',
@@ -72,8 +74,34 @@ export default {
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false
-      }
+      },
     }
+  },
+  methods: {
+    getAllVotes(){
+      http
+          .get("user/getAllUser")
+          .then((users => {
+            let allIdElection = [];
+            users.data.forEach(u => allIdElection.push(this.idElect(u.autorisedElections)));
+            const nombreTot = allIdElection.flat().filter(id => id === this.$store.state.actualElection._id).length
+
+            const reducer = (accumulator, curr) => accumulator + curr;
+            const nombreVote = this.$store.state.actualElection.resultats.reduce(reducer);
+            this.chartData.datasets[0].data[0] = nombreVote;
+            this.chartData.datasets[0].data[1] = nombreTot - nombreVote;
+            // this.chartData.datasets[0].data.push(nombreVote, nombreTot - nombreVote)
+            // console.log(this.chartData)
+          }))
+    },
+    idElect(arrObj){
+      let test = []
+      arrObj.forEach(o => test.push(o.election))
+      return test
+    },
+  },
+  mounted() {
+      this.$nextTick(this.getAllVotes);
   }
   /* // old do not use, do not delete either still useful
   extends: Pie,
