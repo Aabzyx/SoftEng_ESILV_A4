@@ -35,9 +35,9 @@
       </div>
       <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
         <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-          <h1>Ekip vote</h1>
+          <h1 class="slide-in-right">Ekip vote</h1>
         </div>
-        <div class="formbg-outer">
+        <div class="formbg-outer slide-in-right">
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
               <span class="padding-bottom--15"><b>Register</b></span>
@@ -407,6 +407,22 @@ input[name="submit"] {
   }
   100% {
     transform: translateX(0px);
+  }
+}
+
+.slide-in-right {
+  animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation-delay: 0.3s;
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 </style>
