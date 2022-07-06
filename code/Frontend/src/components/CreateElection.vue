@@ -3,7 +3,8 @@
   <div class="login-root">
     <div
       class="box-root flex-flex flex-direction--column"
-      style="min-height: 100vh; flex-grow: 1">
+      style="min-height: 100vh; flex-grow: 1"
+    >
       <div class="loginbackground box-background--white padding-top--64">
         <div class="loginbackground-gridContainer">
           <div
@@ -179,14 +180,12 @@
                           style="width: 200px"
                         >
                           <Slide
-                            v-for="(slide, indexBis) in this.arrayCarrousel[
-                              index
-                            ]"
+                            v-for="slide in this.arrayCarrousel[index]"
                             :key="slide"
                             style="display: flex; flex-direction: column"
                           >
                             <img
-                              :src="this.arrayCarrousel[index][indexBis]"
+                              :src="slide"
                               style="width: 100px; height: 100px"
                               class="carousel__item"
                             />
@@ -196,9 +195,7 @@
                               v-on:click="
                                 confirmerChoix(
                                   this.arrayCarrousel[index][
-                                    indexBis -
-                                      this.arrayCarrousel[index].length +
-                                      1
+                                    choice.indexImgCar
                                   ],
                                   index
                                 )
@@ -244,7 +241,6 @@
                       />
                     </div>
                   </div>
-
                 </div>
                 <div class="field padding-bottom--24 les-boutons">
                   <input
@@ -253,14 +249,23 @@
                     value="Continue"
                     v-on:click="createElection"
                   />
-                  <i class='bx bx-plus-circle bx-spin-hover icon plus' v-on:click="addChoix"></i>
-                  <i class='bx bx-minus-circle bx-spin-hover icon moins' v-on:click="delChoix"></i>
-<!--                  <div class="div-button-A-E">-->
-<!--                    <div class="button_plus" v-on:click="addChoix"></div>-->
-<!--                  </div>-->
-<!--                  <div class="div-button-A-E">-->
-<!--                    <div class="button_moins" v-on:click="delChoix"></div>-->
-<!--                  </div>-->
+                  <i
+                    class="bx bx-plus-circle bx-spin-hover icon plus"
+                    v-on:click="addChoix"
+                  ></i>
+                  <i
+                    class="bx bx-minus-circle bx-spin-hover icon moins"
+                    v-on:click="delChoix"
+                  ></i>
+                  <button type="button" v-on:click="console.log('test')">
+                    test
+                  </button>
+                  <!--                  <div class="div-button-A-E">-->
+                  <!--                    <div class="button_plus" v-on:click="addChoix"></div>-->
+                  <!--                  </div>-->
+                  <!--                  <div class="div-button-A-E">-->
+                  <!--                    <div class="button_moins" v-on:click="delChoix"></div>-->
+                  <!--                  </div>-->
                 </div>
               </form>
             </div>
@@ -288,14 +293,16 @@ export default {
       limite: 10,
       typeElection: "informel",
       choix: [
-        { value: "", desc: "", img: "" },
-        { value: "", desc: "", img: "" },
+        { value: "", desc: "", img: "", indexImgCar: 0 },
+        { value: "", desc: "", img: "", indexImgCar: 0 },
       ],
       arrayCarrousel: [],
       resultats: [],
       dateFin: Date,
       dates: [],
       code: "",
+      buttonPrev: HTMLElement,
+      buttonNext: HTMLElement,
     };
   },
   computed: {
@@ -339,8 +346,6 @@ export default {
           }
           this.arrayCarrousel[input.index] = memory;
         }
-        //this.arrayCarrousel.pop();
-        //this.arrayCarrousel.push(memory);
       }
     },
     confirmerChoix(slide, index) {
@@ -429,15 +434,18 @@ export default {
   },
   mounted: function () {
     this.$nextTick(this.redirection);
+    this.buttonPrev = document.querySelector(".carousel__prev");
+    this.buttonPrev.setAttribute("v-on:click", 'console.log("çamarche")');
+    this.buttonNext = document.querySelector(".carousel__next");
+    this.buttonNext.setAttribute("v-on:click", "choice.indexImgCar++");
   },
 };
 </script>
 
 <style scoped>
-
 /* Google Font Link */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-@import url('https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+@import url("https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css");
 
 * {
   color: #1a1f36;
@@ -841,23 +849,21 @@ input[name="nom_du_choix"] {
   transition: 0.2s;
 }
 
-.les-boutons{
+.les-boutons {
   display: flex;
 }
 
-.icon{
+.icon {
   font-size: 44px;
   cursor: pointer;
   margin-left: 10px;
-
 }
 
-.plus{
+.plus {
   color: darkgreen;
 }
 
-.moins{
+.moins {
   color: darkred;
 }
-
 </style>
