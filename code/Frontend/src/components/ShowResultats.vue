@@ -1,45 +1,30 @@
 <template>
 <Header2 v-if="$store.state.actualClient !== null"></Header2>
-<!--  <p>ShowResultats</p>-->
-<!--  <div v-for="(election, index) in electionBrut.resultats" v-bind:key="index">-->
-<!--    <div>{{electionBrut.choix[index].value}} : {{election}} %</div>-->
 
-<!--  </div>-->
-  <h1 style="display: flex; justify-content: center; margin-top: 15px">Résultats élèction</h1>
-  <div class="entie">
-    <div class="podium">
-<!--      <div class="deuxieme">-->
-<!--        <div class="participant-deux">-->
+  <div class="slide-in-bottom" v-if="$store.state.actualResult.length != 0">
+  <h1 style="display: flex; justify-content: center; margin-top: 50px">Elections results</h1>
 
-<!--        </div>-->
-<!--        <div class="podiume-deux">-->
+    <div class="formbg">
 
-<!--        </div>-->
-
-<!--      </div>-->
-<!--      <div class="premier">-->
-<!--        <div class="participant-un">-->
-
-<!--        </div>-->
-<!--        <div class="podiume-un">-->
-
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="troisieme">-->
-<!--        <div class="participant-trois">-->
-
-<!--        </div>-->
-<!--        <div class="podiume-trois">-->
-
-<!--        </div>-->
-<!--      </div>-->
       <div class="container podium">
         <div class="podium__item slide-in-bottom">
-          <div class="choix slide-in-bottom"></div>
+          <div class="choix slide-in-bottom">
+            <label class="label-img">{{$store.state.actualResult[1].label}}</label>
+            <div class="div-img">
+              <img v-if="$store.state.actualResult[1].image" :src="$store.state.actualResult[1].image" class="img">
+            </div>
+            <p class="pourcentage">{{(($store.state.actualResult[1].data[0]*100)/$store.state.nombreTotVotants).toFixed(2)}}%</p>
+          </div>
           <div class="podium__rank second slide-in-bottom">2</div>
         </div>
         <div class="podium__item slide-in-bottom">
-          <div class="choix slide-in-bottom"></div>
+          <div class="choix slide-in-bottom">
+            <label class="label-img">{{$store.state.actualResult[0].label}}</label>
+            <div class="div-img">
+              <img v-if="$store.state.actualResult[0].image" :src="$store.state.actualResult[0].image" class="img">
+            </div>
+            <p class="pourcentage">{{(($store.state.actualResult[0].data[0]*100)/$store.state.nombreTotVotants).toFixed(2)}}%</p>
+          </div>
           <div class="podium__rank first">
             <svg class="podium__number" viewBox="0 0 27.476 75.03" xmlns="http://www.w3.org/2000/svg">
               <g transform="matrix(1, 0, 0, 1, 214.957736, -43.117417)">
@@ -49,14 +34,21 @@
           </div>
         </div>
         <div class="podium__item slide-in-bottom" v-if="$store.state.actualResult.length > 2">
-          <div class="choix slide-in-bottom"></div>
+          <div class="choix slide-in-bottom">
+            <label class="label-img">{{$store.state.actualResult[2].label}}</label>
+            <div class="div-img">
+              <img v-if="$store.state.actualResult[2].image" :src="$store.state.actualResult[2].image" class="img">
+            </div>
+            <p class="pourcentage">{{(($store.state.actualResult[2].data[0]*100)/$store.state.nombreTotVotants).toFixed(2)}}%</p>
+
+          </div>
           <div class="podium__rank third slide-in-bottom">3</div>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="app" class="container">
+  <div id="app" class="container slide-in-bottom">
     <div class="col mt-5">
       <div class="row mt-5">
         <h2> Suffrages Exprimés </h2>
@@ -129,10 +121,11 @@ export default {
 }
 
 .podium{
+  margin-top: 100px;
   display: flex;
   width: 100%;
   height: 100%;
-  background: #7fd3ed;
+  background: white;
   justify-content: center;
 }
 /*.podiume-deux{*/
@@ -190,22 +183,38 @@ body {
       rgba(254,207,51,1) 13%,
       rgba(254,224,51,1) 53%,
       rgba(255,172,37,1) 100%);
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 
 }
 
 .podium .second {
   min-height: 200px;
-  background: blue;
+  background: silver;
+  background:
+      linear-gradient(333deg,
+      #9D978F 0%,
+      #C3BDB5 13%,
+      #d5cfc7 53%,
+      #A7A199 100%);
+  border-top-left-radius: 5px;
 }
 
 .podium .third {
   min-height: 100px;
-  background: green;
+  background: #cf7234;
+  background:
+      linear-gradient(333deg,
+      #a55c2a 0%,
+      #bc7129 13%,
+      #db7f3c 53%,
+      #99502a 100%);
+  border-top-right-radius: 5px;
 }
 
 .choix {
   background-color: #5469d4;
-  min-height: 280px;
+  min-height: 220px;
   margin: 20px auto;
   width: 170px;
   border-radius: 10px;
@@ -242,6 +251,55 @@ body {
   }
   100% {
     transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.label-img{
+  display: block;
+  text-align: center;
+  color: white;
+}
+
+.div-img{
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+}
+
+.img{
+  width: 100px;
+  height: 100px;
+}
+
+.pourcentage{
+  margin-top: 20px;
+  display: block;
+  font-size: 50px;
+  text-align: center;
+}
+.formbg {
+  margin: 0px auto;
+  width: 100%;
+  max-width: 1000px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px,
+  rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
+  border-radius: 10px;
+}
+
+.slide-in-right {
+  animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
     opacity: 1;
   }
 }
