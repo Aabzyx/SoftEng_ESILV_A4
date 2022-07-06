@@ -19,12 +19,12 @@ exports.create = (req, res) => {
 
 //DELETE a vote
 exports.delete = (req,res) => {
-    Vote.findByIdAndRemove(req.body.id)
+    Vote.findByIdAndRemove(req.body._id)
         .then(vote => {
             if(!vote){
                 return res.status(404).send({
                     message: "Vote not found with id " +
-                        req.body.id
+                        req.body._id
                 });
             }
             res.send({message: "Vote deleted successfully!"});
@@ -34,12 +34,12 @@ exports.delete = (req,res) => {
             if (err.kind === 'ObjectId' || err.name === 'NotFound') {
                 return res.status(404).send({
                     message: "Vote not found with id " +
-                        req.body.id
+                        req.body._id
                 });
             }
             return res.status(500).send({
                 message: "Could not delete vote with id " +
-                    req.body.id
+                    req.body._id
             });
         });
 };
@@ -72,7 +72,6 @@ exports.getVote = (req, res) => {
 
 //Get allVotes of a specific election
 exports.getAllVotesOfElection = (req,res) => {
-    console.log(req.body.electionData);
         Vote.find({idElection: req.body.electionData._id})
             .then(votes => {
                 console.log("les votes");

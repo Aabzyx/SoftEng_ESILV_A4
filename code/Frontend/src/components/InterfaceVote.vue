@@ -66,6 +66,21 @@ export default {
         .post("/vote/createVote", newVote)
         .then((response) => {
           this.$store.state.actualVote = response.data;
+          this.$store.state.actualClient.autorisedElections.find(e => e.election === this.$store.state.actualElection._id).bool = true;
+
+          http
+              .put("user/joinVote", this.$store.state.actualClient)
+              .then((response) => {
+                console.log("response :", response);
+                this.$router.push("/HomePageVue");
+              })
+              .catch((error) => {
+                if (error.response.status === 404) {
+                  alert("Can't update your autorisedElections");
+                }
+                console.log(error);
+              });
+
           http.get("election/getElection").then((r) => {
             tab = r.data;
             tab.forEach((res) => {
@@ -77,7 +92,6 @@ export default {
                   .put("/election/updateElection", res)
                   .then((responseDuFutur) => {
                     console.log(responseDuFutur);
-                    this.$store.state.actualClient.autorisedElections.find(e => e.election === this.$store.state.actualElection._id).bool = true;
                     this.$router.push("HomePageVue");
                   })
                   .catch((errortamere) => {

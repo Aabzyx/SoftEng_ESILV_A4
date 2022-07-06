@@ -88,17 +88,20 @@
           class="election-items"
         >
           <div class="election-head">
+           <img :src="election.urlImage" class="election-img"/>
             <p class="name-election">{{ election.nom }}</p>
             <div class="progress">
-              <div class="progress-value"></div>
+              <div :class="$store.state.actualClient.autorisedElections.find(
+                        (e) => e.election === election._id).bool ? 'progress-value' : 'progress-value2'"></div>
             </div>
           </div>
           <div class="btns">
-            <button
+            <button id="btnVote"
               v-on:click="goVote(election)"
               class="btn-home"
               v-show="election.isActive"
-            >
+                    :disabled="$store.state.actualClient.autorisedElections.find(
+                        (e) => e.election === election._id).bool">
               Vote
             </button>
             <button
@@ -132,16 +135,15 @@
             </button>
           </div>
           <p
-            v-if="
+              v-if="
               $store.state.actualClient.autorisedElections.find(
-                (e) => e.election === election._id
-              ).bool
-            "
-            style="color: #2bb6a3"
-          >
-            Voted
+                  (e) => e.election === election._id
+                  ).bool
+              "
+             style="color: #2bb6a3">
+            <i class='bx bx-check-circle' ></i>
           </p>
-          <p v-else style="color: darkred">Not Voted</p>
+          <p v-else style="color: darkred"><i class='bx bx-x-circle'></i></p>
         </div>
         <h4>Elections officiels :</h4>
         <div
@@ -149,16 +151,33 @@
           v-bind:key="index"
           class="election-items"
         >
+          <div class="election-head">
+            <img :src="election.urlImage" class="padding-bottom--24"/>
           <p class="name-election">{{ election.nom }}</p>
           <div class="progress">
-            <div class="progress-value"></div>
+            <div :class="$store.state.actualClient.autorisedElections.find(
+                        (e) => e.election === election._id).bool ? 'progress-value' : 'progress-value2'" >
+            </div>
+          </div>
           </div>
           <div class="btns">
-            <button v-on:click="goVote(election)" class="btn-home">Vote</button>
+            <button v-on:click="goVote(election)" :disabled="$store.state.actualClient.autorisedElections.find(
+                        (e) => e.election === election._id).bool" class="btn-home">Vote</button>
             <button v-on:click="goShowResultats(election)" class="btn-home">
               Results
             </button>
           </div>
+          <p
+              v-if="
+              $store.state.actualClient.autorisedElections.find(
+                (e) => e.election === election._id
+              ).bool
+            "
+              style="color: #2bb6a3"
+          >
+            <i class='bx bx-check-circle' ></i>
+          </p>
+          <p v-else style="color: darkred"><i class='bx bx-x-circle'></i></p>
         </div>
         <div class="div-btn-btm">
           <button class="btn-home-btm" v-on:click="goJoinElection">
@@ -182,13 +201,11 @@ export default {
     return {
       electionsOfficiel: [],
       electionsInformel: [],
-      voted: "Not voted",
       elect: Object,
       activeClass: "is-visible",
       active: null,
     };
   },
-  computed: {},
   methods: {
     //show election
     showElection() {
@@ -233,7 +250,7 @@ export default {
                 this.$store.state.actualElection = election;
                 this.$router.push("/InterfaceVoteVue");
               } else {
-                this.voted = "Voted";
+
                 alert("You have already voted !");
                 this.$router.push("/HomePageVue");
               }
@@ -264,25 +281,6 @@ export default {
         .post("/election/deleteElection/", election)
         .then((response) => {
           console.log(response.data);
-          console.log("before", this.$store.state.actualClient.createdElections);
-          this.$store.state.actualClient.createdElections = this.$store.state.actualClient.createdElections.filter((e) => e !== election._id )
-          console.log("after", this.$store.state.actualClient.createdElections);
-          console.log("test", this.$store.state.actualClient.createdElections);
-          const newUser = {
-            _id : this.$store.state.actualClient._id,
-            autorisedElections : this.$store.state.actualClient.autorisedElections,
-            createdElections: this.$store.state.actualClient.createdElections
-          }
-          console.log("newUser = ",newUser);
-          http
-              .put("user/joinVote", newUser)
-              .then((e) => {
-                console.log("response :", e);
-                this.$router.push("/HomePageVue");
-              })
-              .catch((e) => {
-                console.log(e);
-              });
           const elect = {
             electionData: election,
             user: this.$store.state.actualClient,
@@ -291,8 +289,9 @@ export default {
               .post("votes/getAllVotesOfElection", elect)
               .then((response) => {
                 response.data.forEach((r) => {
+                  console.log(r._id);
                     http
-                        .post("/vote/delete/", r._id)
+                        .post("/vote/delete/", r)
                         .then((response) =>{
                           console.log(response.data);
                         })
@@ -346,12 +345,6 @@ export default {
           console.log(e);
         });
     },
-   /* deleteVotes(election){
-      http
-          .post()
-          .then()
-          .catch()
-    },*/
     goJoinElection() {
       this.$router.push("/JoinVoteVue");
     },
@@ -368,6 +361,7 @@ export default {
       }
     },
   },
+
   mounted: function () {
     this.$nextTick(this.redirection);
     this.$nextTick(this.showElection);
@@ -377,13 +371,6 @@ export default {
 </script>
 
 <style scoped>
-.hidden {
-  display: none;
-}
-
-.is-visible {
-  display: flex;
-}
 
 h1 {
   letter-spacing: -1px;
@@ -398,7 +385,9 @@ h4 {
   margin-top: 10px;
   color: gray;
 }
-
+p{
+  margin-bottom: 0px;
+}
 .progress {
   justify-content: flex-start;
   border-radius: 100px;
@@ -420,19 +409,32 @@ h4 {
   width: 0;
 }
 
+.progress-value2 {
+  animation: load2 3s normal forwards;
+  box-shadow: 0 10px 40px -8px #40e0d0;
+  border-radius: 100px;
+  background: #40e0d0;
+  height: 10px;
+  width: 0;
+}
+
 @keyframes load {
   0% {
     width: 0;
   }
   100% {
-    width: 68%;
+    width: 100%;
   }
 }
 
-/* .election-item {
-  margin-right: 5px;
-  margin-bottom: 10px;
-} */
+@keyframes load2 {
+  0% {
+    width: 0;
+  }
+  0% {
+    width: 0%;
+  }
+}
 
 .formbg {
   margin: 0px auto;
@@ -451,11 +453,23 @@ h4 {
   flex-wrap: wrap;
   margin: 30px auto 25px;
   align-items: center;
-  /* width:900px; */
+  height: 90px;
+  width: 926px;
+
 }
 
 .election-items .election-head {
   display: flex;
+  align-items: center;
+}
+
+.election-img{
+  height:90px;
+  width:90px;
+  border-radius:5px;
+  object-fit: cover;
+  margin-right: 10px;
+
 }
 
 @media (max-width: 1200px) {
@@ -467,11 +481,27 @@ h4 {
   .btn-home {
     margin-bottom: 5px;
   }
+  .election-items{
+    margin-right: auto;
+  }
+
+  .election-img{
+    margin: auto;
+  }
+}
+
+@media (max-width: 950px){
+  .election-img{
+    margin-left: 5px;
+    margin-right: 5px;
+  }
 }
 
 @media (max-width: 770px) {
   .election-items .election-head {
     flex-direction: column;
+    height: auto;
+    width: auto;
   }
 
   .election-head {
@@ -479,12 +509,19 @@ h4 {
     justify-content: center;
     align-items: center;
   }
+
+  .election-img{
+    margin: auto;
+  }
 }
 
 @media (max-width: 560px) {
   .election-items {
     display: flex;
     flex-direction: column;
+    height: auto;
+    width: auto;
+    margin-right: auto;
   }
 
   .name-election {
@@ -494,7 +531,36 @@ h4 {
     align-items: center;
     margin-bottom: 10px;
   }
+
+  .election-img{
+    margin: auto;
+  }
+
+  .div-btn-btm{
+    display: flex;
+    flex-direction: column;
+  }
+  .btn-home-btm{
+
+  }
 }
+
+@media (max-width: 412px){
+  .div-btn-btm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .btn-home-btm{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+    margin-right: 0px;
+    align-items: center;
+
+  }
+}
+
 
 .div-btn-btm {
   margin: 15px auto 30px;
