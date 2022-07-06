@@ -5,7 +5,7 @@
 <!--    <div>{{electionBrut.choix[index].value}} : {{election}} %</div>-->
 
 <!--  </div>-->
-  <h1 style="display: flex; justify-content: center; margin-top: 15px">Résultats élèction</h1>
+  <h1 style="display: flex; justify-content: center; margin-top: 15px">Election Results</h1>
   <div class="entie">
     <div class="podium">
 <!--      <div class="deuxieme">-->
@@ -56,15 +56,31 @@
     </div>
   </div>
 
-  <div id="app" class="container">
+  <div class="container">
     <div class="col mt-5">
       <div class="row mt-5">
-        <h2> Suffrages Exprimés </h2>
+        <h2> Votes Cast </h2>
         <PieChart />
       </div>
       <div class="row mt-5">
-        <h2> Résultats Complets </h2>
+        <h2> Complete Results </h2>
         <BarChart />
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="col mt-5">
+      <div class="row mt-5">
+        <h2> Country </h2>
+        <PolarAreaChart />
+      </div>
+      <div class="row mt-5">
+        <h2> Region </h2>
+        <PolarAreaChart />
+      </div>
+      <div class="row mt-5">
+        <h2> Department </h2>
+        <PolarAreaChart />
       </div>
     </div>
   </div>
@@ -75,29 +91,16 @@
 import Header2 from "./Header2.vue";
 import PieChart from './PieChart.vue'
 import BarChart from './BarChart.vue'
+import PolarAreaChart from './PolarAreaChart.vue'
 
 export default {
     name: "ShowResultats",
     data() {
         return {
           electionBrut: [],
-          indexSorted: [],
-          arrVoters: []
+          indexSorted: []
         };
     },
-    // async created() {
-    //   /*
-    //   // affect data in the arrays here in forEach loop
-    //   data
-    //   data.forEach(d => {
-    //     const {
-    //       hasVoted,
-    //       hasNotVoted
-    //     } = d;
-    //   })
-    //   */
-    //   this.arrVoters.push({voted: 60, notVoted: 40});
-    //},
     computed: {},
     methods: {
       test(){
@@ -114,7 +117,7 @@ export default {
       this.$nextTick(this.redirection);
       this.$nextTick(this.miseEnFormeRes);
     },
-    components: { Header2, PieChart, BarChart }
+    components: { Header2, PieChart, BarChart, PolarAreaChart }
 }
 </script>
 

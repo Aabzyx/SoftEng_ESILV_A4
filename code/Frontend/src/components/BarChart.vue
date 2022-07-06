@@ -135,7 +135,7 @@ export default {
   methods:{
     getRandomInt(max) {
   return Math.floor(Math.random() * max);
-},
+  },
     getData(){
       for(let i = 0; i < this.$store.state.actualElection.resultats.length; i++){
         let match = [this.getRandomInt(256), this.getRandomInt(256), this.getRandomInt(256), 0.2];
