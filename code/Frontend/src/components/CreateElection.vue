@@ -253,8 +253,8 @@
                     value="Continue"
                     v-on:click="createElection"
                   />
-                  <i class='bx bx-plus-circle bx-spin-hover icon' v-on:click="addChoix"></i>
-                  <i class='bx bx-minus-circle bx-spin-hover icon' v-on:click="delChoix"></i>
+                  <i class='bx bx-plus-circle bx-spin-hover icon plus' v-on:click="addChoix"></i>
+                  <i class='bx bx-minus-circle bx-spin-hover icon moins' v-on:click="delChoix"></i>
 <!--                  <div class="div-button-A-E">-->
 <!--                    <div class="button_plus" v-on:click="addChoix"></div>-->
 <!--                  </div>-->
@@ -849,6 +849,15 @@ input[name="nom_du_choix"] {
   font-size: 44px;
   cursor: pointer;
   margin-left: 10px;
+
+}
+
+.plus{
+  color: darkgreen;
+}
+
+.moins{
+  color: darkred;
 }
 
 </style>
