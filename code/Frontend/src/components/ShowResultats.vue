@@ -14,7 +14,7 @@
             <div class="div-img">
               <img v-if="$store.state.actualResult[1].image" :src="$store.state.actualResult[1].image" class="img">
             </div>
-            <p class="pourcentage">{{(($store.state.actualResult[1].data[0]*100)/$store.state.nombreTotVotants).toFixed(2)}}%</p>
+            <p class="pourcentage">{{(($store.state.actualResult[1].data[0]*100)/$store.state.nombreTotVotants).toFixed(1)}}%</p>
           </div>
           <div class="podium__rank second slide-in-bottom">2</div>
         </div>
@@ -24,7 +24,7 @@
             <div class="div-img">
               <img v-if="$store.state.actualResult[0].image" :src="$store.state.actualResult[0].image" class="img">
             </div>
-            <p class="pourcentage">{{(($store.state.actualResult[0].data[0]*100)/$store.state.nombreTotVotants).toFixed(2)}}%</p>
+            <p class="pourcentage">{{(($store.state.actualResult[0].data[0]*100)/$store.state.nombreTotVotants).toFixed(1)}}%</p>
           </div>
           <div class="podium__rank first">
             <svg class="podium__number" viewBox="0 0 27.476 75.03" xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +40,7 @@
             <div class="div-img">
               <img v-if="$store.state.actualResult[2].image" :src="$store.state.actualResult[2].image" class="img">
             </div>
-            <p class="pourcentage">{{(($store.state.actualResult[2].data[0]*100)/$store.state.nombreTotVotants).toFixed(2)}}%</p>
+            <p class="pourcentage">{{(($store.state.actualResult[2].data[0]*100)/$store.state.nombreTotVotants).toFixed(1)}}%</p>
 
           </div>
           <div class="podium__rank third slide-in-bottom">3</div>
@@ -280,6 +280,7 @@ body {
   display: block;
   font-size: 50px;
   text-align: center;
+  color: white;
 }
 .formbg {
   margin: 0px auto;
