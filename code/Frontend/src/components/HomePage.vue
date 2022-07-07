@@ -96,7 +96,13 @@
             </div>
           </div>
           <div class="btns">
+            <p                    v-if="
+              $store.state.actualClient.autorisedElections.find(
+                  (e) => e.election === election._id
+                  ).bool
+              "></p>
             <button id="btnVote"
+              v-else
               v-on:click="goVote(election)"
               class="btn-home"
               v-show="election.isActive"
@@ -169,6 +175,11 @@
               Results
             </button>
           </div>
+
+          <div>
+            test = {{election.code}}
+          </div>
+
           <p  v-for="(dates, index) in  election.dates.slice(1,2) "
               v-bind:key="index" class="date">{{dates.split('T')[0]}} </p>
           <p
@@ -243,18 +254,17 @@ export default {
       http
         .post("/votes/getAllVotesOfElection", elect)
         .then((response) => {
-          if (response.data.length == 0) {
+          if (response.data.length === 0) {
             this.$store.state.actualElection = election;
             this.$router.push("/InterfaceVoteVue");
           } else {
             response.data.forEach((r) => {
               console.log(r.idUser);
               console.log(this.$store.state.actualClient._id);
-              if (r.idUser != this.$store.state.actualClient._id) {
+              if (r.idUser !== this.$store.state.actualClient._id) {
                 this.$store.state.actualElection = election;
                 this.$router.push("/InterfaceVoteVue");
               } else {
-
                 alert("You have already voted !");
                 this.$router.push("/HomePageVue");
               }
@@ -315,17 +325,18 @@ export default {
                   response.data.forEach((r) => {
                     console.log(r)
                     r.autorisedElections = r.autorisedElections.filter(e => e.election !== election._id);
-
                     http
                         .put("user/joinVote", r)
                         .then((e) => {
                           console.log("response :", e);
-                          this.$router.push("/HomePageVue");
+
+                          console.log(this.electionsInformel)
+                          this.electionsInformel = this.electionsInformel.filter(ele => ele != election);
+                          console.log(this.electionsInformel)
                         })
                         .catch((e) => {
                             console.log(e);
                         });
-
                     if(r.createdElections.includes(election._id)){
                         r.createdElections = r.createdElections.filter(e => e !== election._id);
                         console.log(r);
@@ -333,7 +344,6 @@ export default {
                           .put("user/joinVote", r)
                           .then((e) => {
                             console.log("response :", e);
-                            this.$router.push("/HomePageVue");
                           })
                           .catch((e) => {
                             console.log(e);
@@ -348,6 +358,7 @@ export default {
         .catch((e) => {
           console.log(e);
         });
+      this.$router.push("/HomePageVue");
     },
     goJoinElection() {
       this.$router.push("/JoinVoteVue");
