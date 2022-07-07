@@ -51,10 +51,10 @@
 
 <script>
 import { PolarArea } from 'vue-chartjs'
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+import * as ChartJS from 'chart.js'
 import http from "../http-common";
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+ChartJS.Chart.register.apply(null, Object.values(ChartJS).filter((chartClass) => (chartClass.id)));
 
 export default {
   name: 'PolarAreaChart',
