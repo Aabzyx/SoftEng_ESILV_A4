@@ -2,10 +2,13 @@ const mongoose = require("mongoose");
 
 //clef secrete
 const key = "uiaezhf§è!çseufh6789GZzufhzuidfh7Z7DçGFZçZIFZFUZG31261&&&dbhzjd";
+var CryptoJS = require("crypto-js");
+
+const password = 'secure secret key'
 
 // import bcryptjs - hashing function
 const bcrypt = require('bcryptjs');
-
+var AES = require("crypto-js/aes");
 // import jsonwebtoken
 const jwt = require('jsonwebtoken');
 
@@ -92,10 +95,31 @@ UserSchema.methods.generateAuthToken = function(){
             urlImage: user.urlImage,
             subscription: user.subscription,
             numElecteur: user.numElecteur,
-            autorisedElections: user.autorisedElections
+            autorisedElections: user.autorisedElections,
+            createdElections: user.createdElections,
         }, key
     );
     return token;
+}
+
+UserSchema.methods.crypteUser = function (){
+    const user = this;
+    const crypteUser = {
+        _id: user._id,
+        nom: AES.encrypt(user.nom, key).ciphertext.words,
+        prenom: user.prenom,
+        mail: user.mail,
+        password: user.password,
+        dateDeNaissance: user.dateDeNaissance,
+        local: user.local,
+        urlImage: user.urlImage,
+        subscription: user.subscription,
+        numElecteur: user.numElecteur,
+        autorisedElections: user.autorisedElections,
+        createdElections: user.createdElections,
+    }
+    console.log(crypteUser)
+    return crypteUser
 }
 
 //Fonction qui vérifie le token
@@ -110,3 +134,14 @@ UserSchema.methods.authorization = function () {
 }
 
 module.exports = mongoose.model("User",UserSchema);
+
+const encrypt = (content, password) => CryptoJS.AES.encrypt(JSON.stringify({ content }), password).toString()
+const decrypt = (crypted, password) => JSON.parse(CryptoJS.AES.decrypt(crypted, password).toString(CryptoJS.enc.Utf8)).content
+
+// Encrypt
+const encryptedObject = encrypt({ test: 'This is an object', data: ['wow', 'wow'] }, password)
+console.log(encryptedObject)
+
+// Decrypt
+const decryptedObject = decrypt(encryptedObject, password)
+console.log(decryptedObject)

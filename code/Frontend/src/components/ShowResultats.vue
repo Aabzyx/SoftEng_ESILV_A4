@@ -61,22 +61,7 @@
       </div>
     </div>
   </div>
-  <div class="container">
-    <div class="col mt-5">
-      <div class="row mt-5">
-        <h2> Country </h2>
-        <PolarAreaChart />
-      </div>
-      <div class="row mt-5">
-        <h2> Region </h2>
-        <PolarAreaChart />
-      </div>
-      <div class="row mt-5">
-        <h2> Department </h2>
-        <PolarAreaChart />
-      </div>
-    </div>
-  </div>
+  <PolarAreaChart />
 
 </template>
 
