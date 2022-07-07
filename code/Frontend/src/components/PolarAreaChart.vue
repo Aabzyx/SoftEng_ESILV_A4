@@ -172,7 +172,7 @@ export default {
                   })
             }
 
-            console.log(this.chartDataCountry, this.chartDataRegion, this.chartDataDepartement)
+            console.log(this.chartDataCountry)
           }))
     },
     idElect(arrObj){

@@ -269,7 +269,7 @@ export default {
       http
         .put("/election/closeElection", election)
         .then((response) => {
-          alert("Election close !");
+          this.$router.push("/HomePageVue");
           console.log(response.data);
         })
         .catch((e) => {
