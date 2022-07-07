@@ -81,14 +81,14 @@
         <h1 class="slide-in-right">EkipVote</h1>
       </div>
       <div class="formbg slide-in-right">
-        <h4>Elections informels :</h4>
+        <h4>Private elections :</h4>
         <div
           v-for="(election, index) in electionsInformel"
           v-bind:key="index"
           class="election-items"
         >
           <div class="election-head">
-           <img :src="election.urlImage" class="election-img"/>
+           <img :src="election.urlImage" class="election-img" alt="Election's image" />
             <p class="name-election">{{ election.nom }}</p>
             <div class="progress">
               <div :class="$store.state.actualClient.autorisedElections.find(
@@ -134,6 +134,8 @@
               Results
             </button>
           </div>
+          <p  v-for="(dates, index) in  election.dates.slice(1,2) "
+              v-bind:key="index" class="date">{{dates.split('T')[0]}} </p>
           <p
               v-if="
               $store.state.actualClient.autorisedElections.find(
@@ -143,16 +145,16 @@
              style="color: #2bb6a3">
             <i class='bx bx-check-circle' ></i>
           </p>
-          <p v-else style="color: darkred"><i class='bx bx-x-circle'></i></p>
+          <p v-else style="color: darkred"><i class='bx bx-x-circle ic'></i></p>
         </div>
-        <h4>Elections officiels :</h4>
+        <h4>Public elections :</h4>
         <div
           v-for="(election, index) in electionsOfficiel"
           v-bind:key="index"
           class="election-items"
         >
           <div class="election-head">
-            <img :src="election.urlImage" class="padding-bottom--24"/>
+            <img :src="election.urlImage" class="election-img" alt="Election's image" />
           <p class="name-election">{{ election.nom }}</p>
           <div class="progress">
             <div :class="$store.state.actualClient.autorisedElections.find(
@@ -167,6 +169,8 @@
               Results
             </button>
           </div>
+          <p  v-for="(dates, index) in  election.dates.slice(1,2) "
+              v-bind:key="index" class="date">{{dates.split('T')[0]}} </p>
           <p
               v-if="
               $store.state.actualClient.autorisedElections.find(
@@ -177,7 +181,7 @@
           >
             <i class='bx bx-check-circle' ></i>
           </p>
-          <p v-else style="color: darkred"><i class='bx bx-x-circle'></i></p>
+          <p v-else style="color: darkred"><i class='bx bx-x-circle ic'></i></p>
         </div>
         <div class="div-btn-btm">
           <button class="btn-home-btm" v-on:click="goJoinElection">
@@ -427,6 +431,7 @@ p{
   }
 }
 
+
 @keyframes load2 {
   0% {
     width: 0;
@@ -454,7 +459,7 @@ p{
   margin: 30px auto 25px;
   align-items: center;
   height: 90px;
-  width: 926px;
+  width: 1028px;
 
 }
 
@@ -463,6 +468,11 @@ p{
   align-items: center;
 }
 
+.ic{
+  font-size: 20px;
+  margin-left: 5px;
+  margin-top: 3px;
+}
 .election-img{
   height:90px;
   width:90px;
@@ -472,7 +482,14 @@ p{
 
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1370px){
+  .election-items{
+    margin-right: auto;
+    width: auto;
+  }
+}
+
+@media (max-width: 1250px) {
   .btns {
     display: flex;
     flex-direction: column;
@@ -497,6 +514,30 @@ p{
   }
 }
 
+@media (max-width: 830px){
+
+  .btn-home-btm{
+    margin-right: 0px;
+    margin-bottom: 5px;
+
+  }
+
+  h4{
+    margin-top: 64px;
+  }
+  .election-head{
+    margin-top: 20px;
+  }
+
+  .date{
+
+    margin-left: 5px;
+  }
+  .election-img{
+    margin-top: 5px;
+  }
+}
+
 @media (max-width: 770px) {
   .election-items .election-head {
     flex-direction: column;
@@ -508,14 +549,21 @@ p{
     align-items: center;
     justify-content: center;
     align-items: center;
+    margin-top: 10px;
   }
 
   .election-img{
-    margin: auto;
+    margin: 5px auto auto;
+
+  }
+  .btn-home-btm{
+    margin-right: 0px;
+    margin-bottom: 5px;
+
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 590px) {
   .election-items {
     display: flex;
     flex-direction: column;
@@ -524,23 +572,35 @@ p{
     margin-right: auto;
   }
 
+  .election-head{
+    margin-top: 10px;
+  }
   .name-election {
     text-align: center;
   }
   .progress {
     align-items: center;
     margin-bottom: 10px;
+    margin-right: auto;
+  }
+
+  .ic{
+    margin-left: auto;
   }
 
   .election-img{
     margin: auto;
+
   }
 
   .div-btn-btm{
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
   .btn-home-btm{
+    margin-right: 0px;
+    margin-bottom: 5px;
 
   }
 }
@@ -555,7 +615,8 @@ p{
     display: flex;
     flex-direction: column;
     margin-bottom: 5px;
-    margin-right: 0px;
+    margin-right: 0;
+    margin-left: 5px;
     align-items: center;
 
   }
