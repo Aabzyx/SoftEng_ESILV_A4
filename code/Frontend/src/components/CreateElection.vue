@@ -324,12 +324,14 @@ export default {
         });
       console.log(memory);
 
-      this.arrayButtonPrev.item(input.index).addEventListener("click", () => {
-        this.decrementIndex(input.index);
-      });
-      this.arrayButtonNext.item(input.index).addEventListener("click", () => {
-        this.incrementIndex(input.index);
-      });
+      if (this.arrayCarrousel[input.index] == undefined) {
+        this.arrayButtonPrev.item(input.index).addEventListener("click", () => {
+          this.decrementIndex(input.index);
+        });
+        this.arrayButtonNext.item(input.index).addEventListener("click", () => {
+          this.incrementIndex(input.index);
+        });
+      }
 
       if (memory.length > 0) {
         if (input.index == this.arrayCarrousel.length) {
@@ -415,7 +417,7 @@ export default {
       if (this.choix.length >= 9) {
         alert("Trop de choix !");
       } else {
-        this.choix.push({ value: "" });
+        this.choix.push({ value: "", desc: "", img: "", indexImgCar: 0 });
       }
     },
 
