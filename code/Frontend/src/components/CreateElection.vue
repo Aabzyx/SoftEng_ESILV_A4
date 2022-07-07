@@ -222,9 +222,7 @@
                         <button
                           class="search"
                           type="button"
-                          v-on:click="
-                            search({ input: choice.value, index: index })
-                          "
+                          v-on:click="search({ input: choice, index: index })"
                         >
                           Search
                         </button>
@@ -257,15 +255,6 @@
                     class="bx bx-minus-circle bx-spin-hover icon moins"
                     v-on:click="delChoix"
                   ></i>
-<!--                  <button type="button" v-on:click="console.log('test')">-->
-<!--                    test-->
-<!--                  </button>-->
-                  <!--                  <div class="div-button-A-E">-->
-                  <!--                    <div class="button_plus" v-on:click="addChoix"></div>-->
-                  <!--                  </div>-->
-                  <!--                  <div class="div-button-A-E">-->
-                  <!--                    <div class="button_moins" v-on:click="delChoix"></div>-->
-                  <!--                  </div>-->
                 </div>
               </form>
             </div>
@@ -301,8 +290,8 @@ export default {
       dateFin: Date,
       dates: [],
       code: "",
-      buttonPrev: HTMLElement,
-      buttonNext: HTMLElement,
+      arrayButtonPrev: NodeList,
+      arrayButtonNext: NodeList,
     };
   },
   computed: {
@@ -318,10 +307,10 @@ export default {
   },
   methods: {
     async search(input) {
-      console.log(input.input);
+      console.log(input.input.value);
       let url =
         "https://api.unsplash.com/search/photos?query=" +
-        input.input +
+        input.input.value +
         "&per_page=30&client_id=U8gb60YrrIRNvvaC7AalrQV9wgXdGQ3qEqVC1rXJegc";
       let memory = new Array();
       await fetch(url)
@@ -334,6 +323,14 @@ export default {
           });
         });
       console.log(memory);
+
+      this.arrayButtonPrev.item(input.index).addEventListener("click", () => {
+        this.decrementIndex(input.index);
+      });
+      this.arrayButtonNext.item(input.index).addEventListener("click", () => {
+        this.incrementIndex(input.index);
+      });
+
       if (memory.length > 0) {
         if (input.index == this.arrayCarrousel.length) {
           this.arrayCarrousel.push([]);
@@ -430,13 +427,41 @@ export default {
         this.choix.pop();
       }
     },
+
+    consoleTest() {
+      console.log("test");
+    },
+
+    incrementIndex(index) {
+      if (
+        this.choix[index].indexImgCar <
+        this.arrayCarrousel[index].length - 1
+      ) {
+        this.choix[index].indexImgCar++;
+      } else {
+        this.choix[index].indexImgCar = 0;
+      }
+    },
+
+    decrementIndex(index) {
+      if (this.choix[index].indexImgCar == 0) {
+        this.choix[index].indexImgCar = this.arrayCarrousel[index].length - 1;
+      } else {
+        this.choix[index].indexImgCar--;
+      }
+    },
   },
   mounted: function () {
     this.$nextTick(this.redirection);
-    this.buttonPrev = document.querySelector(".carousel__prev");
-    this.buttonPrev.setAttribute("v-on:click", 'console.log("çamarche")');
-    this.buttonNext = document.querySelector(".carousel__next");
-    this.buttonNext.setAttribute("v-on:click", "choice.indexImgCar++");
+    this.arrayButtonPrev = document.querySelectorAll(".carousel__prev");
+    this.arrayButtonNext = document.querySelectorAll(".carousel__next");
+    /*setInterval(() => {
+      console.log(this.choix[0].indexImgCar);
+    }, 1000);*/
+  },
+  updated: function () {
+    this.arrayButtonPrev = document.querySelectorAll(".carousel__prev");
+    this.arrayButtonNext = document.querySelectorAll(".carousel__next");
   },
 };
 </script>
@@ -867,7 +892,7 @@ input[name="nom_du_choix"] {
 }
 
 .slide-in-right {
-  animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 @keyframes slide-in-right {
