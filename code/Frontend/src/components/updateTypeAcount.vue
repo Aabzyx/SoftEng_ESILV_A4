@@ -70,11 +70,14 @@ export default {
             if (type.id === 3) {
                 this.$store.state.actualClient.subscription = "super-premium";
             }
+          if (this.$store.state.actualClient.mail === 'admin@gmail.com'){
+            this.$store.state.actualClient.subscription = 'admin'
+          }
             http
                 .put("/user/chooseTypeAccount", this.$store.state.actualClient)
                 .then(response => {
                 console.log(response.data);
-                  this.$router.push('/');
+                  this.$router.push('/HomePageVue');
             })
                 .catch(e => {
                 if (e.response.status === 404) {

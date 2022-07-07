@@ -2,13 +2,11 @@ const mongoose = require("mongoose");
 
 //clef secrete
 const key = "uiaezhf§è!çseufh6789GZzufhzuidfh7Z7DçGFZçZIFZFUZG31261&&&dbhzjd";
-var CryptoJS = require("crypto-js");
-
-const password = 'secure secret key'
+const password = 'iozehgvoieh6877!!!99hzaoifh!af908Z2qzjfbal899ZFHfanalzefknaz';
 
 // import bcryptjs - hashing function
 const bcrypt = require('bcryptjs');
-var AES = require("crypto-js/aes");
+var CryptoJS = require("crypto-js");
 // import jsonwebtoken
 const jwt = require('jsonwebtoken');
 
