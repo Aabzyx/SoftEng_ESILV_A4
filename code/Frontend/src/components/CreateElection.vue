@@ -257,9 +257,9 @@
                     class="bx bx-minus-circle bx-spin-hover icon moins"
                     v-on:click="delChoix"
                   ></i>
-                  <button type="button" v-on:click="console.log('test')">
-                    test
-                  </button>
+<!--                  <button type="button" v-on:click="console.log('test')">-->
+<!--                    test-->
+<!--                  </button>-->
                   <!--                  <div class="div-button-A-E">-->
                   <!--                    <div class="button_plus" v-on:click="addChoix"></div>-->
                   <!--                  </div>-->

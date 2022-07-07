@@ -93,21 +93,18 @@ export default {
     return {
       chartDataCountry: {
         labels: [
-          ''
         ],
         datasets: [
         ]
       },
       chartDataRegion: {
         labels: [
-          ''
         ],
         datasets: [
         ]
       },
       chartDataDepartement: {
         labels: [
-          ''
         ],
         datasets: [
         ]
@@ -138,41 +135,71 @@ export default {
             countryArr = this.indexFct(countryArr);
             RegionyArr = this.indexFct(RegionyArr);
             DepartementArr = this.indexFct(DepartementArr);
+            var datCountry = []
+            var backColoCountry = []
+            var borderColoCountry = []
+            var borderWidCountry = []
+
+            var datRegion = []
+            var backColoRegion = []
+            var borderColoRegion = []
+            var borderWidRegion = []
+
+            var datDepartement = []
+            var backDepartement = []
+            var borderColoDepartement = []
+            var borderDepartement = []
 
             for(const obj in countryArr){
               let match = [this.getRandomInt(256), this.getRandomInt(256), this.getRandomInt(256), 0.2];
-              this.chartDataCountry.datasets.push(
-                  {label: obj,
-                    data: [countryArr[obj].length],
-                    backgroundColor: 'rgba(' + [match[0],match[1],match[2],match[3]].join(',') + ')',
-                    borderColor: 'rgb(' + [match[0],match[1],match[2]].join(',') + ')',
-                    borderWidth: 1
-                  })
+              this.chartDataCountry.labels.push(obj)
+              datCountry.push(countryArr[obj].length)
+              backColoCountry.push('rgba(' + [match[0],match[1],match[2],match[3]].join(',') + ')')
+              borderColoCountry.push('rgb(' + [match[0],match[1],match[2]].join(',') + ')')
+              borderWidCountry.push(1)
             }
 
             for(const obj in RegionyArr){
               let match = [this.getRandomInt(256), this.getRandomInt(256), this.getRandomInt(256), 0.2];
-              this.chartDataRegion.datasets.push(
-                  {label: obj,
-                    data: [RegionyArr[obj].length],
-                    backgroundColor: 'rgba(' + [match[0],match[1],match[2],match[3]].join(',') + ')',
-                    borderColor: 'rgb(' + [match[0],match[1],match[2]].join(',') + ')',
-                    borderWidth: 1
-                  })
+              this.chartDataRegion.labels.push(obj)
+              datRegion.push(RegionyArr[obj].length)
+              backColoRegion.push('rgba(' + [match[0],match[1],match[2],match[3]].join(',') + ')')
+              borderColoRegion.push('rgb(' + [match[0],match[1],match[2]].join(',') + ')')
+              borderWidRegion.push(1)
             }
 
             for(const obj in DepartementArr){
               let match = [this.getRandomInt(256), this.getRandomInt(256), this.getRandomInt(256), 0.2];
-              this.chartDataDepartement.datasets.push(
-                  {label: obj,
-                    data: [DepartementArr[obj].length],
-                    backgroundColor: 'rgba(' + [match[0],match[1],match[2],match[3]].join(',') + ')',
-                    borderColor: 'rgb(' + [match[0],match[1],match[2]].join(',') + ')',
-                    borderWidth: 1
-                  })
+              this.chartDataDepartement.labels.push(obj)
+              datDepartement.push(DepartementArr[obj].length)
+              backDepartement.push('rgba(' + [match[0],match[1],match[2],match[3]].join(',') + ')')
+              borderColoDepartement.push('rgb(' + [match[0],match[1],match[2]].join(',') + ')')
+              borderDepartement.push(1)
             }
 
-            console.log(this.chartDataCountry)
+            this.chartDataCountry.datasets.push(
+                {
+                  data: datCountry,
+                  backgroundColor: backColoCountry,
+                  borderColor: borderColoCountry,
+                  borderWidth: borderWidCountry
+                    })
+
+            this.chartDataRegion.datasets.push(
+                {
+                  data: datRegion,
+                  backgroundColor: backColoRegion,
+                  borderColor: borderColoRegion,
+                  borderWidth: borderWidRegion
+                })
+
+            this.chartDataDepartement.datasets.push(
+                {
+                  data: datDepartement,
+                  backgroundColor: backDepartement,
+                  borderColor: borderColoDepartement,
+                  borderWidth: borderDepartement
+                })
           }))
     },
     idElect(arrObj){
