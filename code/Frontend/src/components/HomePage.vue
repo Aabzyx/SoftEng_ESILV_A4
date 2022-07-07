@@ -96,7 +96,7 @@
             </div>
           </div>
           <div class="btns">
-            <p                    v-if="
+            <p               v-if="
               $store.state.actualClient.autorisedElections.find(
                   (e) => e.election === election._id
                   ).bool
@@ -140,6 +140,7 @@
               Results
             </button>
           </div>
+          <div style="display: flex; gap: 20px">
           <p  v-for="(dates, index) in  election.dates.slice(1,2) "
               v-bind:key="index" class="date">{{dates.split('T')[0]}} </p>
           <p
@@ -152,6 +153,8 @@
             <i class='bx bx-check-circle' ></i>
           </p>
           <p v-else style="color: darkred"><i class='bx bx-x-circle ic'></i></p>
+          <div class="date" style="color: #9D978F" v-if="$store.state.actualClient.createdElections.includes(election._id)">code : {{election.code}}</div>
+        </div>
         </div>
         <h4>Public elections :</h4>
         <div
@@ -169,15 +172,16 @@
           </div>
           </div>
           <div class="btns">
+            <p               v-if="
+              $store.state.actualClient.autorisedElections.find(
+                  (e) => e.election === election._id
+                  ).bool
+              "></p>
             <button v-on:click="goVote(election)" :disabled="$store.state.actualClient.autorisedElections.find(
-                        (e) => e.election === election._id).bool" class="btn-home">Vote</button>
-            <button v-on:click="goShowResultats(election)" class="btn-home">
+                        (e) => e.election === election._id).bool" class="btn-home" v-else-if="$store.state.actualClient.mail !== 'admin@gmail.com'">Vote</button>
+            <button v-on:click="goShowResultats(election)" class="btn-home" v-if="$store.state.actualClient.mail === 'admin@gmail.com' || election.isActive === false">
               Results
             </button>
-          </div>
-
-          <div>
-            test = {{election.code}}
           </div>
 
           <p  v-for="(dates, index) in  election.dates.slice(1,2) "

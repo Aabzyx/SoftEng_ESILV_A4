@@ -399,7 +399,6 @@ export default {
               .put("user/joinVote", this.$store.state.actualClient)
               .then((r) => {
                 console.log("response :", r);
-                alert("Le code pour rejoindre :" + response.data.code);
                 this.$router.push("/HomePageVue");
               });
           } else {
