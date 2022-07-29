@@ -20,9 +20,14 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 // Import API route
-const routes = require('./app/routes/routes.js'); //importing route
+const election = require('./app/routes/election.routes'); //importing route
+const user = require('./app/routes/user.routes'); //importing route
+const vote = require('./app/routes/vote.routes'); //importing route
+
 // routes
-routes(app);
+election(app);
+user(app);
+vote(app);
 
 // Handle production
 if (process.env.NODE_ENV === 'production') {
