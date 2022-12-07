@@ -141,11 +141,8 @@ The application has been tested on the following browsers :
 
 ## Contributors
 
-Ekip :
+Equipe :
 
-- Benjamin Bernard
-- Antoine Rincheval
-- François Charvet
 - Romain Pasquier
-- Herman Huang
-- Luka Kupatadze
+- Maxime Perrin
+- Jeremy Peilleron
